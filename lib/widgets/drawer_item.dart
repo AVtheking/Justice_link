@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 class DrawerItem extends StatelessWidget {
   const DrawerItem({super.key, required this.icon, required this.text});
-  final IconData icon;
+  final String icon;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(
+      leading: Image.asset(
         icon,
-        color: Colors.white,
-        size: 22,
+        height: 30,
+        width: 30,
       ),
       title: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
       ),
     );
