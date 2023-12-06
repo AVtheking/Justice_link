@@ -9,14 +9,16 @@ class DrawerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Image.asset(
+        scale: 0.9,
         icon,
-        height: 30,
+        height: 50,
         width: 30,
+        // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
       ),
       title: Text(
         text,
         style: const TextStyle(
-            color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+            color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -65,11 +65,12 @@ class _HomeScreen extends State<HomeScreen> {
                           color: const Color.fromARGB(255, 12, 117, 9),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: const Icon(
-                          Icons.person_2_sharp,
-                          size: 50,
-                          color: Colors.white,
-                        ),
+                        // child: const Icon(
+                        //   Icons.person_2_sharp,
+                        //   size: 50,
+                        //   color: Colors.white,
+                        // ),
+                        child: Image.asset("assets/images/profile.png"),
                       ),
                       const SizedBox(
                         width: 10,
@@ -126,20 +127,17 @@ class _HomeScreen extends State<HomeScreen> {
                     ),
                     minimumSize: const Size(double.infinity, 50),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Log Out",
                         style: TextStyle(
                             color: Color(0xFF098904),
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      Icon(
-                        Icons.logout,
-                        color: Color(0xFF098904),
-                      )
+                      Image.asset("assets/images/logout.png")
                     ],
                   ),
                 ),
@@ -172,16 +170,12 @@ class _HomeScreen extends State<HomeScreen> {
                   width: 4,
                 ),
 
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.person_2_outlined,
-                      color: Color(0xFF004D14),
-                      size: 30,
-                    ),
+                  child: Image.asset(
+                    "assets/images/1.png",
+                    height: 40,
+                    width: 40,
                   ),
                 ),
                 // SizedBox(
@@ -225,7 +219,7 @@ class _HomeScreen extends State<HomeScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "Log Out",
+                            "Log In",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600),
@@ -253,8 +247,8 @@ class _HomeScreen extends State<HomeScreen> {
                   "eServices",
                   style: TextStyle(
                       color: Color(0xFF046200),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800),
                 ),
                 Expanded(
                   child: Container(
@@ -267,31 +261,225 @@ class _HomeScreen extends State<HomeScreen> {
               ],
             ),
           ),
-          GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    childAspectRatio: 1,
+                    // crossAxisSpacing: 5,
+                    mainAxisSpacing: 10),
+                itemCount: eServices.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Image.asset(
+                        "assets/eServices_images/$index.png",
+                        color: Color.fromARGB(255, 4, 78, 1),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        eServices[index],
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 34, 35, 34),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        softWrap: true,
+                      )
+                    ],
+                  );
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Key Features",
+                  style: TextStyle(
+                      color: Color(0xFF046200),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 12),
+                    height: 1.0,
+                    // width: double.infinity,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 111,
+            margin: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE5E5E5),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ListView.builder(
+              itemCount: 4,
               shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4),
-              itemCount: eServices.length,
+              scrollDirection: Axis.horizontal,
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    Image.asset(
-                      "assets/eServices_images/$index.png",
-                      color: const Color(0xFF046200),
-                    ),
-                    Text(
-                      eServices[index],
-                      style: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w600),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      softWrap: true,
-                    )
-                  ],
+                return Container(
+                  margin: const EdgeInsets.all(10),
+                  width: 72,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFFFFF),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          radius: 21,
+                          backgroundColor: const Color(0xFF046200),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 20,
+                            child: ClipRRect(
+                              // borderRadius: BorderRadius.circular(5),
+
+                              // borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                "assets/key_features/0.png",
+                                width: 25,
+                                height: 25,
+                                color: Color.fromARGB(255, 4, 76, 3),
+
+                                // fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const Text(
+                        "Guidelines",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 26, 30, 26),
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
                 );
-              })
+              },
+            ),
+          ),
+          Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            // color: Colors.white,
+
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
+            // shadowColor: Color(0xFF000000).withOpacity(0.8),
+            child: Container(
+              width: double.infinity,
+              height: 66,
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurRadius: 20,
+                    spreadRadius: 1)
+              ], color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Image.asset("assets/images/reminders.png",
+                            height: 25,
+                            width: 25,
+                            color: Color.fromARGB(255, 4, 50, 2)),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Text(
+                          "Reminders",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/feedback.png",
+                          height: 25,
+                          width: 25,
+                          color: Color.fromARGB(255, 9, 46, 7),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Text(
+                          "Feedback",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/contact.png",
+                          height: 25,
+                          width: 25,
+                          color: Color.fromARGB(255, 4, 78, 1),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Text(
+                          "Contact Us",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const Text(
+            "All Rights Reserved @ 2023",
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+          ),
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: Image.asset(
+                "assets/images/par.png",
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+          )
         ],
       ),
     );
