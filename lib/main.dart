@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justice_link/screens/home_screen.dart';
+import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());

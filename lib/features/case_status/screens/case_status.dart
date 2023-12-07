@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:justice_link/widgets/rich_text.dart';
+import 'package:justice_link/features/case_status/screens/view_case_status.dart';
+import 'package:justice_link/features/case_status/widgets/rich_text.dart';
 
 class CaseStatus extends StatefulWidget {
   const CaseStatus({Key? key}) : super(key: key);
@@ -211,7 +212,7 @@ class _CaseStatusState extends State<CaseStatus> {
             ),
           ),
           const Spacer(),
-          Container(
+          SizedBox(
             // margin: const EdgeInsets.only(bottom: 50),
             height: 131,
             width: double.infinity,
@@ -221,6 +222,13 @@ class _CaseStatusState extends State<CaseStatus> {
             ),
           ),
           GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ViewCaseStatus(),
+                ),
+              );
+            },
             child: Container(
               height: 46,
               margin: const EdgeInsets.symmetric(horizontal: 19),

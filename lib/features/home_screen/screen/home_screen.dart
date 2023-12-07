@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:justice_link/screens/case_status.dart';
-import 'package:justice_link/widgets/drawer_item.dart';
+import 'package:justice_link/features/home_screen/widgets/app_bar_container.dart';
+import 'package:justice_link/features/home_screen/widgets/drawer_item.dart';
+import 'package:justice_link/features/home_screen/widgets/eServices.dart';
+import 'package:justice_link/features/home_screen/widgets/key_feature.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,15 +23,7 @@ class _HomeScreen extends State<HomeScreen> {
     "Reminders",
     "Contact Us"
   ];
-  List<String> eServices = [
-    "Case Status",
-    "Medical Updates",
-    "Need Help",
-    "Meetings",
-    "UTRC connection",
-    "Document Verfication",
-    "Rehabilitation Program",
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,11 +60,6 @@ class _HomeScreen extends State<HomeScreen> {
                           color: const Color.fromARGB(255, 12, 117, 9),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        // child: const Icon(
-                        //   Icons.person_2_sharp,
-                        //   size: 50,
-                        //   color: Colors.white,
-                        // ),
                         child: Image.asset("assets/images/profile.png"),
                       ),
                       const SizedBox(
@@ -149,96 +138,7 @@ class _HomeScreen extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 56,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color(0xFF004D14),
-                  const Color(0xFF004D14).withOpacity(0.7),
-                  const Color(0xFF046200)
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: const [0.0, 0.7, 0.9],
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: 4,
-                ),
-
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    "assets/images/1.png",
-                    height: 40,
-                    width: 40,
-                  ),
-                ),
-                // SizedBox(
-                //   width: 5,
-                // ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      Text(
-                        "Tue,December 4,2023",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      minimumSize: const Size(77, 30),
-                    ),
-                    child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "Log In",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          // const Spacer(),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Icon(
-                            Icons.logout,
-                            color: Color(0xFF004D14),
-                          )
-                        ]),
-                  ),
-                )
-              ],
-            ),
-          ),
+          const TopBar(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -262,50 +162,7 @@ class _HomeScreen extends State<HomeScreen> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 1,
-                    // crossAxisSpacing: 5,
-                    mainAxisSpacing: 10),
-                itemCount: eServices.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          if (index == 0) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const CaseStatus()));
-                          }
-                        },
-                        child: Image.asset(
-                          "assets/eServices_images/$index.png",
-                          color: Color.fromARGB(255, 4, 78, 1),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        eServices[index],
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 34, 35, 34),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: true,
-                      )
-                    ],
-                  );
-                }),
-          ),
+          const EServices(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -322,82 +179,19 @@ class _HomeScreen extends State<HomeScreen> {
                   child: Container(
                     margin: const EdgeInsets.only(top: 12),
                     height: 1.0,
-                    // width: double.infinity,
                     color: Colors.grey,
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            height: 111,
-            margin: const EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFE5E5E5),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ListView.builder(
-              itemCount: 4,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.all(10),
-                  width: 72,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFFFFF),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: 21,
-                          backgroundColor: const Color(0xFF046200),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 20,
-                            child: ClipRRect(
-                              // borderRadius: BorderRadius.circular(5),
-
-                              // borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                "assets/key_features/0.png",
-                                width: 25,
-                                height: 25,
-                                color: Color.fromARGB(255, 4, 76, 3),
-
-                                // fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        "Guidelines",
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Color.fromARGB(255, 26, 30, 26),
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+          const KeyFeatures(),
           Card(
             elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            // color: Colors.white,
-
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-            // shadowColor: Color(0xFF000000).withOpacity(0.8),
             child: Container(
               width: double.infinity,
               height: 66,
@@ -417,7 +211,7 @@ class _HomeScreen extends State<HomeScreen> {
                         Image.asset("assets/images/reminders.png",
                             height: 25,
                             width: 25,
-                            color: Color.fromARGB(255, 4, 50, 2)),
+                            color: const Color.fromARGB(255, 4, 50, 2)),
                         const SizedBox(
                           height: 5,
                         ),
@@ -436,7 +230,7 @@ class _HomeScreen extends State<HomeScreen> {
                           "assets/images/feedback.png",
                           height: 25,
                           width: 25,
-                          color: Color.fromARGB(255, 9, 46, 7),
+                          color: const Color.fromARGB(255, 9, 46, 7),
                         ),
                         const SizedBox(
                           height: 5,
@@ -456,7 +250,7 @@ class _HomeScreen extends State<HomeScreen> {
                           "assets/images/contact.png",
                           height: 25,
                           width: 25,
-                          color: Color.fromARGB(255, 4, 78, 1),
+                          color: const Color.fromARGB(255, 4, 78, 1),
                         ),
                         const SizedBox(
                           height: 5,
