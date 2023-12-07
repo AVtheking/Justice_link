@@ -63,7 +63,7 @@ class _CaseStatusState extends State<CaseStatus> {
                     //   style:
                     //       TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     // ),
-                    Case_status(text: "Case Type"),
+                    const Case_status(text: "Case Type"),
                     const SizedBox(
                       height: 5,
                     ),
@@ -126,13 +126,14 @@ class _CaseStatusState extends State<CaseStatus> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Case_status(text: "Case Number"),
+                    const Case_status(text: "Case Number"),
                     const SizedBox(
                       height: 5,
                     ),
                     Expanded(
                       child: TextField(
                         cursorHeight: 20,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           // hintText: "Enter Case Number",
                           border: OutlineInputBorder(
@@ -169,7 +170,7 @@ class _CaseStatusState extends State<CaseStatus> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Case_status(text: "year"),
+                    const Case_status(text: "year"),
                     const SizedBox(
                       height: 5,
                     ),
@@ -209,6 +210,49 @@ class _CaseStatusState extends State<CaseStatus> {
               ),
             ),
           ),
+          const Spacer(),
+          Container(
+            // margin: const EdgeInsets.only(bottom: 50),
+            height: 131,
+            width: double.infinity,
+            child: Image.asset(
+              "assets/images/par.png",
+              fit: BoxFit.cover,
+            ),
+          ),
+          GestureDetector(
+            child: Container(
+              height: 46,
+              margin: const EdgeInsets.symmetric(horizontal: 19),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF046200), Color(0xFF098904)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.remove_red_eye, color: Colors.white),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "View Case Status",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          )
         ],
       ),
     );
