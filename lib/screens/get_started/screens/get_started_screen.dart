@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
@@ -26,6 +27,10 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         actions: const [],
         title: const Text("Choose Your Language"),
         centerTitle: true,
+        elevation: 5,
+        backgroundColor: Colors.white,
+        shadowColor: const Color.fromARGB(255, 72, 73, 72),
+        systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
       ),
       body: Center(
         child: Column(
@@ -98,8 +103,8 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: isCheckedList[i]
-                                    ? Color(0xFF004D14)
-                                    : Color(0xFFEEEEEE),
+                                    ? const Color(0xFF004D14)
+                                    : const Color(0xFFEEEEEE),
                               ),
                               child: isCheckedList[i]
                                   ? const Icon(

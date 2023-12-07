@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justice_link/screens/get_started_screen.dart';
-
+import 'package:justice_link/screens/medical_updates/screens/medical_updates.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -8,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  const GetStartedScreen(),
+      home:  const MedicalUpdates(),
     );
   }
 }
