@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:justice_link/widgets/rich_text.dart';
 
 class CaseStatus extends StatefulWidget {
   const CaseStatus({Key? key}) : super(key: key);
@@ -9,29 +10,28 @@ class CaseStatus extends StatefulWidget {
 }
 
 class _CaseStatusState extends State<CaseStatus> {
-  var _currencies = [
+  final _currencies = [
     "Food",
     "Transport",
     "Personal",
-    "Shopping",
-    "Medical",
-    "Rent",
-    "Movie",
-    "Salary"
   ];
   String? _currentSelectedValue;
+  String? _currentSelectedYear;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Case Status"),
+        title: const Text(
+          "Case Status",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        ),
         centerTitle: true,
         elevation: 5,
         backgroundColor: Colors.white,
-        shadowColor: Color.fromARGB(255, 72, 73, 72),
+        shadowColor: const Color.fromARGB(255, 72, 73, 72),
         systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
+            const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
       ),
       body: Column(
         children: [
@@ -58,46 +58,41 @@ class _CaseStatusState extends State<CaseStatus> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Case Type",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    // const Text(
+                    //   "Case Type",
+                    //   style:
+                    //       TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    // ),
+                    Case_status(text: "Case Type"),
+                    const SizedBox(
+                      height: 5,
                     ),
-                    SizedBox(
+                    Container(
                       height: 30,
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          errorStyle: const TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: 13.0,
-                          ),
-                          // hintText: 'Please select expense',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                        ),
-                        // isEmpty: _currentSelectedValue == null,
-                        child: DropdownButtonHideUnderline(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black54),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16),
                           child: DropdownButton<String>(
-                            value: _currentSelectedValue,
-                            isDense: true,
                             isExpanded: true,
+                            iconEnabledColor: Colors.black,
+                            value: _currentSelectedValue,
                             onChanged: (String? newValue) {
                               setState(() {
                                 _currentSelectedValue = newValue;
                               });
                             },
                             items: [
-                              // const DropdownMenuItem<String>(
-                              //   // value: null,
-                              //   child: Text(''), // Empty item
-                              // ),
                               ..._currencies.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
                                 );
-                              }),
+                              }).toList(),
                             ],
                           ),
                         ),
@@ -131,20 +126,84 @@ class _CaseStatusState extends State<CaseStatus> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Case Number",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    Case_status(text: "Case Number"),
+                    const SizedBox(
+                      height: 5,
                     ),
                     Expanded(
                       child: TextField(
+                        cursorHeight: 20,
                         decoration: InputDecoration(
                           // hintText: "Enter Case Number",
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                         ),
                       ),
-                    )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Card(
+            elevation: 10,
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 40),
+            child: Container(
+              height: 70,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 0.5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Case_status(text: "year"),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black54),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            iconEnabledColor: Colors.black,
+                            value: _currentSelectedYear,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _currentSelectedYear = newValue;
+                              });
+                            },
+                            items: [
+                              ..._currencies.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
