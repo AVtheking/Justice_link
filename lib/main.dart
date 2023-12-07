@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justice_link/screens/home_screen.dart';
+import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home:  const HomeScreen(),
     );
   }
 }
