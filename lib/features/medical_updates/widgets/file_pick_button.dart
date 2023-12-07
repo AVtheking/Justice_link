@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 
 class MyElevatedButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
@@ -15,7 +15,7 @@ class MyElevatedButton extends StatelessWidget {
     required this.child,
     this.borderRadius,
     this.width,
-    this.height = 44.0,
+    this.height = 34.0,
     this.gradient = const LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
@@ -49,7 +49,7 @@ class MyElevatedButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => _pickFile(),
         style: ElevatedButton.styleFrom(
-          primary: Colors.transparent,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),

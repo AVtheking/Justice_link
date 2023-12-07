@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
+import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 
 class EServices extends StatelessWidget {
@@ -33,8 +34,17 @@ class EServices extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (index == 0) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const CaseStatus()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const CaseStatus(),
+                        ),
+                      );
+                    } else if (index == 1) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MedicalUpdates(),
+                        ),
+                      );
                     } else if (index == 3) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
