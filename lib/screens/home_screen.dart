@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:justice_link/screens/case_status.dart';
 import 'package:justice_link/widgets/drawer_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -275,9 +276,17 @@ class _HomeScreen extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
-                      Image.asset(
-                        "assets/eServices_images/$index.png",
-                        color: Color.fromARGB(255, 4, 78, 1),
+                      GestureDetector(
+                        onTap: () {
+                          if (index == 0) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const CaseStatus()));
+                          }
+                        },
+                        child: Image.asset(
+                          "assets/eServices_images/$index.png",
+                          color: Color.fromARGB(255, 4, 78, 1),
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
