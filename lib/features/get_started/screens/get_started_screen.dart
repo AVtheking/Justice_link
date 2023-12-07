@@ -134,17 +134,14 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+         
             Image.asset(
-              'assets/images/homify.png',
-              width: 360,
+              'assets/images/par.png',
+              fit: BoxFit.cover,
+              width: double.infinity,
               height: 131,
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            
             Container(
               width: 320,
               height: 46,
