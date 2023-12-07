@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justice_link/screens/medical_updates/screens/medical_updates.dart';
+import 'package:justice_link/features/screens/medical_updates/screens/medical_updates.dart';
 void main() {
   runApp(const MyApp());
 }

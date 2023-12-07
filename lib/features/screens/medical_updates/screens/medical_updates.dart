@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:justice_link/screens/medical_updates/widgets/file_pick_button.dart';
+import 'package:justice_link/features/screens/medical_updates/widgets/file_pick_button.dart';
 
 class MedicalUpdates extends StatefulWidget {
   const MedicalUpdates({super.key});
