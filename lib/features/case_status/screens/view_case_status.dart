@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/widgets/case_details.dart';
 import 'package:justice_link/features/case_status/widgets/case_status.dart';
 import 'package:justice_link/features/case_status/widgets/versus_card.dart';
@@ -27,18 +27,7 @@ class ViewCaseStatus extends StatelessWidget {
       "MR. RAKESH AGGARWAL\nADDRESS: CHIRANJEEV VIHAR",
     ];
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Case Status",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-        ),
-        centerTitle: true,
-        elevation: 5,
-        backgroundColor: Colors.white,
-        shadowColor: const Color.fromARGB(255, 72, 73, 72),
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
-      ),
+      appBar: appbarfun("Case Status"),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

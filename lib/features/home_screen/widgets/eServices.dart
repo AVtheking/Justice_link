@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
+import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 
 class EServices extends StatelessWidget {
   const EServices({super.key});
@@ -34,6 +35,12 @@ class EServices extends StatelessWidget {
                     if (index == 0) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const CaseStatus()));
+                    } else if (index == 3) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const Meeting(),
+                        ),
+                      );
                     }
                   },
                   child: Image.asset(
