@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/auth/widgets/text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -208,7 +209,7 @@ class _LoginState extends State<LoginScreen> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
+                          builder: (context) => const Register(),
                         ),
                       );
                     },
