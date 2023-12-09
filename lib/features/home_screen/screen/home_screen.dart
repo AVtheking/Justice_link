@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:justice_link/features/feedback/screens/feedback_screen.dart';
+
 import 'package:flutter/services.dart';
 import 'package:justice_link/features/home_screen/widgets/app_bar_container.dart';
 import 'package:justice_link/features/home_screen/widgets/drawer_item.dart';
@@ -19,7 +22,7 @@ class _HomeScreen extends State<HomeScreen> {
     "Medical Updates",
     "Need Help",
     "Meetings",
-    "Guidlines",
+    "Guidelines",
     "Fundamental Rights",
     "Reminders",
     "Contact Us"
@@ -229,11 +232,20 @@ class _HomeScreen extends State<HomeScreen> {
                     ),
                     Column(
                       children: [
-                        Image.asset(
-                          "assets/images/feedback.png",
-                          height: 25,
-                          width: 25,
-                          color: const Color.fromARGB(255, 9, 46, 7),
+                        GestureDetector(
+                          onTap: () => {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const FeedBack(),
+                              ),
+                            ),
+                          },
+                          child: Image.asset(
+                            "assets/images/feedback.png",
+                            height: 25,
+                            width: 25,
+                            color: const Color.fromARGB(255, 9, 46, 7),
+                          ),
                         ),
                         const SizedBox(
                           height: 5,

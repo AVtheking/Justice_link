@@ -30,7 +30,8 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         elevation: 5,
         backgroundColor: Colors.white,
         shadowColor: const Color.fromARGB(255, 72, 73, 72),
-        systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
+        systemOverlayStyle:
+            const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
       ),
       body: Center(
         child: Column(
@@ -134,14 +135,12 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 ],
               ),
             ),
-         
             Image.asset(
               'assets/images/par.png',
               fit: BoxFit.cover,
               width: double.infinity,
               height: 131,
             ),
-            
             Container(
               width: 320,
               height: 46,

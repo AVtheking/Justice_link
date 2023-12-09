@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
+import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 
@@ -51,6 +52,9 @@ class EServices extends StatelessWidget {
                           builder: (context) => const Meeting(),
                         ),
                       );
+                    }
+                    else if(index ==5){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const DocumentVerification()));
                     }
                   },
                   child: Image.asset(
