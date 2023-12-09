@@ -30,7 +30,8 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         elevation: 5,
         backgroundColor: Colors.white,
         shadowColor: const Color.fromARGB(255, 72, 73, 72),
-        systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
+        systemOverlayStyle:
+            const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
       ),
       body: Center(
         child: Column(
@@ -134,16 +135,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
             Image.asset(
-              'assets/images/homify.png',
-              width: 360,
+              'assets/images/par.png',
+              fit: BoxFit.cover,
+              width: double.infinity,
               height: 131,
-            ),
-            const SizedBox(
-              height: 20,
             ),
             Container(
               width: 320,
