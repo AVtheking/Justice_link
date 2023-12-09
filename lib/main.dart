@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:justice_link/features/home_screen/screen/home_screen.dart';
+import 'package:justice_link/features/auth/screens/sign_up.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  const HomeScreen(),
+      home: const Register(),
     );
   }
 }
