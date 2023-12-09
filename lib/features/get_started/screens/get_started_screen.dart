@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
@@ -63,9 +64,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 borderRadius: BorderRadius.circular(10.0),
                 gradient: const RadialGradient(
                   center: Alignment.center,
-                  radius: 1.0,
+                  // radius: 1.0,
                   colors: [
-                    Color(0xFFD9D9D9),
+                    Color(0xFF098904),
                     Color(0xFF004D14),
                   ],
                 ),
@@ -135,6 +136,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Image.asset(
               'assets/images/par.png',
               fit: BoxFit.cover,
@@ -156,7 +160,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 ),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const HomeScreen(),
+                    ),
+                  );
+                },
                 child: const Text(
                   'Submit',
                   style: TextStyle(
