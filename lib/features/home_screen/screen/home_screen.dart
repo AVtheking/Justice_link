@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:justice_link/features/case_status/screens/case_status.dart';
 
 import 'package:justice_link/features/feedback/screens/feedback_screen.dart';
 
@@ -7,6 +8,8 @@ import 'package:justice_link/features/home_screen/widgets/app_bar_container.dart
 import 'package:justice_link/features/home_screen/widgets/drawer_item.dart';
 import 'package:justice_link/features/home_screen/widgets/eServices.dart';
 import 'package:justice_link/features/home_screen/widgets/key_feature.dart';
+import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
+import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -107,9 +110,33 @@ class _HomeScreen extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return DrawerItem(
-                      icon: "assets/drawer_images/$index.png",
-                      text: drawerItems[index]);
+                  return GestureDetector(
+                    onTap:() {
+                      if (index == 0) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const CaseStatus(),
+                          ),
+                        );
+                      } else if (index == 1) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const MedicalUpdates(),
+                          ),
+                        );
+                      } else if (index == 3) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const Meeting(),
+                          ),
+                        );
+                      }
+                    
+                    },
+                    child: DrawerItem(
+                        icon: "assets/drawer_images/$index.png",
+                        text: drawerItems[index]),
+                  );
                 },
               ),
               const Spacer(),

@@ -1,21 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/screens/login_in.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/auth/widgets/text_field.dart';
 
-class Register extends StatefulWidget {
+class Register extends ConsumerStatefulWidget {
   const Register({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends ConsumerState<Register> {
   int selectedOption = 1;
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void register(BuildContext context) {
+    // print(_nameController);
+    ref.watch(authServiceProvider).register(
+          context: context,
+          name: _nameController.text.trim(),
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,23 +219,28 @@ class _RegisterState extends State<Register> {
               const SizedBox(
                 height: 30,
               ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF004D14),
-                      Color(0xFF098904),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+              GestureDetector(
+                onTap: () {
+                  register(context);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color(0xFF004D14),
+                        Color(0xFF098904),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
                   ),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: const Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
               ),
