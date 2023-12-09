@@ -127,7 +127,7 @@ class _CaseStatusState extends State<CaseStatus> {
                           ),
                           Expanded(
                             child: TextField(
-                              // cursorHeight: 20,
+                              cursorHeight: 20,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 // hintText: "Enter Case Number",
