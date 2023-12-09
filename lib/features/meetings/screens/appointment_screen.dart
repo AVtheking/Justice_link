@@ -11,8 +11,7 @@ class AppointmentScreen extends StatefulWidget {
 }
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
-  var _selectedDay = DateTime.now();
-  var _focusedDay = DateTime.now();
+
 
   @override
   Widget build(BuildContext context) {
