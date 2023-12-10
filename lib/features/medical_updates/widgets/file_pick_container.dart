@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/medical_updates/widgets/file_pick_button.dart';
+import 'package:justice_link/features/medical_updates/widgets/open_file.dart';
 
-class FilePickContainer extends StatelessWidget {
-  final VoidCallback onAddFilePressed;
+class FilePickContainer extends StatefulWidget {
   final String title;
 
-  const FilePickContainer(
-      {Key? key, required this.onAddFilePressed, required this.title})
-      : super(key: key);
+  const FilePickContainer({Key? key, required this.title}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _FilePickContainerState createState() => _FilePickContainerState();
+}
+
+class _FilePickContainerState extends State<FilePickContainer> {
+  late String pickedFilePath = '';
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +37,9 @@ class FilePickContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Text(
-              title,
-              style:const TextStyle(
+            Text(
+              widget.title,
+              style: const TextStyle(
                 fontFamily: 'Inter',
                 fontSize: 15.0,
                 fontWeight: FontWeight.w600,
@@ -42,18 +48,47 @@ class FilePickContainer extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            MyElevatedButton(
-              onPressed: onAddFilePressed,
-              borderRadius: BorderRadius.circular(10),
-              child: const Text(
-                '+ Add File ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Inter',
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w600,
+            Row(
+              children: [
+                MyElevatedButton(
+                  onFilePicked: (filePath) {
+                    setState(() {
+                      pickedFilePath = filePath;
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(10),
+                  child: const Text(
+                    '+ Add File ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Inter',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
-              ),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ViewFile(filePath: pickedFilePath),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'View Files ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Inter',
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

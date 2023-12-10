@@ -6,12 +6,12 @@ class MyElevatedButton extends StatelessWidget {
   final double? width;
   final double height;
   final Gradient gradient;
-  final VoidCallback? onPressed;
+  final Function(String)? onFilePicked;
   final Widget child;
 
   const MyElevatedButton({
     Key? key,
-    required this.onPressed,
+    required this.onFilePicked,
     required this.child,
     this.borderRadius,
     this.width,
@@ -23,16 +23,17 @@ class MyElevatedButton extends StatelessWidget {
     ),
   }) : super(key: key);
 
-  Future<void> _pickFile() async {
+  Future<void> _pickFile(BuildContext context) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
-     
       String filePath = result.files.single.path ?? '';
-      print('Picked file path: $filePath');
+
+
+      if (onFilePicked != null) {
+        onFilePicked!(filePath);
+      }
     } else {
-      
-      print('File picking canceled');
     }
   }
 
@@ -47,7 +48,7 @@ class MyElevatedButton extends StatelessWidget {
         borderRadius: borderRadius,
       ),
       child: ElevatedButton(
-        onPressed: () => _pickFile(),
+        onPressed: () => _pickFile(context),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           elevation: 0,

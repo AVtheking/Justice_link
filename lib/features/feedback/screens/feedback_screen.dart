@@ -61,14 +61,14 @@ class _FeedBackState extends State<FeedBack> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
                               width: 2,
-                              color: const Color(0xFFADADAD),
+                              color: Color(0xFFADADAD),
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
                               width: 2,
-                              color: const Color(0xFFADADAD),
+                              color: Color(0xFFADADAD),
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
@@ -102,7 +102,7 @@ class _FeedBackState extends State<FeedBack> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Case_status(text: "How Was Your Experience"),
+                      const Case_status(text: "How Was Your Experience"),
                       const SizedBox(
                         height: 4,
                       ),
@@ -114,8 +114,8 @@ class _FeedBackState extends State<FeedBack> {
                           direction: Axis.horizontal,
                           allowHalfRating: true,
                           itemCount: 5,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, _) => Icon(
+                          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          itemBuilder: (context, _) => const Icon(
                             Icons.star,
                             color: Colors.amber,
                           ),
@@ -169,14 +169,14 @@ class _FeedBackState extends State<FeedBack> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
                               width: 2,
-                              color: const Color(0xFFADADAD),
+                              color: Color(0xFFADADAD),
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
                               width: 2,
-                              color: const Color(0xFFADADAD),
+                              color: Color(0xFFADADAD),
                             ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
