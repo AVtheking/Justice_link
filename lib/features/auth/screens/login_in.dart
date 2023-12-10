@@ -19,7 +19,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   @override
   void dispose() {
-    // TODO: implement dispose
+    
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -200,7 +200,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  print("here");
+                  // print("here");
                   login(context);
                 },
                 child: Container(

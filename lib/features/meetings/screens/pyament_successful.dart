@@ -52,7 +52,7 @@ class _AppointmentScreenState extends State<PaymentSuccessFul> {
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Color(0xFFD9D9D9),
+                        color:const  Color(0xFFD9D9D9),
                       ),
                       child: const Center(
                         child: Text(
@@ -85,7 +85,7 @@ class _AppointmentScreenState extends State<PaymentSuccessFul> {
             ),
             const SizedBox(height: 20),
             Image.asset("assets/images/pay.png"),
-            Text("Meeting is scheduled with the lawyer"),
+          const   Text("Meeting is scheduled with the lawyer"),
             const SizedBox(
               height: 10,
             ),
@@ -112,15 +112,15 @@ class _AppointmentScreenState extends State<PaymentSuccessFul> {
                           "Chat with the lawyer",
                           style: TextStyle(
                             fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: const Text(
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    child: Text(
                       "Our lawyer will connect to you as soon as possible ",
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.w400),

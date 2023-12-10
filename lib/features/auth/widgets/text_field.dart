@@ -21,7 +21,7 @@ class RegisterField extends StatefulWidget {
 class _RegisterFieldState extends State<RegisterField> {
   @override
   Widget build(BuildContext context) {
-    print(widget.controller.text);
+    // print(widget.controller.text);
     return TextField(
       obscureText: widget.isVisible ?? false,
       controller: widget.controller,
@@ -39,7 +39,7 @@ class _RegisterFieldState extends State<RegisterField> {
           borderSide: const BorderSide(color: Colors.grey, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1),
+            borderSide: const BorderSide(color: Colors.grey, width: 1),
             borderRadius: BorderRadius.circular(10)),
         fillColor: Colors.white,
         filled: true,

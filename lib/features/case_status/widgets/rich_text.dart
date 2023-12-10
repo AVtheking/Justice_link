@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 class Case_status extends StatelessWidget {
@@ -11,7 +13,7 @@ class Case_status extends StatelessWidget {
         children: [
           TextSpan(
             text: text,
-            style: TextStyle(
+            style:const  TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Colors.black,

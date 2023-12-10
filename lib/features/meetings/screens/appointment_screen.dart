@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/meetings/screens/payment.dart';

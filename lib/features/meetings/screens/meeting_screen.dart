@@ -18,11 +18,11 @@ class Meeting extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const AppointmentPayment()));
                 },
-                child: LawyerCard()),
-            LawyerCard(),
-            LawyerCard(),
-            LawyerCard(),
-            LawyerCard(),
+                child: const LawyerCard()),
+            const LawyerCard(),
+            const LawyerCard(),
+            const LawyerCard(),
+            const LawyerCard(),
           ],
         ),
       ),

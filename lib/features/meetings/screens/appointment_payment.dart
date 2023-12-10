@@ -182,7 +182,7 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                   border: Border.all(
-                    color: Color(0xFFADADAD),
+                    color:const  Color(0xFFADADAD),
                   ),
                   borderRadius: BorderRadius.circular(5)),
               child: const Column(children: [
