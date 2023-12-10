@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
-import 'package:justice_link/features/meetings/screens/appointment_screen.dart';
+import 'package:justice_link/features/meetings/screens/appointment_payment.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 
 class Meeting extends StatelessWidget {
@@ -16,7 +16,7 @@ class Meeting extends StatelessWidget {
             GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AppointmentScreen()));
+                      builder: (context) => const AppointmentPayment()));
                 },
                 child: LawyerCard()),
             LawyerCard(),

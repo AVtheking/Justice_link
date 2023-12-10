@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
-import 'package:justice_link/features/home_screen/screen/home_screen.dart';
+import 'package:justice_link/features/meetings/screens/appointment_payment.dart';
 
 void main() {
   runApp(
@@ -37,7 +36,9 @@ class _MyAppState extends ConsumerState<MyApp> {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: user == null ? const Register() : const HomeScreen(),
+            home: user == null
+                ? const AppointmentPayment()
+                : const AppointmentPayment(),
           );
         } else {
           // Return a loading indicator or placeholder while checking authentication
