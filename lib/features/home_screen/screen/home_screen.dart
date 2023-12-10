@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
+import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
 
 import 'package:justice_link/features/feedback/screens/feedback_screen.dart';
 
@@ -111,7 +112,7 @@ class _HomeScreen extends State<HomeScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap:() {
+                    onTap: () {
                       if (index == 0) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -131,7 +132,6 @@ class _HomeScreen extends State<HomeScreen> {
                           ),
                         );
                       }
-                    
                     },
                     child: DrawerItem(
                         icon: "assets/drawer_images/$index.png",
@@ -288,11 +288,20 @@ class _HomeScreen extends State<HomeScreen> {
                     ),
                     Column(
                       children: [
-                        Image.asset(
-                          "assets/images/contact.png",
-                          height: 25,
-                          width: 25,
-                          color: const Color.fromARGB(255, 4, 78, 1),
+                        GestureDetector(
+                          onTap:( ) => {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ContactUs(),
+                              ),
+                            ),
+                          },
+                          child: Image.asset(
+                            "assets/images/contact.png",
+                            height: 25,
+                            width: 25,
+                            color: const Color.fromARGB(255, 4, 78, 1),
+                          ),
                         ),
                         const SizedBox(
                           height: 5,
