@@ -128,20 +128,20 @@ class AuthService {
         pref.setString("token", '');
       }
       // print(token);
-      http.Response res =
-          await http.get(Uri.parse('$uri/user'), headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'authorization': "Bearer $token"
-      });
-      // print(res.body);
-      final body = jsonDecode(res.body);
-      final data = body['data'];
-      final _user = jsonEncode(data['user']);
-      _ref.read(userProvider.notifier).update(
-            (state) => User.fromJson(_user),
-          );
+      // http.Response res =
+      //     await http.get(Uri.parse('$uri/user'), headers: <String, String>{
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      //   'authorization': "Bearer $token"
+      // });
+      // // print(res.body);
+      // final body = jsonDecode(res.body);
+      // final data = body['data'];
+      // final _user = jsonEncode(data['user']);
+      // _ref.read(userProvider.notifier).update(
+      //       (state) => User.fromJson(_user),
+      //     );
     } catch (e) {
-      // print("here");
+      print("here");
       // showSnackBar(context, e.toString());
     }
   }
