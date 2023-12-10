@@ -14,59 +14,59 @@ class _ChatScreenState extends State<ChatScreen> {
   final ScrollController _scrollController = ScrollController();
 
   final List<Message> _messageList = [
-    Message(
+    const Message(
         content: "Hi, Bill! This is the simplest example ever.",
         ownerType: OwnerType.sender,
         ownerName: "Higor Lapa"),
-    Message(
+    const Message(
         content:
             "Let's make it better , Higor. Custom font size and text color",
         textColor: Colors.black38,
         ownerType: OwnerType.receiver,
         ownerName: "Bill Gates"),
-    Message(
+    const Message(
         content: "Bill, we have to talk about business",
         ownerType: OwnerType.sender,
         ownerName: "Higor"),
-    Message(
+    const Message(
         content: "Wow, I like it. Tell me what I can do for you, pal.",
         ownerType: OwnerType.receiver,
         ownerName: "Bill Gates"),
-    Message(
+    const Message(
         content: "I'm just a copy",
         ownerType: OwnerType.sender,
         ownerName: "Higor"),
-    Message(
+    const Message(
         content: "Nice",
         ownerType: OwnerType.receiver,
         ownerName: "Bill Gates"),
-    Message(
+    const Message(
         content: "I'm just a copy",
         ownerType: OwnerType.sender,
         ownerName: "Higor"),
-    Message(
+    const Message(
         content: "Nice",
         ownerType: OwnerType.receiver,
         ownerName: "Bill Gates"),
-    Message(
+    const Message(
         content: "I'm just a copy",
         ownerType: OwnerType.receiver,
         ownerName: "Bill Gates"),
-    Message(
+    const Message(
         content: "Nice",
         ownerType: OwnerType.receiver,
         ownerName: "Bill Gates"),
-    Message(
+    const Message(
         content: "I'm just a copy",
         ownerType: OwnerType.sender,
         ownerName: "Higor"),
-    Message(
+    const Message(
         content: "I'm just a copy",
         ownerType: OwnerType.sender,
         ownerName: "Higor"),
   ];
 
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
         centerTitle: true,
         elevation: 5,
         foregroundColor: Colors.white,
-        backgroundColor: Color(0xFF098904),
+        backgroundColor: const Color(0xFF098904),
         shadowColor: const Color.fromARGB(255, 72, 73, 72),
         actions: [
           Padding(
@@ -97,8 +97,8 @@ class _ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
             child: ChatList(
-              children: _messageList,
               scrollController: _scrollController,
+              children: _messageList,
             ),
           ),
           Padding(
@@ -112,17 +112,17 @@ class _ChatScreenState extends State<ChatScreen> {
                     Expanded(
                       child: TextField(
                         controller: _textEditingController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Type a message...',
                         ),
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.photo),
+                      icon: const Icon(Icons.photo),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.send),
+                      icon: const Icon(Icons.send),
                       onPressed: () {
                         _sendMessage(_textEditingController.text);
                       },

@@ -66,7 +66,7 @@ class ContactUs extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {},
-                child: Container(
+                child: SizedBox(
                   width: 90,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

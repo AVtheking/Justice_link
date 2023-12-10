@@ -221,6 +221,7 @@ class _HomeScreen extends State<HomeScreen> {
           const KeyFeatures(),
           Card(
             elevation: 10,
+            
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),

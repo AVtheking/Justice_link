@@ -7,20 +7,21 @@ class KeyFeatures extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 111,
+      width: double.infinity,
       margin: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: const Color(0xFFE5E5E5),
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListView.builder(
-        itemCount: 4,
+        itemCount: 2,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             margin: const EdgeInsets.all(10),
-            width: 72,
+            width: 160,
             height: 90,
             decoration: BoxDecoration(
               color: const Color(0xFFFFFFFF),

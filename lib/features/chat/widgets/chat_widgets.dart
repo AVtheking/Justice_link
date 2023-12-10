@@ -1,6 +1,5 @@
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Message extends StatefulWidget {
   final String content;
@@ -12,7 +11,7 @@ class Message extends StatefulWidget {
   final bool showOwnerName;
   final Color? backgroundColor;
 
-  Message({
+  const Message({super.key, 
     this.content = "",
     this.fontFamily,
     this.fontSize = 16.0,
@@ -24,6 +23,7 @@ class Message extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _MessageState createState() => _MessageState();
 }
 
@@ -45,7 +45,6 @@ class _MessageState extends State<Message> implements IMessageWidget {
         return widget.ownerName![0] + lastInitial[0];
       }
     } catch (e) {
-      print(e);
       return 'ME';
     }
   }
@@ -70,10 +69,10 @@ class _MessageState extends State<Message> implements IMessageWidget {
         _buildCircleAvatar(),
         Flexible(
           child: Bubble(
-            margin: BubbleEdges.fromLTRB(10, 10, 30, 0),
+            margin: const BubbleEdges.fromLTRB(10, 10, 30, 0),
             stick: true,
             nip: BubbleNip.leftTop,
-            color: Color(0xffD9D9D9),
+            color: const Color(0xffD9D9D9),
             alignment: Alignment.topLeft,
             child: _buildContentText(TextAlign.left),
           ),
@@ -90,10 +89,10 @@ class _MessageState extends State<Message> implements IMessageWidget {
       children: <Widget>[
         Flexible(
           child: Bubble(
-            margin: BubbleEdges.fromLTRB(30, 10, 10, 0),
+            margin: const BubbleEdges.fromLTRB(30, 10, 10, 0),
             stick: true,
             nip: BubbleNip.rightTop,
-            color: Color(0Xff9ED881),
+            color: const Color(0Xff9ED881),
             alignment: Alignment.topRight,
             child: _buildContentText(TextAlign.right),
           ),
@@ -121,7 +120,7 @@ class _MessageState extends State<Message> implements IMessageWidget {
       radius: 12,
       child: Text(
         senderInitials,
-        style: TextStyle(fontSize: 9),
+        style: const TextStyle(fontSize: 9),
       ),
     );
   }
@@ -147,12 +146,13 @@ class ChatList extends StatelessWidget {
   /// Padding of the list
   final EdgeInsets padding;
 
-  ChatList(
-      {this.children = const <Message>[],
+  const ChatList(
+      {super.key, this.children = const <Message>[],
       this.scrollController,
       this.shrinkWrap = true,
       this.padding = const EdgeInsets.symmetric(horizontal: 5, vertical: 10)});
 
+  @override
   Widget build(context) {
     return ListView.builder(
       shrinkWrap: shrinkWrap,

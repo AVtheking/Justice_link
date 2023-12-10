@@ -12,7 +12,6 @@ class EServices extends StatelessWidget {
     List<String> eServices = [
       "Case Status",
       "Medical Updates",
-      "Need Help",
       "Meetings",
       "UTRC connection",
       "Document Verfication",
@@ -24,9 +23,9 @@ class EServices extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              childAspectRatio: 1,
-              // crossAxisSpacing: 5,
+              crossAxisCount: 3,
+              childAspectRatio: 1.3,
+              crossAxisSpacing: 10,
               mainAxisSpacing: 10),
           itemCount: eServices.length,
           itemBuilder: (context, index) {
@@ -46,15 +45,15 @@ class EServices extends StatelessWidget {
                           builder: (context) => const MedicalUpdates(),
                         ),
                       );
-                    } else if (index == 3) {
+                    } else if (index == 2) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => const Meeting(),
                         ),
                       );
-                    }
-                    else if(index ==5){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const DocumentVerification()));
+                    } else if (index == 4) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const DocumentVerification()));
                     }
                   },
                   child: Image.asset(

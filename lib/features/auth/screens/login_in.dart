@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/auth/widgets/text_field.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginState();
+  ConsumerState<LoginScreen> createState() => _LoginState();
 }
 
-class _LoginState extends State<LoginScreen> {
+class _LoginState extends ConsumerState<LoginScreen> {
   int selectedOption = 1;
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void login(BuildContext context) {
+    // print(_nameController);
+    ref.watch(authServiceProvider).login(
+          context: context,
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -180,23 +198,29 @@ class _LoginState extends State<LoginScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF004D14),
-                      Color(0xFF098904),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+              GestureDetector(
+                onTap: () {
+                  print("here");
+                  login(context);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    gradient: const LinearGradient(
+                      colors: [
+                        Color(0xFF004D14),
+                        Color(0xFF098904),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
                   ),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: const Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
               ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class RegisterField extends StatefulWidget {
-  const RegisterField({
-    super.key,
-    required this.hintText,
-    required this.controller,
-    required this.icon,
-    this.isVisible,
-    this.suffixIcon
-  });
+  const RegisterField(
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      required this.icon,
+      this.isVisible,
+      this.suffixIcon});
   final String hintText;
   final IconData icon;
   final bool? isVisible;
@@ -22,8 +21,10 @@ class RegisterField extends StatefulWidget {
 class _RegisterFieldState extends State<RegisterField> {
   @override
   Widget build(BuildContext context) {
+    print(widget.controller.text);
     return TextField(
       obscureText: widget.isVisible ?? false,
+      controller: widget.controller,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 2),
         hintText: widget.hintText,

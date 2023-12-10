@@ -19,40 +19,35 @@ class _DocumentVerificationState extends State<DocumentVerification> {
           const SizedBox(
             height: 40,
           ),
-          Expanded(
+          const Expanded(
             child: Column(
               children: [
                 RequiredDocuments(
                   title: "Government Issued-ID",
-                  onAddFilePressed: () {},
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 24,
                 ),
                 RequiredDocuments(
                   title: "Aadhar Card",
-                  onAddFilePressed: () {},
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 24,
                 ),
                 RequiredDocuments(
                   title: "Address Proof",
-                  onAddFilePressed: () {},
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 24,
                 ),
                 RequiredDocuments(
                   title: "Legal Documents",
-                  onAddFilePressed: () {},
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 24,
                 ),
                 RequiredDocuments(
                   title: "Passport Size Photograph",
-                  onAddFilePressed: () {},
                 ),
               ],
             ),
