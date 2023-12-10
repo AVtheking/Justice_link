@@ -47,7 +47,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             home: user == null ? const Register() : const HomeScreen(),
           );
         } else {
-          return Center(child: const CircularProgressIndicator());
+          return const Center(child:  CircularProgressIndicator());
         }
       },
     );

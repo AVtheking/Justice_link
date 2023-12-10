@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -43,7 +45,7 @@ class _CalenderState extends State<Calender> {
         ),
         selectedTextStyle: const TextStyle(color: Colors.white),
       ),
-      headerStyle: HeaderStyle(
+      headerStyle: const HeaderStyle(
         titleCentered: true,
         formatButtonVisible: false,
       ),
