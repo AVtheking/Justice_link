@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/features/meetings/screens/appointment_screen.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 
 class AppointmentPayment extends StatefulWidget {
@@ -159,7 +160,7 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
                           spreadRadius: 1),
                     ],
                   ),
-                  child:const  Padding(
+                  child: const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,44 +200,49 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF046200),
-                    Color(0xFF098904),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AppointmentScreen(),
+                  ),
+                );
+              },
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFF046200),
+                      Color(0xFF098904),
+                    ],
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Image.asset(
+                      "assets/images/appointment.png",
+                      width: 20,
+                      height: 20,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const Text(
+                      "Book an appointment",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16),
+                    )
                   ],
                 ),
-              ),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-              const    SizedBox(
-                    width: 15,
-                  ),
-                  // Icon(
-                  //   Icons.bookmark_added_sharp,
-                  //   color: Colors.white,
-                  // ),
-                  Image.asset(
-                    "assets/images/appointment.png",
-                    width: 20,
-                    height: 20,
-                  ),
-                const   SizedBox(
-                    width: 20,
-                  ),
-                  const Text(
-                    "Book an appointment",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16),
-                  )
-                ],
               ),
             )
           ],
