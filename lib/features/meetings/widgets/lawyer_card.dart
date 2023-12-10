@@ -177,7 +177,7 @@ class LawyerCard extends StatelessWidget {
                               ),
                               child: const Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(2.0),
+                                  padding:  EdgeInsets.all(2.0),
                                   child: Text(
                                     "Property&Real Estates",
                                     style: TextStyle(

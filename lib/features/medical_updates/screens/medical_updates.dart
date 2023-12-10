@@ -78,17 +78,16 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
             const SizedBox(
               height: 49,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(9, 3, 0, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(9, 3, 0, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 4,
                   ),
                   FilePickContainer(
                     title: "Medical Reports",
-                    onAddFilePressed: () {},
                   ),
                 ],
               ),
@@ -96,17 +95,16 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
             const SizedBox(
               height: 49,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(9, 3, 0, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(9, 3, 0, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     height: 4,
                   ),
                   FilePickContainer(
                     title: "Prescription Medication",
-                    onAddFilePressed: () {},
                   ),
                 ],
               ),

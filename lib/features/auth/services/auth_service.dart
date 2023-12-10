@@ -76,7 +76,7 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-    // print(email);
+    
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/login'),
@@ -90,6 +90,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      
 
       httpErrorHandle(
         response: res,
@@ -126,11 +127,13 @@ class AuthService {
       if (token == null) {
         pref.setString("token", '');
       }
+      // print(token);
       http.Response res =
           await http.get(Uri.parse('$uri/user'), headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'authorization': "Bearer $token"
       });
+      // print(res.body);
       final body = jsonDecode(res.body);
       final data = body['data'];
       final _user = jsonEncode(data['user']);
@@ -138,7 +141,8 @@ class AuthService {
             (state) => User.fromJson(_user),
           );
     } catch (e) {
-      showSnackBar(context, e.toString());
+     
+      // showSnackBar(context, e.toString());
     }
   }
 }
