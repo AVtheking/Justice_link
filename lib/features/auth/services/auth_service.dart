@@ -103,7 +103,7 @@ class AuthService {
         onSuccess: () async {
           showSnackBar(context, "Account Created Successfully");
           final body = jsonDecode(res.body);
-          print(body);
+          // print(body);
           final data = body['data'];
 
           final _lawyer = jsonEncode(data['lawyer']);
