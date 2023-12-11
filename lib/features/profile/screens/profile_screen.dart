@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/features/profile/screens/update_profile_screen.dart';
 import 'package:justice_link/features/profile/widgets/case_stats.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -63,23 +64,29 @@ class _ProfileScreemState extends State<ProfileScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE5E5E5),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.edit_outlined),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Edit Profile",
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const UpdateProfile()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE5E5E5),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(Icons.edit_outlined),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Edit Profile",
+                            style: TextStyle(fontSize: 15),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Container(
