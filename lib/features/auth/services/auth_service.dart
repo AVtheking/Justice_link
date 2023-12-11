@@ -10,10 +10,12 @@ import 'package:justice_link/common/snackbar.dart';
 import 'package:justice_link/features/get_started/screens/get_started_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 import 'package:justice_link/global.dart';
+import 'package:justice_link/models/lawyer.dart';
 import 'package:justice_link/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final userProvider = StateProvider<User?>((ref) => null);
+final lawyerProvider = StateProvider<Lawyer?>((ref) => null);
 
 final authServiceProvider = Provider((ref) => AuthService(ref: ref));
 
@@ -71,12 +73,65 @@ class AuthService {
     }
   }
 
+  Future<void> registerLawyer({
+    required BuildContext context,
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      Lawyer lawyer = Lawyer(
+          id: '',
+          name: name,
+          email: email,
+          password: password,
+          lawyerId: '',
+          lawyerType: '',
+          lawyerExperience: '',
+          location: '',
+          skills: '');
+      http.Response res = await http.post(
+        Uri.parse("$uri/lawyer/register"),
+        body: lawyer.toJson(),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+      );
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () async {
+          showSnackBar(context, "Account Created Successfully");
+          final body = jsonDecode(res.body);
+          // print(body);
+          final data = body['data'];
+
+          final _lawyer = jsonEncode(data['lawyer']);
+
+          _ref.read(lawyerProvider.notifier).update(
+                (state) => Lawyer.fromJson(_lawyer),
+              );
+
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          await pref.setString("token", data['token']);
+
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const GetStartedScreen(),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   Future<void> login({
     required BuildContext context,
     required String email,
     required String password,
   }) async {
-    
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/login'),
@@ -90,7 +145,6 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-      
 
       httpErrorHandle(
         response: res,
@@ -103,6 +157,53 @@ class AuthService {
 
           _ref.read(userProvider.notifier).update(
                 (state) => User.fromJson(_user),
+              );
+
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          await pref.setString("token", data['token']);
+
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<void> loginLawyer({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/lawyer/login'),
+        body: jsonEncode(
+          {
+            'email': email,
+            'password': password,
+          },
+        ),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () async {
+          showSnackBar(context, "Login Successful");
+          final body = jsonDecode(res.body);
+          final data = body['data'];
+          final _lawyer = jsonEncode(data['lawyer']);
+
+          _ref.read(lawyerProvider.notifier).update(
+                (state) => Lawyer.fromJson(_lawyer),
               );
 
           SharedPreferences pref = await SharedPreferences.getInstance();
@@ -141,8 +242,35 @@ class AuthService {
             (state) => User.fromJson(_user),
           );
     } catch (e) {
-     
+      print(e.toString());
       // showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<void> getLawyerData() async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? token = pref.getString("token");
+      if (token == null) {
+        pref.setString("token", '');
+      }
+
+      http.Response res = await http.get(
+        Uri.parse('$uri/lawyer/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'authorization': "Bearer $token"
+        },
+      );
+
+      final body = jsonDecode(res.body);
+      final data = body['data'];
+      final _lawyer = jsonEncode(data['lawyer']);
+      _ref.read(lawyerProvider.notifier).update(
+            (state) => Lawyer.fromJson(_lawyer),
+          );
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

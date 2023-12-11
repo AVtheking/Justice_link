@@ -30,12 +30,19 @@ class _RegisterState extends ConsumerState<Register> {
 
   void register(BuildContext context) {
     // print(_nameController);
-    ref.watch(authServiceProvider).register(
-          context: context,
-          name: _nameController.text.trim(),
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+    selectedOption == 1
+        ? ref.watch(authServiceProvider).register(
+              context: context,
+              name: _nameController.text.trim(),
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            )
+        : ref.watch(authServiceProvider).registerLawyer(
+              context: context,
+              name: _nameController.text.trim(),
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            );
   }
 
   @override
@@ -238,7 +245,7 @@ class _RegisterState extends ConsumerState<Register> {
                   ),
                   child: const Center(
                     child: Text(
-                      'Login',
+                      'Register',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
