@@ -1,8 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.dart';
 
 class EServices extends StatelessWidget {
   const EServices({super.key});
@@ -54,6 +57,9 @@ class EServices extends StatelessWidget {
                     } else if (index == 4) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const DocumentVerification()));
+                    } else if (index == 5) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const RehabilationScreen()));
                     }
                   },
                   child: Image.asset(

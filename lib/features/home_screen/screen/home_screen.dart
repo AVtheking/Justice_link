@@ -11,6 +11,7 @@ import 'package:justice_link/features/home_screen/widgets/eServices.dart';
 import 'package:justice_link/features/home_screen/widgets/key_feature.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -221,7 +222,6 @@ class _HomeScreen extends State<HomeScreen> {
           const KeyFeatures(),
           Card(
             elevation: 10,
-            
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -242,10 +242,17 @@ class _HomeScreen extends State<HomeScreen> {
                   children: [
                     Column(
                       children: [
-                        Image.asset("assets/images/reminders.png",
-                            height: 25,
-                            width: 25,
-                            color: const Color.fromARGB(255, 4, 50, 2)),
+                        GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ReminderScreen(),
+                            ),
+                          ),
+                          child: Image.asset("assets/images/reminders.png",
+                              height: 25,
+                              width: 25,
+                              color: const Color.fromARGB(255, 4, 50, 2)),
+                        ),
                         const SizedBox(
                           height: 5,
                         ),
@@ -290,7 +297,7 @@ class _HomeScreen extends State<HomeScreen> {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap:( ) => {
+                          onTap: () => {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => const ContactUs(),
