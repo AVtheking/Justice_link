@@ -68,23 +68,43 @@ class _FilePickContainerState extends State<FilePickContainer> {
                   ),
                 ),
                 const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ViewFile(filePath: pickedFilePath),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0xFF004D14), Color(0xFF098904)],
                       ),
-                    );
-                  },
-                  child: const Text(
-                    'View Files ',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Inter',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w600,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    height: 34,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ViewFile(filePath: pickedFilePath),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'View Files ',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Inter',
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                 ),

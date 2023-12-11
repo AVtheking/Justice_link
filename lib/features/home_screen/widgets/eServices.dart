@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
@@ -6,6 +8,7 @@ import 'package:justice_link/features/document_verification/screens/document_ver
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_request.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.dart';
 
 class EServices extends ConsumerWidget {
   const EServices({super.key});
@@ -71,6 +74,9 @@ class EServices extends ConsumerWidget {
                     } else if (index == 4) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const DocumentVerification()));
+                    } else if (index == 5) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const RehabilationScreen()));
                     }
                   },
                   child: Image.asset(
