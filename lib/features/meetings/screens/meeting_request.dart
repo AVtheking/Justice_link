@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/features/meetings/services/meeting_service.dart';
+import 'package:justice_link/models/meeting.dart';
 
-class MeetingRequest extends StatefulWidget {
+class MeetingRequest extends ConsumerStatefulWidget {
   const MeetingRequest({super.key});
 
   @override
-  State<MeetingRequest> createState() => _MeetingRequestState();
+  ConsumerState<MeetingRequest> createState() => _MeetingRequestState();
 }
 
-class _MeetingRequestState extends State<MeetingRequest> {
+class _MeetingRequestState extends ConsumerState<MeetingRequest> {
+  List<Meeting> meetings = [];
+  getMeetingsRequest() async {
+    meetings =
+        await ref.read(meetingServiceProvider).getMeetingRequestsForLawyer(context);
+        setState(() {});
+  }
+
+  @override
+  void initState() {
+    getMeetingsRequest();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +52,7 @@ class _MeetingRequestState extends State<MeetingRequest> {
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: ListView.builder(
-            itemCount: 4,
+            itemCount: meetings.length,
             itemBuilder: (ctx, index) {
               return Card(
                 child: Container(
@@ -44,13 +61,13 @@ class _MeetingRequestState extends State<MeetingRequest> {
                     // border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const ListTile(
-                    leading: CircleAvatar(
+                  child: ListTile(
+                    leading: const CircleAvatar(
                       radius: 30,
                       backgroundImage: AssetImage("assets/images/lawyer.png"),
                     ),
-                    title: Text("Samay Raina"),
-                    subtitle: Text("New Meeting Request"),
+                    title: Text(meetings[index].senderName),
+                    subtitle: const Text("New Meeting Request"),
                   ),
                 ),
               );

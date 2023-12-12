@@ -48,7 +48,7 @@ class MeetingService {
             }
           });
     } catch (e) {
-      print(e);
+      // print(e);
       showSnackBar(context, e.toString());
     }
     return lawyers;
@@ -101,7 +101,7 @@ class MeetingService {
                 (route) => false);
           });
     } catch (e) {
-      print(e);
+      // print(e);
       showSnackBar(context, e.toString());
     }
   }
@@ -131,7 +131,38 @@ class MeetingService {
             //     .update((state) => Meeting.fromJson(jsonEncode(meetingsData)));
             for (int i = 0; i < meetingsData.length; i++) {
               final String _meeting = jsonEncode(meetingsData[i]);
-              print(_meeting);
+              // print(_meeting);
+              meetings.add(Meeting.fromJson(_meeting));
+            }
+          });
+    } catch (e) {
+      // print(e);
+      showSnackBar(context, e.toString());
+    }
+    return meetings;
+  }
+
+  Future<List<Meeting>> getMeetingRequestsForLawyer(
+      BuildContext context) async {
+    List<Meeting> meetings = [];
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      final token = pref.getString("token");
+      http.Response res = await http
+          .get(Uri.parse("$uri/get-meeting-lawyer"), headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'authorization': "Bearer $token"
+      });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            final body = jsonDecode(res.body);
+            final data = body['data'];
+            final meetingsData = data['meetings'];
+            for (int i = 0; i < meetingsData.length; i++) {
+              final String _meeting = jsonEncode(meetingsData[i]);
+              // print(_meeting);
               meetings.add(Meeting.fromJson(_meeting));
             }
           });
@@ -140,26 +171,5 @@ class MeetingService {
       showSnackBar(context, e.toString());
     }
     return meetings;
-  }
-
-  Future<void> getMeetingRequestsForLawyer(BuildContext context) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    final token = pref.getString("token");
-    http.Response res = await http
-        .get(Uri.parse("$uri/get-meeting-lawyer"), headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'authorization': "Bearer $token"
-    });
-    httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () {
-          final body = jsonDecode(res.body);
-          final data = body['data'];
-          final meetingsData = data['meeting'];
-          _ref
-              .read(meetingProvider.notifier)
-              .update((state) => Meeting.fromJson(jsonEncode(meetingsData)));
-        });
   }
 }
