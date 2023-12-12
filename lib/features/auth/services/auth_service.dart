@@ -218,6 +218,7 @@ class AuthService {
           _ref.read(lawyerProvider.notifier).update(
                 (state) => Lawyer.fromJson(_lawyer),
               );
+          print(data['token']);
 
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setString("token", data['token']);
