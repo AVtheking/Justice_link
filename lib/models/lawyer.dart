@@ -11,17 +11,18 @@ class Lawyer {
   final String? lawyerExperience;
   final String? location;
   final String? skills;
-
+  final String? lawyerbio;
   Lawyer({
-    required this.id,
+    this.id,
     required this.name,
     required this.email,
     required this.password,
-    required this.lawyerId,
-    required this.lawyerType,
-    required this.lawyerExperience,
-    required this.location,
-    required this.skills,
+    this.lawyerId,
+    this.lawyerType,
+    this.lawyerExperience,
+    this.location,
+    this.skills,
+    this.lawyerbio,
   });
 
   Lawyer copyWith({
@@ -34,6 +35,7 @@ class Lawyer {
     String? lawyerExperience,
     String? location,
     String? skills,
+    String? lawyerbio,
   }) {
     return Lawyer(
       id: id ?? this.id,
@@ -45,33 +47,51 @@ class Lawyer {
       lawyerExperience: lawyerExperience ?? this.lawyerExperience,
       location: location ?? this.location,
       skills: skills ?? this.skills,
+      lawyerbio: lawyerbio ?? this.lawyerbio,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'name': name,
       'email': email,
       'password': password,
+      'lawyerId': lawyerId,
+      'lawyerType': lawyerType,
+      'lawyerExperience': lawyerExperience,
+      'location': location,
+      'skills': skills,
+      'lawyerbio': lawyerbio,
     };
   }
 
   factory Lawyer.fromMap(Map<String, dynamic> map) {
     return Lawyer(
-      id: map['_id'] as String? ?? '',
-      name: map['name'] as String? ?? '',
-      email: map['email'] as String? ?? '',
-      password: map['password'] as String? ?? '',
-      lawyerId: map['lawyerId'] as String? ?? '',
-      lawyerType: map['lawyerType'] as String? ?? '',
-      lawyerExperience: map['lawyerExperience'] as String? ?? '',
-      location: map['location'] as String? ?? '',
-      skills: map['skills'] as String? ?? '',
+      id: map['_id'] != null ? map['_id'] as String : null,
+      name: map['name'] as String,
+      email: map['email'] as String,
+      password: map['password'] as String,
+      lawyerId: map['lawyerId'] != null ? map['lawyerId'] as String : null,
+      lawyerType:
+          map['lawyerType'] != null ? map['lawyerType'] as String : null,
+      lawyerExperience: map['lawyerExperience'] != null
+          ? map['lawyerExperience'] as String
+          : null,
+      location: map['location'] != null ? map['location'] as String : null,
+      skills: map['skills'] != null ? map['skills'] as String : null,
+      lawyerbio: map['bio'] != null ? map['bio'] as String : null,
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String toJson() =>
+      json.encode(toMap()..removeWhere((key, value) => value == null));
 
   factory Lawyer.fromJson(String source) =>
       Lawyer.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Lawyer(id: $id, name: $name, email: $email, password: $password, lawyerId: $lawyerId, lawyerType: $lawyerType, lawyerExperience: $lawyerExperience, location: $location, skills: $skills, lawyerbio: $lawyerbio)';
+  }
 }
