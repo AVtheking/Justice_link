@@ -9,6 +9,7 @@ import 'package:justice_link/features/home_screen/widgets/eServices_lawyer.dart'
 import 'package:justice_link/features/home_screen/widgets/key_features_lawyer.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/profile/screens/profile_screen.dart';
 
 class HomeScreenLawyer extends StatefulWidget {
   const HomeScreenLawyer({Key? key}) : super(key: key);
@@ -68,7 +69,16 @@ class _HomeScreen extends State<HomeScreenLawyer> {
                           color: const Color.fromARGB(255, 12, 117, 9),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Image.asset("assets/images/profile.png"),
+                        child: GestureDetector(
+                            onTap: () => {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfileScreen(),
+                                    ),
+                                  ),
+                                },
+                            child: Image.asset("assets/images/profile.png")),
                       ),
                       const SizedBox(
                         width: 10,
