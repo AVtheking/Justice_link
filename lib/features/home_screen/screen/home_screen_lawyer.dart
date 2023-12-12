@@ -141,7 +141,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                       } else if (index == 3) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Meeting(),
+                            builder: (context) => const MeetingScreen(),
                           ),
                         );
                       }

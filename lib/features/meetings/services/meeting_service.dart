@@ -7,11 +7,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:http/http.dart" as http;
 import 'package:justice_link/common/api_service.dart';
 import 'package:justice_link/common/snackbar.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
+import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 import 'package:justice_link/global.dart';
 import 'package:justice_link/models/lawyer.dart';
+import 'package:justice_link/models/meeting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final meetingServiceProvider = Provider((ref) => MeetingService(ref: ref));
+final meetingProvider = StateProvider<Meeting?>((ref) => null);
 
 class MeetingService {
   final Ref _ref;
@@ -39,7 +43,7 @@ class MeetingService {
             final lawyersData = data['lawyers'];
             for (int i = 0; i < lawyersData.length; i++) {
               final String _lawyer = jsonEncode(lawyersData[i]);
-              // print(_lawyer);  
+              // print(_lawyer);
               lawyers.add(Lawyer.fromJson(_lawyer));
             }
           });
@@ -48,5 +52,114 @@ class MeetingService {
       showSnackBar(context, e.toString());
     }
     return lawyers;
+  }
+
+  Future<void> sendMeetingReq({
+    required BuildContext context,
+    required String lawyerId,
+    // required String senderName,
+    required String receiverName,
+    required String accusedName,
+    required String applicantName,
+    required String caseType,
+    required String oppositionLawyerName,
+    required String caseNo,
+    required String courtName,
+    required String caseDetails,
+  }) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      final token = pref.getString("token");
+      final user = _ref.read(userProvider)!;
+      http.Response res = await http.post(
+        Uri.parse("$uri/meeting-request"),
+        body: jsonEncode({
+          "lawyerId": lawyerId,
+          "userId": user.id,
+          "senderName": user.name,
+          "receiverName": receiverName,
+          "accusedName": accusedName,
+          "applicantName": applicantName,
+          "caseType": caseType,
+          "opposingLawyerName": oppositionLawyerName,
+          "caseNo": caseNo,
+          "courtName": courtName,
+          "caseDetails": caseDetails,
+        }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'authorization': "Bearer $token"
+        },
+      );
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            showSnackBar(context, "Meeting Request Sent Successfully");
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                (route) => false);
+          });
+    } catch (e) {
+      print(e);
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  Future<List<Meeting>> getMeetingRequests(BuildContext context) async {
+    List<Meeting> meetings = [];
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      final token = pref.getString("token");
+      // final user = _ref.read(userProvider)!;
+      http.Response res = await http.get(
+        Uri.parse("$uri/get-meeting-client"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'authorization': "Bearer $token"
+        },
+      );
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            final body = jsonDecode(res.body);
+            final data = body['data'];
+            final meetingsData = data['meetings'];
+            // _ref
+            //     .read(meetingProvider.notifier)
+            //     .update((state) => Meeting.fromJson(jsonEncode(meetingsData)));
+            for (int i = 0; i < meetingsData.length; i++) {
+              final String _meeting = jsonEncode(meetingsData[i]);
+              print(_meeting);
+              meetings.add(Meeting.fromJson(_meeting));
+            }
+          });
+    } catch (e) {
+      print(e);
+      showSnackBar(context, e.toString());
+    }
+    return meetings;
+  }
+
+  Future<void> getMeetingRequestsForLawyer(BuildContext context) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    final token = pref.getString("token");
+    http.Response res = await http
+        .get(Uri.parse("$uri/get-meeting-lawyer"), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'authorization': "Bearer $token"
+    });
+    httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          final body = jsonDecode(res.body);
+          final data = body['data'];
+          final meetingsData = data['meeting'];
+          _ref
+              .read(meetingProvider.notifier)
+              .update((state) => Meeting.fromJson(jsonEncode(meetingsData)));
+        });
   }
 }

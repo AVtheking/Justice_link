@@ -128,7 +128,7 @@ class _HomeScreen extends State<HomeScreen> {
                       } else if (index == 3) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Meeting(),
+                            builder: (context) => const MeetingScreen(),
                           ),
                         );
                       }

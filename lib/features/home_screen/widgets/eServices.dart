@@ -5,6 +5,7 @@ import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/meetings/services/meeting_service.dart';
 
 class EServices extends ConsumerWidget {
   const EServices({super.key});
@@ -50,9 +51,12 @@ class EServices extends ConsumerWidget {
                         ),
                       );
                     } else if (index == 2) {
+                      ref
+                          .read(meetingServiceProvider)
+                          .getMeetingRequests(context);
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const Meeting(),
+                          builder: (context) => const MeetingScreen(),
                         ),
                       );
                     } else if (index == 4) {

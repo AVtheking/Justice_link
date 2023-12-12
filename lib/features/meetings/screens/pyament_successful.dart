@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/common/symbol.dart';
+import 'package:justice_link/features/meetings/screens/meeting_detail.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 import 'package:justice_link/models/lawyer.dart';
 
@@ -95,44 +96,51 @@ class _AppointmentScreenState extends State<PaymentSuccessFul> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 181, 178, 178))),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "assets/images/robot.png",
-                          width: 30,
-                          height: 30,
-                          fit: BoxFit.cover,
-                        ),
-                        const SizedBox(width: 20),
-                        const Text(
-                          "Chat with the lawyer",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => MeetingDetails(lawyer: widget.lawyer)));
+              },
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        color: const Color.fromARGB(255, 181, 178, 178))),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/robot.png",
+                            width: 30,
+                            height: 30,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 20),
+                          const Text(
+                            "Chat with the lawyer",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
-                    child: Text(
-                      "Our lawyer will connect to you as soon as possible ",
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                    ),
-                  )
-                ],
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      child: Text(
+                        "Our lawyer will connect to you as soon as possible ",
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w400),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(

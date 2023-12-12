@@ -5,24 +5,33 @@ import 'package:justice_link/features/meetings/screens/appointment_payment.dart'
 import 'package:justice_link/features/meetings/services/meeting_service.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 import 'package:justice_link/models/lawyer.dart';
+import 'package:justice_link/models/meeting.dart';
 
-class Meeting extends ConsumerStatefulWidget {
-  const Meeting({super.key});
+class MeetingScreen extends ConsumerStatefulWidget {
+  const MeetingScreen({super.key});
 
   @override
-  ConsumerState<Meeting> createState() => _MeetingState();
+  ConsumerState<MeetingScreen> createState() => _MeetingState();
 }
 
-class _MeetingState extends ConsumerState<Meeting> {
+class _MeetingState extends ConsumerState<MeetingScreen> {
   List<Lawyer?>? lawyers;
+  List<Meeting> meetings = [];
   getLawyers() async {
     lawyers = await ref.read(meetingServiceProvider).getAllLawyers(context);
+    setState(() {});
+  }
+
+  getMeeting() async {
+    meetings =
+        await ref.read(meetingServiceProvider).getMeetingRequests(context);
     setState(() {});
   }
 
   @override
   void initState() {
     getLawyers();
+    getMeeting();
     super.initState();
   }
 
@@ -47,6 +56,7 @@ class _MeetingState extends ConsumerState<Meeting> {
                   },
                   child: LawyerCard(
                     lawyer: lawyers![index]!,
+                    meeting: index >= meetings.length ? null : meetings[index],
                   ),
                 );
               },
