@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/meetings/screens/appointment_screen.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
+import 'package:justice_link/models/lawyer.dart';
 
 class AppointmentPayment extends StatefulWidget {
-  const AppointmentPayment({Key? key}) : super(key: key);
+  const AppointmentPayment({super.key, required this.lawyer});
+  final Lawyer lawyer;
 
   @override
   State<AppointmentPayment> createState() => _AppointmentScreenState();
@@ -20,7 +22,9 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const LawyerCard(),
+            LawyerCard(
+              lawyer: widget.lawyer,
+            ),
             // const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(top: 1),
@@ -182,7 +186,7 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
               margin: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                   border: Border.all(
-                    color:const  Color(0xFFADADAD),
+                    color: const Color(0xFFADADAD),
                   ),
                   borderRadius: BorderRadius.circular(5)),
               child: const Column(children: [
@@ -204,7 +208,9 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const AppointmentScreen(),
+                    builder: (context) => AppointmentScreen(
+                      lawyer: widget.lawyer,
+                    ),
                   ),
                 );
               },

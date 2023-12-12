@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/auth/widgets/text_field.dart';
+import 'package:justice_link/features/profile/services/profile_service.dart';
 
-class UpdateProfile extends StatefulWidget {
+class UpdateProfile extends ConsumerStatefulWidget {
   const UpdateProfile({super.key});
 
   @override
-  State<UpdateProfile> createState() => _UpdateProfileState();
+  ConsumerState<UpdateProfile> createState() => _UpdateProfileState();
 }
 
-class _UpdateProfileState extends State<UpdateProfile> {
+class _UpdateProfileState extends ConsumerState<UpdateProfile> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _lawyerIdController = TextEditingController();
   final TextEditingController _skillController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -22,11 +28,29 @@ class _UpdateProfileState extends State<UpdateProfile> {
     _lawyerIdController.dispose();
     _skillController.dispose();
     _bioController.dispose();
+    _experienceController.dispose();
+    _locationController.dispose();
     super.dispose();
+  }
+
+  void updateProfile(BuildContext context, String id) {
+    ref.read(profileServiceProvider).updateProfile(
+        context: context,
+        id: id,
+        name: _nameController.text.trim(),
+        email: _emailController.text.trim(),
+        lawyerId: _lawyerIdController.text.trim(),
+        lawyerSkills: _skillController.text.trim(),
+        lawyerExperience: _experienceController.text.trim(),
+        location: _locationController.text.trim(),
+        lawyerbio: _bioController.text.trim());
   }
 
   @override
   Widget build(BuildContext context) {
+    final lawyer = ref.read(lawyerProvider)!;
+    _nameController.text = lawyer.name;
+    _emailController.text = lawyer.email;
     return Scaffold(
       appBar: appbarfun("Your Profile"),
       body: SingleChildScrollView(
@@ -113,6 +137,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   const SizedBox(
                     height: 20,
                   ),
+                  RegisterField(
+                      hintText: "Enter your Experience",
+                      controller: _experienceController,
+                      icon: Icons.timelapse_sharp),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  RegisterField(
+                      hintText: "Enter your location",
+                      controller: _locationController,
+                      icon: Icons.explore),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   const Text(
                     "Your Skills : ",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -146,7 +184,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
             ),
             GestureDetector(
               onTap: () {
-                // print("here");
+                updateProfile(context, lawyer.id!);
               },
               child: Container(
                 margin:

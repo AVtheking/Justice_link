@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
 import 'package:justice_link/features/feedback/screens/feedback_screen.dart';
@@ -9,16 +11,17 @@ import 'package:justice_link/features/home_screen/widgets/eServices_lawyer.dart'
 import 'package:justice_link/features/home_screen/widgets/key_features_lawyer.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/profile/screens/profile_screen.dart';
 
-class HomeScreenLawyer extends StatefulWidget {
+class HomeScreenLawyer extends ConsumerStatefulWidget {
   const HomeScreenLawyer({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreenLawyer> createState() => _HomeScreen();
+  ConsumerState<HomeScreenLawyer> createState() => _HomeScreen();
 }
 
 // enum DrawerItems { caseStatus, medicalUpdates, needHelp }
-class _HomeScreen extends State<HomeScreenLawyer> {
+class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
   List<String> drawerItems = [
     "Case Status",
     "Medical Updates",
@@ -29,6 +32,9 @@ class _HomeScreen extends State<HomeScreenLawyer> {
     "Reminders",
     "Contact Us"
   ];
+  void logOut(BuildContext context) {
+    ref.read(authServiceProvider).logOut(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +74,16 @@ class _HomeScreen extends State<HomeScreenLawyer> {
                           color: const Color.fromARGB(255, 12, 117, 9),
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        child: Image.asset("assets/images/profile.png"),
+                        child: GestureDetector(
+                            onTap: () => {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfileScreen(),
+                                    ),
+                                  ),
+                                },
+                            child: Image.asset("assets/images/profile.png")),
                       ),
                       const SizedBox(
                         width: 10,
@@ -126,7 +141,7 @@ class _HomeScreen extends State<HomeScreenLawyer> {
                       } else if (index == 3) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Meeting(),
+                            builder: (context) => const MeetingScreen(),
                           ),
                         );
                       }
@@ -141,7 +156,9 @@ class _HomeScreen extends State<HomeScreenLawyer> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 50.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    logOut(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),

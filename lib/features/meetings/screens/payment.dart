@@ -4,9 +4,11 @@ import 'package:justice_link/common/symbol.dart';
 import 'package:justice_link/features/meetings/screens/pyament_successful.dart';
 import 'package:justice_link/features/meetings/widgets/appointment_btn.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
+import 'package:justice_link/models/lawyer.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+  const PaymentScreen({Key? key, required this.lawyer}) : super(key: key);
+  final Lawyer lawyer;
 
   @override
   State<PaymentScreen> createState() => _AppointmentScreenState();
@@ -16,7 +18,7 @@ class _AppointmentScreenState extends State<PaymentScreen> {
   void naviggateToPayment() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const PaymentSuccessFul(),
+        builder: (context) =>  PaymentSuccessFul(lawyer:widget.lawyer),
       ),
     );
   }
@@ -28,7 +30,9 @@ class _AppointmentScreenState extends State<PaymentScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const LawyerCard(),
+          LawyerCard(
+            lawyer: widget.lawyer,
+          ),
           const SizedBox(height: 20),
           Card(
             elevation: 5,

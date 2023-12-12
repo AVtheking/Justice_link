@@ -1,31 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/meetings/screens/appointment_payment.dart';
+import 'package:justice_link/features/meetings/services/meeting_service.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
+import 'package:justice_link/models/lawyer.dart';
+import 'package:justice_link/models/meeting.dart';
 
-class Meeting extends StatelessWidget {
-  const Meeting({super.key});
+class MeetingScreen extends ConsumerStatefulWidget {
+  const MeetingScreen({super.key});
+
+  @override
+  ConsumerState<MeetingScreen> createState() => _MeetingState();
+}
+
+class _MeetingState extends ConsumerState<MeetingScreen> {
+  List<Lawyer?>? lawyers;
+  List<Meeting> meetings = [];
+  getLawyers() async {
+    lawyers = await ref.read(meetingServiceProvider).getAllLawyers(context);
+    setState(() {});
+  }
+
+  getMeeting() async {
+    meetings =
+        await ref.read(meetingServiceProvider).getMeetingRequests(context);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getLawyers();
+    getMeeting();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbarfun("Meetings"),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AppointmentPayment()));
-                },
-                child: const LawyerCard()),
-            const LawyerCard(),
-            const LawyerCard(),
-            const LawyerCard(),
-            const LawyerCard(),
-          ],
-        ),
-      ),
+      body: lawyers == null
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: lawyers!.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AppointmentPayment(
+                          lawyer: lawyers![index]!,
+                        ),
+                      ),
+                    );
+                  },
+                  child: LawyerCard(
+                    lawyer: lawyers![index]!,
+                    meeting: index >= meetings.length ? null : meetings[index],
+                  ),
+                );
+              },
+            ),
     );
   }
 }

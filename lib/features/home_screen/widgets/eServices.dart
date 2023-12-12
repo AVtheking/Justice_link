@@ -6,9 +6,11 @@ import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
-import 'package:justice_link/features/meetings/screens/meeting_request.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+
 import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.dart';
+
+import 'package:justice_link/features/meetings/services/meeting_service.dart';
 
 class EServices extends ConsumerWidget {
   const EServices({super.key});
@@ -23,14 +25,7 @@ class EServices extends ConsumerWidget {
       "Document Verfication",
       "Rehabilitation Program",
     ];
-    List<String> eServicesLawyer = [
-      "Case Status",
-      "Medical Updates",
-      "Meeting Request",
-      "UTRC connection",
-      "Document Verfication",
-      "Rehabilitation Program",
-    ];
+
     final lawyer = ref.read(lawyerProvider);
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -61,16 +56,14 @@ class EServices extends ConsumerWidget {
                         ),
                       );
                     } else if (index == 2) {
-                      lawyer != null
-                          ? Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => const MeetingRequest()),
-                            )
-                          : Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const Meeting(),
-                              ),
-                            );
+                      ref
+                          .read(meetingServiceProvider)
+                          .getMeetingRequests(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const MeetingScreen(),
+                        ),
+                      );
                     } else if (index == 4) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const DocumentVerification()));
@@ -88,7 +81,7 @@ class EServices extends ConsumerWidget {
                   height: 10,
                 ),
                 Text(
-                  lawyer != null ? eServicesLawyer[index] : eServices[index],
+                  eServices[index],
                   style: const TextStyle(
                       color: Color.fromARGB(255, 34, 35, 34),
                       fontSize: 13,
