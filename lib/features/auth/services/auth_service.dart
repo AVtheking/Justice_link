@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:justice_link/common/api_service.dart';
 import 'package:justice_link/common/snackbar.dart';
+import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/get_started/screens/get_started_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 import 'package:justice_link/global.dart';
@@ -81,15 +82,11 @@ class AuthService {
   }) async {
     try {
       Lawyer lawyer = Lawyer(
-          id: '',
-          name: name,
-          email: email,
-          password: password,
-          lawyerId: '',
-          lawyerType: '',
-          lawyerExperience: '',
-          location: '',
-          skills: '');
+        name: name,
+        email: email,
+        password: password,
+      );
+      print(lawyer.toJson());
       http.Response res = await http.post(
         Uri.parse("$uri/lawyer/register"),
         body: lawyer.toJson(),
@@ -168,6 +165,21 @@ class AuthService {
             ),
           );
         },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString("token", '');
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const Register()),
+        (route) => false,
       );
     } catch (e) {
       showSnackBar(context, e.toString());

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
-
 import 'package:justice_link/features/feedback/screens/feedback_screen.dart';
-
-import 'package:flutter/services.dart';
 import 'package:justice_link/features/home_screen/widgets/app_bar_container.dart';
 import 'package:justice_link/features/home_screen/widgets/drawer_item.dart';
 import 'package:justice_link/features/home_screen/widgets/eServices.dart';
@@ -12,6 +11,7 @@ import 'package:justice_link/features/home_screen/widgets/key_feature.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -144,7 +144,17 @@ class _HomeScreen extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 50.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    pref.setString("token", '');
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Register()),
+                      (route) => false,
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
