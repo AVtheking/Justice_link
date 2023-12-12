@@ -1,48 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/profile/screens/update_profile_screen.dart';
 import 'package:justice_link/features/profile/widgets/case_stats.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreemState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreemState();
 }
 
-class _ProfileScreemState extends State<ProfileScreen> {
+class _ProfileScreemState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final lawyer = ref.read(lawyerProvider)!;
+    print(lawyer.skills);
     return Scaffold(
       appBar: appbarfun("Your Profile"),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 50,
-                    backgroundImage:
-                        const AssetImage("assets/images/profile2.png"),
+                    backgroundImage: AssetImage("assets/images/profile2.png"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Mehul sharma",
-                        style: TextStyle(
+                        lawyer.name,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Text(
+                      const Text(
                         "12/02/2023",
                         style: TextStyle(
                           fontSize: 15,
@@ -50,8 +53,8 @@ class _ProfileScreemState extends State<ProfileScreen> {
                         ),
                       ),
                       Text(
-                        "mehulsharma@gmail.com",
-                        style: TextStyle(
+                        lawyer.email,
+                        style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w400),
                       ),
                     ],
@@ -229,28 +232,30 @@ class _ProfileScreemState extends State<ProfileScreen> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                        ),
-                        child: const Text("Civil Matters"),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                        ),
-                        child: const Text("Property & Real Estate"),
-                      ),
-                    ],
-                  )
+                  lawyer.skills == null
+                      ? const SizedBox()
+                      : Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                              ),
+                              child: Text(lawyer.skills!),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                              ),
+                              child: const Text("Property & Real Estate"),
+                            ),
+                          ],
+                        )
                 ],
               ),
             ),
@@ -280,8 +285,11 @@ class _ProfileScreemState extends State<ProfileScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
                     ),
-                    child: const Text(
-                        "Advocate Sudershani has since been practicing and handling cases independently with a result oriented approach, both professionally and ethically and has now acquired 8 years of professional experience in providing legal consultancy and advisory services. She has completed her BA.LLB(Hons) from Jamia Millia Islamia and has been practicing and handling cases independently and provides legal consultancy and advisory services."),
+                    child: lawyer.lawyerbio != null
+                        ? lawyer.lawyerbio != ""
+                            ? Text(lawyer.lawyerbio!)
+                            : const Text("No Bio")
+                        : const Text("No Bio"),
                   )
                 ],
               ),

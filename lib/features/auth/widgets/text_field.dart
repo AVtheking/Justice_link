@@ -5,13 +5,15 @@ class RegisterField extends StatefulWidget {
       {super.key,
       required this.hintText,
       required this.controller,
-      required this.icon,
+      this.icon,
       this.isVisible,
+      this.maxlines,
       this.suffixIcon});
   final String hintText;
-  final IconData icon;
+  final IconData? icon;
   final bool? isVisible;
   final bool? suffixIcon;
+  final int? maxlines;
   final TextEditingController controller;
 
   @override
@@ -24,11 +26,12 @@ class _RegisterFieldState extends State<RegisterField> {
     // print(widget.controller.text);
     return TextField(
       obscureText: widget.isVisible ?? false,
+      maxLines: widget.maxlines ?? 1,
       controller: widget.controller,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 2),
+        contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         hintText: widget.hintText,
-        prefixIcon: Icon(widget.icon),
+        prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
         // icon: Icon(Icons.person),
         hintStyle: const TextStyle(
           color: Colors.grey,
