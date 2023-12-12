@@ -41,15 +41,16 @@ class ReminderScreen extends StatelessWidget {
                     height: 80,
                     width: 360,
                     decoration: BoxDecoration(),
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.calendar_month,),
-                        const Text(
-                            "Update for Case hearing dates Circular Attached"),
+                        Icon(
+                          Icons.calendar_month,
+                        ),
+                        Text("Update for Case hearing dates Circular Attached"),
                         Align(
                           alignment: Alignment.topRight,
-                          child: const Text("8:45 PM"),
+                          child: Text("8:45 PM"),
                         ),
                         Divider()
                       ],

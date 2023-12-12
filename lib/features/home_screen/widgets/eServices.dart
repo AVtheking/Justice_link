@@ -9,6 +9,7 @@ import 'package:justice_link/features/medical_updates/screens/medical_updates.da
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 
 import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.dart';
+import 'package:justice_link/features/utrc/screens/annexurea.dart';
 
 import 'package:justice_link/features/meetings/services/meeting_service.dart';
 
@@ -62,6 +63,12 @@ class EServices extends ConsumerWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => const MeetingScreen(),
+                        ),
+                      );
+                    } else if (index == 3) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AnnexureA(),
                         ),
                       );
                     } else if (index == 4) {
