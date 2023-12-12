@@ -6,6 +6,7 @@ import 'package:justice_link/features/document_verification/screens/document_ver
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.dart';
+import 'package:justice_link/features/utrc/screens/annexurea.dart';
 
 class EServices extends StatelessWidget {
   const EServices({super.key});
@@ -52,6 +53,12 @@ class EServices extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => const Meeting(),
+                        ),
+                      );
+                    } else if (index == 3) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AnnexureA(),
                         ),
                       );
                     } else if (index == 4) {

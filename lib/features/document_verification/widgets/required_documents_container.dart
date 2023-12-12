@@ -73,7 +73,7 @@ class _RequiredDocumentsState extends State<RequiredDocuments> {
                   child: Container(
                     height: 34,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [Color(0xFF004D14), Color(0xFF098904)],
