@@ -180,8 +180,7 @@ class ChatList extends StatelessWidget {
                             children: const <TextSpan>[
                               TextSpan(
                                   text: ': Vishal Raina',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                                  style: TextStyle(fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
@@ -192,8 +191,7 @@ class ChatList extends StatelessWidget {
                             children: const <TextSpan>[
                               TextSpan(
                                   text: ': Samay Raina',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                                  style: TextStyle(fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ),
@@ -204,20 +202,17 @@ class ChatList extends StatelessWidget {
                             children: const <TextSpan>[
                               TextSpan(
                                   text: ': Civil Case',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                                  style: TextStyle(fontWeight: FontWeight.bold)),
                             ],
                           ),
-                        ),
-                        RichText(
+                        ),RichText(
                           text: TextSpan(
                             text: 'Applicant name  ',
                             style: DefaultTextStyle.of(context).style,
                             children: const <TextSpan>[
                               TextSpan(
                                   text: ': Samay Raina',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
+                                  style: TextStyle(fontWeight: FontWeight.bold)),
                             ],
                           ),
                         )
@@ -242,3 +237,4 @@ class ChatList extends StatelessWidget {
     );
   }
 }
+

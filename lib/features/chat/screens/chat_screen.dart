@@ -70,7 +70,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.grey,
+    return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: const Text("Chat Bot"),
         centerTitle: true,
@@ -104,7 +105,8 @@ class _ChatScreenState extends State<ChatScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
