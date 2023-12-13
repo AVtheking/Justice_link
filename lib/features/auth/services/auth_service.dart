@@ -87,7 +87,7 @@ class AuthService {
         email: email,
         password: password,
       );
-      print(lawyer.toJson());
+      // print(lawyer.toJson());
       http.Response res = await http.post(
         Uri.parse("$uri/lawyer/register"),
         body: lawyer.toJson(),
@@ -218,7 +218,7 @@ class AuthService {
           _ref.read(lawyerProvider.notifier).update(
                 (state) => Lawyer.fromJson(_lawyer),
               );
-          print(data['token']);
+          // print(data['token']);
 
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setString("token", data['token']);

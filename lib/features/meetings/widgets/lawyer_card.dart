@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/features/meetings/services/meeting_service.dart';
 import 'package:justice_link/models/lawyer.dart';
 import 'package:justice_link/models/meeting.dart';
 
-class LawyerCard extends ConsumerWidget {
-  const LawyerCard({super.key, required this.lawyer, this.meeting});
+class LawyerCard extends ConsumerStatefulWidget {
+  const LawyerCard({Key? key, required this.lawyer}) : super(key: key);
   final Lawyer lawyer;
-  final Meeting? meeting;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final meeting = ref.read(meetingProvider);
-    print(meeting);
+  ConsumerState<ConsumerStatefulWidget> createState() => _LawyerCardState();
+}
+
+class _LawyerCardState extends ConsumerState<LawyerCard> {
+  Meeting? meeting;
+  Future<void> getMeetingRequest(BuildContext context, String lawyerId) async {
+    final fetchedMeeting = await ref
+        .read(meetingServiceProvider)
+        .getMeetingRequests(context, lawyerId);
+    setState(() {
+      meeting = fetchedMeeting;
+    });
+  }
+
+  @override
+  void initState() {
+    getMeetingRequest(context, widget.lawyer.id!);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // final meeting = ref.watch(meetingProvider);
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: IntrinsicHeight(
@@ -21,7 +41,7 @@ class LawyerCard extends ConsumerWidget {
             borderRadius: BorderRadius.circular(10),
             color: meeting == null
                 ? Colors.white
-                : meeting!.lawyerId == lawyer.id
+                : meeting!.lawyerId == widget.lawyer.id
                     ? meeting!.meetingStatus == "pending"
                         ? Colors.yellow
                         : meeting!.meetingStatus == "accepted"
@@ -65,7 +85,7 @@ class LawyerCard extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: Text(
-                              lawyer.name,
+                              widget.lawyer.name,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -84,9 +104,9 @@ class LawyerCard extends ConsumerWidget {
                                 size: 20,
                               ),
                               Text(
-                                lawyer.location == null
+                                widget.lawyer.location == null
                                     ? "Ahmedabad, Gujarat"
-                                    : lawyer.location!,
+                                    : widget.lawyer.location!,
                                 style: const TextStyle(
                                   color: Color.fromARGB(255, 75, 77, 81),
                                   fontWeight: FontWeight.w400,
@@ -108,9 +128,9 @@ class LawyerCard extends ConsumerWidget {
                                 width: 2,
                               ),
                               Text(
-                                lawyer.lawyerExperience == null
+                                widget.lawyer.lawyerExperience == null
                                     ? "5 years"
-                                    : "${lawyer.lawyerExperience} years",
+                                    : "${widget.lawyer.lawyerExperience} years",
                                 style: const TextStyle(
                                   color: Color.fromARGB(255, 61, 63, 65),
                                   fontWeight: FontWeight.w400,
@@ -180,9 +200,9 @@ class LawyerCard extends ConsumerWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: Text(
-                                    lawyer.skills == null
+                                    widget.lawyer.skills == null
                                         ? "Criminal Law"
-                                        : lawyer.skills!,
+                                        : widget.lawyer.skills!,
                                     style: const TextStyle(
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,

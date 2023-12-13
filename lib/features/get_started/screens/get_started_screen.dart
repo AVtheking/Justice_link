@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
+import 'package:justice_link/features/home_screen/screen/home_screen_lawyer.dart';
 
-class GetStartedScreen extends StatefulWidget {
+class GetStartedScreen extends ConsumerStatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
 
   @override
-  State<GetStartedScreen> createState() => _GetStartedScreenState();
+  ConsumerState<GetStartedScreen> createState() => _GetStartedScreenState();
 }
 
-class _GetStartedScreenState extends State<GetStartedScreen> {
+class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
   final List<String> items = <String>[
     "English",
     "Hindi",
@@ -23,6 +26,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final lawyer = ref.read(lawyerProvider);
     return Scaffold(
       appBar: AppBar(
         actions: const [],
@@ -163,7 +167,9 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
+                      builder: (context) => lawyer == null
+                          ? const HomeScreen()
+                          : const HomeScreenLawyer(),
                     ),
                   );
                 },
