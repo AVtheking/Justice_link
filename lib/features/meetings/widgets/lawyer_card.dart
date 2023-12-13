@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/models/lawyer.dart';
+import 'package:justice_link/models/meeting.dart';
 
-class LawyerCard extends StatelessWidget {
-  const LawyerCard({super.key});
+class LawyerCard extends ConsumerWidget {
+  const LawyerCard({super.key, required this.lawyer, this.meeting});
+  final Lawyer lawyer;
+  final Meeting? meeting;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final meeting = ref.read(meetingProvider);
+    print(meeting);
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: IntrinsicHeight(
@@ -12,7 +19,17 @@ class LawyerCard extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
+            color: meeting == null
+                ? Colors.white
+                : meeting!.lawyerId == lawyer.id
+                    ? meeting!.meetingStatus == "pending"
+                        ? Colors.yellow
+                        : meeting!.meetingStatus == "accepted"
+                            ? Colors.green
+                            : meeting!.meetingStatus == "rejected"
+                                ? Colors.red
+                                : Colors.white
+                    : Colors.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -40,67 +57,71 @@ class LawyerCard extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 20),
+                            padding: const EdgeInsets.only(left: 20),
                             child: Text(
-                              "Madhav Rastogi",
-                              style: TextStyle(
+                              lawyer.name,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xFF046200),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.location_on_outlined,
                                 color: Color.fromARGB(255, 90, 90, 92),
                                 size: 20,
                               ),
                               Text(
-                                "Ahmedabad, Gujarat",
-                                style: TextStyle(
+                                lawyer.location == null
+                                    ? "Ahmedabad, Gujarat"
+                                    : lawyer.location!,
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 75, 77, 81),
                                   fontWeight: FontWeight.w400,
                                 ),
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 2,
                           ),
                           Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.work_outline,
                                 color: Color.fromARGB(255, 90, 90, 92),
                                 size: 20,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 2,
                               ),
                               Text(
-                                "15 Years of Experience",
-                                style: TextStyle(
+                                lawyer.lawyerExperience == null
+                                    ? "5 years"
+                                    : "${lawyer.lawyerExperience} years",
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 61, 63, 65),
                                   fontWeight: FontWeight.w400,
                                 ),
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          IntrinsicHeight(
+                          const IntrinsicHeight(
                             child: Stack(children: [
                               Row(
                                 children: [
@@ -155,12 +176,14 @@ class LawyerCard extends StatelessWidget {
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.black54),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Padding(
-                                  padding: EdgeInsets.all(2.0),
+                                  padding: const EdgeInsets.all(2.0),
                                   child: Text(
-                                    "Civil Matters",
-                                    style: TextStyle(
+                                    lawyer.skills == null
+                                        ? "Criminal Law"
+                                        : lawyer.skills!,
+                                    style: const TextStyle(
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -177,7 +200,7 @@ class LawyerCard extends StatelessWidget {
                               ),
                               child: const Center(
                                 child: Padding(
-                                  padding:  EdgeInsets.all(2.0),
+                                  padding: EdgeInsets.all(2.0),
                                   child: Text(
                                     "Property&Real Estates",
                                     style: TextStyle(

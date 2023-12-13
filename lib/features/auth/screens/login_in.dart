@@ -19,7 +19,6 @@ class _LoginState extends ConsumerState<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   @override
   void dispose() {
-    
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -27,11 +26,17 @@ class _LoginState extends ConsumerState<LoginScreen> {
 
   void login(BuildContext context) {
     // print(_nameController);
-    ref.watch(authServiceProvider).login(
-          context: context,
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+    selectedOption == 1
+        ? ref.watch(authServiceProvider).login(
+              context: context,
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            )
+        : ref.watch(authServiceProvider).loginLawyer(
+              context: context,
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            );
   }
 
   @override

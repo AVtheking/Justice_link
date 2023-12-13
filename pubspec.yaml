@@ -75,6 +75,7 @@ flutter:
     - assets/drawer_images/
     - assets/eServices_images/
     - assets/images/
+    - assets/key_features_lawyer/  
     - assets/key_features/
   #   - images/a_dot_ham.jpeg
 

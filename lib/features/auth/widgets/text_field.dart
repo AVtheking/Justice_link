@@ -5,13 +5,15 @@ class RegisterField extends StatefulWidget {
       {super.key,
       required this.hintText,
       required this.controller,
-      required this.icon,
+      this.icon,
       this.isVisible,
+      this.maxlines,
       this.suffixIcon});
   final String hintText;
-  final IconData icon;
+  final IconData? icon;
   final bool? isVisible;
   final bool? suffixIcon;
+  final int? maxlines;
   final TextEditingController controller;
 
   @override
@@ -24,26 +26,27 @@ class _RegisterFieldState extends State<RegisterField> {
     // print(widget.controller.text);
     return TextField(
       obscureText: widget.isVisible ?? false,
+      maxLines: widget.maxlines ?? 1,
       controller: widget.controller,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 2),
-        hintText: widget.hintText,
-        prefixIcon: Icon(widget.icon),
-        // icon: Icon(Icons.person),
-        hintStyle: const TextStyle(
-          color: Colors.grey,
-          fontSize: 16,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.grey, width: 1),
-        ),
-        enabledBorder: OutlineInputBorder(
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+          hintText: widget.hintText,
+          prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
+          // icon: Icon(Icons.person),
+          hintStyle: const TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.circular(10)),
-        fillColor: Colors.white,
-        filled: true,
-      ),
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.circular(10)),
+          fillColor: Colors.white,
+          filled: true,
+        ),
     );
   }
 }

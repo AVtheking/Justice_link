@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class KeyFeatures extends StatelessWidget {
+class KeyFeatures extends ConsumerWidget {
   const KeyFeatures({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // print(lawyer);
     List<String> features = [
       "Guidelines",
       "Legal rights",
     ];
+
     return Container(
       height: 111,
       width: double.infinity,
