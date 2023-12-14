@@ -22,16 +22,10 @@ class _MeetingState extends ConsumerState<MeetingScreen> {
     setState(() {});
   }
 
-  getMeeting() async {
-    meetings =
-        await ref.read(meetingServiceProvider).getMeetingRequests(context);
-    setState(() {});
-  }
-
   @override
   void initState() {
     getLawyers();
-    getMeeting();
+
     super.initState();
   }
 
@@ -56,7 +50,6 @@ class _MeetingState extends ConsumerState<MeetingScreen> {
                   },
                   child: LawyerCard(
                     lawyer: lawyers![index]!,
-                    meeting: index >= meetings.length ? null : meetings[index],
                   ),
                 );
               },
