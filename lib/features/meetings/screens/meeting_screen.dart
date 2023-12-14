@@ -22,16 +22,10 @@ class _MeetingState extends ConsumerState<MeetingScreen> {
     setState(() {});
   }
 
-  getMeeting() async {
-    meetings =
-        await ref.read(meetingServiceProvider).getMeetingRequests(context);
-    setState(() {});
-  }
-
   @override
   void initState() {
     getLawyers();
-    getMeeting();
+
     super.initState();
   }
 
@@ -44,20 +38,8 @@ class _MeetingState extends ConsumerState<MeetingScreen> {
           : ListView.builder(
               itemCount: lawyers!.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AppointmentPayment(
-                          lawyer: lawyers![index]!,
-                        ),
-                      ),
-                    );
-                  },
-                  child: LawyerCard(
-                    lawyer: lawyers![index]!,
-                    meeting: index >= meetings.length ? null : meetings[index],
-                  ),
+                return LawyerCard(
+                  lawyer: lawyers![index]!,
                 );
               },
             ),

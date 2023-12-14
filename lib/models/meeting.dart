@@ -14,7 +14,7 @@ class Meeting {
   final String caseNo;
   final String courtName;
   final String caseDetails;
-  final String? meetingStatus;
+  late final String? meetingStatus;
 
   Meeting({
     required this.id,

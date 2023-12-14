@@ -106,14 +106,15 @@ class MeetingService {
     }
   }
 
-  Future<List<Meeting>> getMeetingRequests(BuildContext context) async {
-    List<Meeting> meetings = [];
+  Future<Meeting?> getMeetingRequests(
+      BuildContext context, String lawyerId) async {
+    Meeting? meeting;
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       final token = pref.getString("token");
       // final user = _ref.read(userProvider)!;
       http.Response res = await http.get(
-        Uri.parse("$uri/get-meeting-client"),
+        Uri.parse("$uri/get-meeting-client/$lawyerId"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'authorization': "Bearer $token"
@@ -125,21 +126,29 @@ class MeetingService {
           onSuccess: () {
             final body = jsonDecode(res.body);
             final data = body['data'];
-            final meetingsData = data['meetings'];
-            // _ref
-            //     .read(meetingProvider.notifier)
-            //     .update((state) => Meeting.fromJson(jsonEncode(meetingsData)));
-            for (int i = 0; i < meetingsData.length; i++) {
-              final String _meeting = jsonEncode(meetingsData[i]);
-              // print(_meeting);
-              meetings.add(Meeting.fromJson(_meeting));
-            }
+            final meetingsData = data['meeting'];
+            meeting = meetingsData != null
+                ? Meeting.fromJson(
+                    jsonEncode(meetingsData),
+                  )
+                : null;
+            // print(meetingsData);
+
+            meetingsData == null
+                ? _ref.read(meetingProvider.notifier).update(
+                      (state) => null,
+                    )
+                : _ref.read(meetingProvider.notifier).update(
+                      (state) => Meeting.fromJson(
+                        jsonEncode(meetingsData),
+                      ),
+                    );
           });
     } catch (e) {
       // print(e);
       showSnackBar(context, e.toString());
     }
-    return meetings;
+    return meeting;
   }
 
   Future<List<Meeting>> getMeetingRequestsForLawyer(
@@ -178,7 +187,7 @@ class MeetingService {
     required Meeting meeting,
   }) async {
     try {
-      final meeting = _ref.read(meetingProvider)!;
+      // final meeting = _ref.read(meetingProvider)!;
       SharedPreferences pref = await SharedPreferences.getInstance();
       final token = pref.getString("token");
       http.Response res = await http.put(
@@ -188,6 +197,7 @@ class MeetingService {
           'authorization': "Bearer $token"
         },
       );
+      print(res);
       httpErrorHandle(
           response: res,
           context: context,
