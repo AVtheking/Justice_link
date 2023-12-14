@@ -43,29 +43,22 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     socket.on(
       'message',
       (data) {
-        print("hih----------------------------------------------i");
-        print(_messageList);
-        final messageData = data['message'];
-        print(data);
+        // print(data);
         final user = ref.read(userProvider);
-        // final user = User(name: 'name', email: 'email', password: 'password');
-        if (messageData is Map<String, dynamic>) {
-          final message;
-          if (messageData['userId'] == user?.id) {
-            message = Message(
-                content: messageData['message'],
-                ownerType: OwnerType.sender,
-                ownerName: user?.name);
-          } else {
-            message = Message(
-              content: messageData['message'],
+        final message;
+        if ((data)['userId'] == user?.id) {
+          message = Message(
+              content: data['message'],
               ownerType: OwnerType.sender,
-              ownerName: user?.name,
-            );
-          }
-          _messageList.add(message);
+              ownerName: user?.name);
+        } else {
+          message = Message(
+            content: data['message'],
+            ownerType: OwnerType.receiver,
+            ownerName: user?.name,
+          );
         }
-        print(_messageList);
+        _messageList.add(message);
         setState(
           () {},
         );
@@ -187,7 +180,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     socket.disconnect();
     super.dispose();
   }
@@ -196,13 +188,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final user = ref.read(userProvider);
 
     if (text.isNotEmpty) {
-      // _messageList.add(
-      //   Message(
-      //     content: text,
-      //     ownerType: OwnerType.sender,
-      //     ownerName: "Your Name",
-      //   ),
-      // );
       Map<String, dynamic> data = {
         'userId': user?.id,
         'message': text,
