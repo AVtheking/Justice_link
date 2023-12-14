@@ -14,7 +14,6 @@ class _MeetingStatusState extends ConsumerState<MeetingStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbarfun("Meeting Status"),
-
     );
   }
 }
