@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:justice_link/features/chat/widgets/chat_widgets.dart';
+import 'package:justice_link/models/meeting.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
-
+  const ChatScreen({Key? key, this.meeting}) : super(key: key);
+  final Meeting? meeting;
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
@@ -102,7 +103,40 @@ class _ChatScreenState extends State<ChatScreen> {
               children: _messageList,
             ),
           ),
+          widget.meeting!=null ? 
+          widget.meeting?.meetingStatus == 'pending' ? Container():
           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _textEditingController,
+                        decoration: const InputDecoration(
+                          hintText: 'Type a message...',
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.photo),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.send),
+                      onPressed: () {
+                        _sendMessage(_textEditingController.text);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ):   Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(

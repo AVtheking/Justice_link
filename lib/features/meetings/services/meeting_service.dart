@@ -187,7 +187,7 @@ class MeetingService {
     required Meeting meeting,
   }) async {
     try {
-      final meeting = _ref.read(meetingProvider)!;
+      // final meeting = _ref.read(meetingProvider)!;
       SharedPreferences pref = await SharedPreferences.getInstance();
       final token = pref.getString("token");
       http.Response res = await http.put(
@@ -197,6 +197,7 @@ class MeetingService {
           'authorization': "Bearer $token"
         },
       );
+      print(res);
       httpErrorHandle(
           response: res,
           context: context,
