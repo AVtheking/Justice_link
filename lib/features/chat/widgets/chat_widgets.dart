@@ -156,89 +156,14 @@ class ChatList extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Flexible(
-                child: Bubble(
-                  margin: const BubbleEdges.fromLTRB(10, 10, 30, 0),
-                  stick: true,
-                  nip: BubbleNip.leftTop,
-                  color: const Color(0xffD9D9D9),
-                  alignment: Alignment.topRight,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            text: 'Accused name  ',
-                            style: DefaultTextStyle.of(context).style,
-                            children: const <TextSpan>[
-                              TextSpan(
-                                  text: ': Vishal Raina',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Applicant name  ',
-                            style: DefaultTextStyle.of(context).style,
-                            children: const <TextSpan>[
-                              TextSpan(
-                                  text: ': Samay Raina',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Case Type  ',
-                            style: DefaultTextStyle.of(context).style,
-                            children: const <TextSpan>[
-                              TextSpan(
-                                  text: ': Civil Case',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            text: 'Applicant name  ',
-                            style: DefaultTextStyle.of(context).style,
-                            children: const <TextSpan>[
-                              TextSpan(
-                                  text: ': Samay Raina',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          ListView.builder(
-            shrinkWrap: shrinkWrap,
-            controller: scrollController ?? ScrollController(),
-            padding: padding,
-            itemCount: children.length,
-            itemBuilder: (BuildContext buildContext, int index) {
-              return children[index];
-            },
-          ),
-        ],
-      ),
+    return ListView.builder(
+      shrinkWrap: shrinkWrap,
+      controller: scrollController ?? ScrollController(),
+      padding: padding,
+      itemCount: children.length,
+      itemBuilder: (BuildContext buildContext, int index) {
+        return children[index];
+      },
     );
   }
 }
