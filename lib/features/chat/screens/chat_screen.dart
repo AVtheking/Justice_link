@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
-
 import 'package:justice_link/features/chat/widgets/chat_widgets.dart';
 import 'package:justice_link/global.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:justice_link/models/meeting.dart';
-import 'package:justice_link/models/user.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -28,7 +27,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    // connectToServer();
+    // WidgetsBinding.instance?.addPostFrameCallback((_) {
+    connectToServer();
   }
 
   void connectToServer() {
@@ -43,25 +43,46 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     socket.on(
       'message',
       (data) {
-        // print(data);
+        if (!mounted) {
+          return;
+        }
         final user = ref.read(userProvider);
+        final lawyer = ref.read(lawyerProvider);
         final message;
-        if ((data)['userId'] == user?.id) {
-          message = Message(
+        if (user == null) {
+          if ((data)['userId'] == lawyer!.id) {
+            message = Message(
+                content: data['message'],
+                ownerType: OwnerType.sender,
+                ownerName: lawyer.name);
+          } else {
+            message = Message(
               content: data['message'],
-              ownerType: OwnerType.sender,
-              ownerName: user?.name);
+              ownerType: OwnerType.receiver,
+              ownerName: lawyer.name,
+            );
+          }
         } else {
-          message = Message(
-            content: data['message'],
-            ownerType: OwnerType.receiver,
-            ownerName: user?.name,
+          if ((data)['userId'] == user.id) {
+            message = Message(
+                content: data['message'],
+                ownerType: OwnerType.sender,
+                ownerName: user.name);
+          } else {
+            message = Message(
+              content: data['message'],
+              ownerType: OwnerType.receiver,
+              ownerName: user.name,
+            );
+          }
+        }
+
+        _messageList.add(message);
+        if (mounted) {
+          setState(
+            () {},
           );
         }
-        _messageList.add(message);
-        setState(
-          () {},
-        );
       },
     );
   }
@@ -70,6 +91,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final user = ref.read(userProvider);
+    // final lawyer = ref.read(lawyerProvider);
+    // connectToServer(user,lawyer);
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -84,7 +108,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               onPressed: () {
-                connectToServer();
+                // connectToServer();
               },
               icon: const Icon(
                 Icons.call,
@@ -180,16 +204,17 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   void dispose() {
-    socket.disconnect();
     super.dispose();
+    _textEditingController.dispose();
+    socket.disconnect();
   }
 
   void _sendMessage(String text) {
     final user = ref.read(userProvider);
-
+    final lawyer = ref.read(lawyerProvider);
     if (text.isNotEmpty) {
       Map<String, dynamic> data = {
-        'userId': user?.id,
+        'userId': user?.id ?? lawyer?.id,
         'message': text,
       };
       socket.emit('message', data);
