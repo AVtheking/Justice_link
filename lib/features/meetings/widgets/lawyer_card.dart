@@ -20,15 +20,17 @@ class _LawyerCardState extends ConsumerState<LawyerCard> {
     final fetchedMeeting = await ref
         .read(meetingServiceProvider)
         .getMeetingRequests(context, lawyerId);
-    setState(() {
-      meeting = fetchedMeeting;
-    });
+    if (mounted) {
+      setState(() {
+        meeting = fetchedMeeting;
+      });
+    }
   }
 
   @override
   void initState() {
-    getMeetingRequest(context, widget.lawyer.id!);
     super.initState();
+    getMeetingRequest(context, widget.lawyer.id!);
   }
 
   @override
@@ -37,9 +39,10 @@ class _LawyerCardState extends ConsumerState<LawyerCard> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
-          
           MaterialPageRoute(
-            builder: (context) => meeting !=null ? ChatScreen(meeting: meeting) :AppointmentPayment(lawyer: widget.lawyer),
+            builder: (context) => meeting != null
+                ? ChatScreen(meeting: meeting)
+                : AppointmentPayment(lawyer: widget.lawyer),
           ),
         );
       },
