@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import, library_prefixes, unnecessary_string_interpolations
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,6 +10,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class ChatScreen extends ConsumerStatefulWidget {
   const ChatScreen({Key? key, this.meeting}) : super(key: key);
   final Meeting? meeting;
+
   @override
   ConsumerState<ChatScreen> createState() => _ChatScreenState();
 }
@@ -25,10 +24,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ownerType: OwnerType.sender,
         ownerName: "Higor Lapa"),
   ];
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance?.addPostFrameCallback((_) {
     connectToServer();
   }
 
@@ -38,8 +38,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       'autoconnect': false,
     });
     socket.connect();
-    socket.on('connect', (_) {
-    });
+    socket.on('connect', (_) {});
     socket.on(
       'message',
       (data) {
@@ -79,21 +78,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
         _messageList.add(message);
         if (mounted) {
-          setState(
-            () {},
-          );
+          setState(() {});
         }
       },
     );
   }
 
-  final TextEditingController _textEditingController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    // final user = ref.read(userProvider);
-    // final lawyer = ref.read(lawyerProvider);
-    // connectToServer(user,lawyer);
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -107,11 +99,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              onPressed: () {
-                // connectToServer();
-              },
+              onPressed: showMeetingDetails,
               icon: const Icon(
-                Icons.call,
+                Icons.details,
                 color: Colors.white,
               ),
             ),
@@ -129,7 +119,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             ),
           ),
           widget.meeting != null
-              ? widget.meeting?.meetingStatus == 'pending'
+              ? widget.meeting!.meetingStatus == 'pending'
                   ? Container()
                   : Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -202,11 +192,45 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _textEditingController.dispose();
-    socket.disconnect();
+  void showMeetingDetails() {
+    final meeting = widget.meeting;
+    if (meeting != null) {
+      final snackBarHeight = 200.0;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Container(
+            height: snackBarHeight,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Sender Name: ${meeting.senderName}'),
+                Text('Receiver Name: ${meeting.receiverName}'),
+                Text('Accused Name: ${meeting.accusedName}'),
+                Text('Applicant Name: ${meeting.applicantName}'),
+                Text('Case Type: ${meeting.caseType}'),
+                Text('Opposition Lawyer Name: ${meeting.oppositionLawyerName}'),
+                Text('Case No: ${meeting.caseNo}'),
+                Text('Court Name: ${meeting.courtName}'),
+                Text('Case Details: ${meeting.caseDetails}'),
+                Text('Meeting Status: ${meeting.meetingStatus}'),
+              ],
+            ),
+          ),
+          action: SnackBarAction(
+            label: 'Close',
+            onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            },
+          ),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.all(20.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      );
+    }
   }
 
   void _sendMessage(String text) {
@@ -226,5 +250,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         curve: Curves.easeIn,
       );
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textEditingController.dispose();
+    socket.disconnect();
   }
 }

@@ -16,40 +16,16 @@ class AnnexureB1 extends ConsumerStatefulWidget {
 }
 
 class _LoginState extends ConsumerState<AnnexureB1> {
-  final TextEditingController _utpNameController = TextEditingController();
+  final TextEditingController _recommUTRC = TextEditingController();
   final TextEditingController _fatherNameController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _firController = TextEditingController();
-  final TextEditingController _policeStationController =
-      TextEditingController();
+  final TextEditingController _dateOfRecomm = TextEditingController();
+  final TextEditingController _dateOfReleaseUTP = TextEditingController();
+  final TextEditingController _briefReasons = TextEditingController();
+  final TextEditingController _actionTakenOnRecomm = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
   final TextEditingController _arrestedUnderSectionController =
       TextEditingController();
-  final TextEditingController _courtParticularsController =
-      TextEditingController();
-  final TextEditingController _dateOfArrestController = TextEditingController();
-  final TextEditingController _dateOfFirstRemandController =
-      TextEditingController();
-  final TextEditingController _dateOfAdmissionController =
-      TextEditingController();
-  final TextEditingController _dateOfFillingSheetController =
-      TextEditingController();
-  final TextEditingController _chargesheetedUnderSectionController =
-      TextEditingController();
-  final TextEditingController _utpRepresentedByController =
-      TextEditingController();
-  final TextEditingController _lawyersDetailsController =
-      TextEditingController();
-  final TextEditingController _bailStatusController = TextEditingController();
-  final TextEditingController _reasonForNoBailController =
-      TextEditingController();
-  final TextEditingController _diseaseDetailsController =
-      TextEditingController();
-  final TextEditingController _convictUndertrialController =
-      TextEditingController();
-  final TextEditingController _additionalCaseDetailsController =
-      TextEditingController();
+  final TextEditingController _finalOutcome = TextEditingController();
 
   int selectedOption = 2;
 
@@ -197,7 +173,7 @@ class _LoginState extends ConsumerState<AnnexureB1> {
                 height: 38,
                 width: 340,
                 child: CustomTextField(
-                  controller: _utpNameController,
+                  controller: _recommUTRC,
                   hintText: 'Recommendation of UTRC',
                   width: 340,
                 ),
@@ -216,13 +192,13 @@ class _LoginState extends ConsumerState<AnnexureB1> {
               Row(
                 children: [
                   CustomTextField(
-                    controller: _genderController,
+                    controller: _dateOfRecomm,
                     hintText: 'Date of recommendation',
                     width: 140,
                   ),
                   Spacer(),
                   CustomTextField(
-                    controller: _ageController,
+                    controller: _dateOfReleaseUTP,
                     hintText: 'Date of release of UTP',
                     width: 140,
                   ),
@@ -230,13 +206,13 @@ class _LoginState extends ConsumerState<AnnexureB1> {
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: _firController,
+                controller: _briefReasons,
                 hintText: 'Brief reasons for UTRC recommendation',
                 width: 340,
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: _policeStationController,
+                controller: _actionTakenOnRecomm,
                 hintText: 'Action taken on recommendation',
                 width: 340,
               ),
@@ -245,7 +221,7 @@ class _LoginState extends ConsumerState<AnnexureB1> {
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: _courtParticularsController,
+                controller: _finalOutcome,
                 hintText: 'Final Outcome',
                 width: 340,
               ),
