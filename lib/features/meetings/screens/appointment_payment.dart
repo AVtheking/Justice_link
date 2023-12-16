@@ -25,7 +25,6 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
             LawyerCard(
               lawyer: widget.lawyer,
             ),
-            // const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(top: 1),
               child: Row(
@@ -146,7 +145,6 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -189,8 +187,8 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
                     color: const Color(0xFFADADAD),
                   ),
                   borderRadius: BorderRadius.circular(5)),
-              child: const Column(children: [
-                Text(
+              child: Column(children: [
+                const Text(
                   "Charges Per Appointmemt:",
                   style: TextStyle(
                     color: Color(0xFF046200),
@@ -198,7 +196,7 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                Text("1500")
+                selectedOption == 1 ? const Text("0") : const Text("1500")
               ]),
             ),
             const SizedBox(
@@ -209,6 +207,7 @@ class _AppointmentScreenState extends State<AppointmentPayment> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => AppointmentScreen(
+                      isProbono: selectedOption == 1 ? true : false,
                       lawyer: widget.lawyer,
                     ),
                   ),

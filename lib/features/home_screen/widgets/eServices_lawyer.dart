@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:justice_link/features/case_status/screens/case_status_lawyer.dart';
+import 'package:justice_link/features/case_status/screens/new_case_status_lawyer.dart';
 import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_request.dart';
@@ -46,7 +46,7 @@ class EServicesLawyer extends ConsumerWidget {
                     if (index == 0) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const CaseStatusLawyer(),
+                          builder: (context) => const NewCaseStatus(),
                         ),
                       );
                     } else if (index == 1) {

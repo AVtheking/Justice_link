@@ -10,8 +10,11 @@ import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 import 'package:justice_link/models/lawyer.dart';
 
 class AppointmentScreen extends StatefulWidget {
-  const AppointmentScreen({Key? key, required this.lawyer}) : super(key: key);
+  const AppointmentScreen(
+      {Key? key, required this.lawyer, this.isProbono = false})
+      : super(key: key);
   final Lawyer lawyer;
+  final bool isProbono;
 
   @override
   State<AppointmentScreen> createState() => _AppointmentScreenState();
@@ -31,6 +34,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       MaterialPageRoute(
         builder: (context) => PaymentScreen(
           lawyer: widget.lawyer,
+          isProbono:widget.isProbono
         ),
       ),
     );

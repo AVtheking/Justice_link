@@ -2,7 +2,8 @@
 import 'dart:convert';
 
 class Case {
-  final String id;
+  final String? id;
+  final String lawyerId;
   final String victimName;
   final String oppositionName;
   final String lastPresentedOn;
@@ -15,7 +16,8 @@ class Case {
   final String resAdvocates;
 
   Case({
-    required this.id,
+    this.id,
+    required this.lawyerId,
     required this.victimName,
     required this.oppositionName,
     required this.lastPresentedOn,
@@ -30,6 +32,7 @@ class Case {
 
   Case copyWith({
     String? id,
+    String? lawyerId,
     String? victimName,
     String? oppositionName,
     String? lastPresentedOn,
@@ -43,6 +46,7 @@ class Case {
   }) {
     return Case(
       id: id ?? this.id,
+      lawyerId: lawyerId ?? this.lawyerId,
       victimName: victimName ?? this.victimName,
       oppositionName: oppositionName ?? this.oppositionName,
       lastPresentedOn: lastPresentedOn ?? this.lastPresentedOn,
@@ -59,6 +63,7 @@ class Case {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'lawyerId': lawyerId,
       'victimName': victimName,
       'oppositionName': oppositionName,
       'lastPresentedOn': lastPresentedOn,
@@ -74,7 +79,8 @@ class Case {
 
   factory Case.fromMap(Map<String, dynamic> map) {
     return Case(
-      id: map['_id'] as String,
+      id: map['_id'] != null ? map['id'] as String : null,
+      lawyerId: map['lawyerId'] as String,
       victimName: map['victimName'] as String,
       oppositionName: map['oppositionName'] as String,
       lastPresentedOn: map['lastPresentedOn'] as String,
@@ -88,9 +94,48 @@ class Case {
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String toJson() =>
+      json.encode(toMap()..removeWhere((key, value) => value == null));
 
-  factory Case.fromJson(String source) => Case.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Case.fromJson(String source) =>
+      Case.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  
+  @override
+  String toString() {
+    return 'Case(id: $id, lawyerId: $lawyerId, victimName: $victimName, oppositionName: $oppositionName, lastPresentedOn: $lastPresentedOn, petitioner: $petitioner, caseNo: $caseNo, respondent: $respondent, petAdvocates: $petAdvocates, caseStatus: $caseStatus, category: $category, resAdvocates: $resAdvocates)';
+  }
+
+  @override
+  bool operator ==(covariant Case other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.lawyerId == lawyerId &&
+        other.victimName == victimName &&
+        other.oppositionName == oppositionName &&
+        other.lastPresentedOn == lastPresentedOn &&
+        other.petitioner == petitioner &&
+        other.caseNo == caseNo &&
+        other.respondent == respondent &&
+        other.petAdvocates == petAdvocates &&
+        other.caseStatus == caseStatus &&
+        other.category == category &&
+        other.resAdvocates == resAdvocates;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        lawyerId.hashCode ^
+        victimName.hashCode ^
+        oppositionName.hashCode ^
+        lastPresentedOn.hashCode ^
+        petitioner.hashCode ^
+        caseNo.hashCode ^
+        respondent.hashCode ^
+        petAdvocates.hashCode ^
+        caseStatus.hashCode ^
+        category.hashCode ^
+        resAdvocates.hashCode;
+  }
 }

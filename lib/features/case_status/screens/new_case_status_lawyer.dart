@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/features/case_status/screens/case_status_lawyer.dart';
 import 'package:justice_link/features/case_status/screens/view_case_status.dart';
+import 'package:justice_link/features/case_status/widgets/case_status_btn.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
 
-class CaseStatus extends StatefulWidget {
-  const CaseStatus({Key? key}) : super(key: key);
+class NewCaseStatus extends StatefulWidget {
+  const NewCaseStatus({Key? key}) : super(key: key);
 
   @override
-  State<CaseStatus> createState() => _CaseStatusState();
+  State<NewCaseStatus> createState() => _CaseStatusState();
 }
 
-class _CaseStatusState extends State<CaseStatus> {
+class _CaseStatusState extends State<NewCaseStatus> {
   final _currencies = [
-    "Food",
-    "Transport",
-    "Personal",
+    "Criminal",
+    "Civil",
   ];
   String? _currentSelectedValue;
   String? _currentSelectedYear;
@@ -217,13 +218,11 @@ class _CaseStatusState extends State<CaseStatus> {
                   ],
                 ),
                 const SizedBox(
-                  height: 150,
+                  height: 100,
                 ),
                 Column(
                   children: [
                     SizedBox(
-                      // margin: const EdgeInsets.only(bottom: 50),
-                      // height: 131,
                       width: double.infinity,
                       child: Image.asset(
                         "assets/images/par.png",
@@ -238,34 +237,20 @@ class _CaseStatusState extends State<CaseStatus> {
                           ),
                         );
                       },
-                      child: Container(
-                        height: 46,
-                        margin: const EdgeInsets.symmetric(horizontal: 19),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFF046200), Color(0xFF098904)],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
+                      child: const CaseStatusButton(text: "View Case Status"),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const CaseStatusLawyer(),
                           ),
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.remove_red_eye, color: Colors.white),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "View Case Status",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
-                        ),
-                      ),
+                        );
+                      },
+                      child: const CaseStatusButton(text: "Upload Case Status"),
                     ),
                     const SizedBox(
                       height: 40,

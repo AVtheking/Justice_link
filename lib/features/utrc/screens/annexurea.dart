@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
-import 'package:justice_link/features/auth/services/auth_service.dart';
-import 'package:justice_link/features/auth/widgets/text_field.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
 import 'package:justice_link/features/utrc/widgets/InputContainer.dart';
 
@@ -16,29 +13,39 @@ class AnnexureA extends ConsumerStatefulWidget {
 }
 
 class _LoginState extends ConsumerState<AnnexureA> {
-  TextEditingController _utpNameController = TextEditingController();
-  TextEditingController _fatherNameController = TextEditingController();
-  TextEditingController _genderController = TextEditingController();
-  TextEditingController _ageController = TextEditingController();
-  TextEditingController _firController = TextEditingController();
-  TextEditingController _policeStationController = TextEditingController();
-  TextEditingController _districtController = TextEditingController();
-  TextEditingController _arrestedUnderSectionController =
+  final TextEditingController _utpNameController = TextEditingController();
+  final TextEditingController _fatherNameController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _firController = TextEditingController();
+  final TextEditingController _policeStationController =
       TextEditingController();
-  TextEditingController _courtParticularsController = TextEditingController();
-  TextEditingController _dateOfArrestController = TextEditingController();
-  TextEditingController _dateOfFirstRemandController = TextEditingController();
-  TextEditingController _dateOfAdmissionController = TextEditingController();
-  TextEditingController _dateOfFillingSheetController = TextEditingController();
-  TextEditingController _chargesheetedUnderSectionController =
+  final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _arrestedUnderSectionController =
       TextEditingController();
-  TextEditingController _utpRepresentedByController = TextEditingController();
-  TextEditingController _lawyersDetailsController = TextEditingController();
-  TextEditingController _bailStatusController = TextEditingController();
-  TextEditingController _reasonForNoBailController = TextEditingController();
-  TextEditingController _diseaseDetailsController = TextEditingController();
-  TextEditingController _convictUndertrialController = TextEditingController();
-  TextEditingController _additionalCaseDetailsController =
+  final TextEditingController _courtParticularsController =
+      TextEditingController();
+  final TextEditingController _dateOfArrestController = TextEditingController();
+  final TextEditingController _dateOfFirstRemandController =
+      TextEditingController();
+  final TextEditingController _dateOfAdmissionController =
+      TextEditingController();
+  final TextEditingController _dateOfFillingSheetController =
+      TextEditingController();
+  final TextEditingController _chargesheetedUnderSectionController =
+      TextEditingController();
+  final TextEditingController _utpRepresentedByController =
+      TextEditingController();
+  final TextEditingController _lawyersDetailsController =
+      TextEditingController();
+  final TextEditingController _bailStatusController = TextEditingController();
+  final TextEditingController _reasonForNoBailController =
+      TextEditingController();
+  final TextEditingController _diseaseDetailsController =
+      TextEditingController();
+  final TextEditingController _convictUndertrialController =
+      TextEditingController();
+  final TextEditingController _additionalCaseDetailsController =
       TextEditingController();
 
   int selectedOption = 1;
@@ -183,7 +190,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
               const SizedBox(height: 20),
               const Case_status(text: 'To be filled by Jail Superintendent'),
               const SizedBox(height: 20),
-              Container(
+              SizedBox(
                 height: 38,
                 width: 340,
                 child: CustomTextField(
@@ -210,7 +217,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'Gender',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _ageController,
                     hintText: 'Age',
@@ -240,7 +247,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'District',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _arrestedUnderSectionController,
                     hintText: 'Arrested under section',
@@ -267,7 +274,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'Date of Arrest',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _dateOfFirstRemandController,
                     hintText: 'Date of First remand',
@@ -285,7 +292,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'Date of Admission',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _dateOfFillingSheetController,
                     hintText: 'Date of Filling sheet',

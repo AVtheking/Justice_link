@@ -197,14 +197,14 @@ class MeetingService {
           'authorization': "Bearer $token"
         },
       );
-      print(res);
+      // print(res);
       httpErrorHandle(
           response: res,
           context: context,
           onSuccess: () {
-            final body = jsonDecode(res.body);
-            final data = body['data'];
-            final meetingData = data['meeting'];
+            // final body = jsonDecode(res.body);
+            // final data = body['data'];
+            // final meetingData = data['meeting'];
             // _ref.read(provider)
             showSnackBar(context, "Meeting Request Accepted Successfully");
           });
@@ -232,9 +232,9 @@ class MeetingService {
           response: res,
           context: context,
           onSuccess: () {
-            final body = jsonDecode(res.body);
-            final data = body['data'];
-            final meetingData = data['meeting'];
+            // final body = jsonDecode(res.body);
+            // final data = body['data'];
+            // final meetingData = data['meeting'];
             // _ref.read(provider)
             showSnackBar(context, "Meeting Request Declined Successfully");
           });

@@ -7,8 +7,13 @@ import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 import 'package:justice_link/models/lawyer.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key? key, required this.lawyer}) : super(key: key);
+  const PaymentScreen({
+    Key? key,
+    required this.lawyer,
+    this.isProbono = false,
+  }) : super(key: key);
   final Lawyer lawyer;
+  final bool isProbono;
 
   @override
   State<PaymentScreen> createState() => _AppointmentScreenState();
@@ -18,7 +23,7 @@ class _AppointmentScreenState extends State<PaymentScreen> {
   void naviggateToPayment() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>  PaymentSuccessFul(lawyer:widget.lawyer),
+        builder: (context) => PaymentSuccessFul(lawyer: widget.lawyer),
       ),
     );
   }
@@ -65,20 +70,25 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Service Fee:",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          "$ruppeeSymbol 1500",
-                          style: TextStyle(fontSize: 16),
-                        )
+                        widget.isProbono == false
+                            ? const Text(
+                                "$ruppeeSymbol 1500",
+                                style: TextStyle(fontSize: 16),
+                              )
+                            : const Text(
+                                "$ruppeeSymbol 0",
+                                style: TextStyle(fontSize: 16),
+                              )
                       ],
                     ),
                   ),
