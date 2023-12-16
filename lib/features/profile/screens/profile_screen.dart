@@ -17,7 +17,6 @@ class _ProfileScreemState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final lawyer = ref.read(lawyerProvider)!;
-    print(lawyer.skills);
     return Scaffold(
       appBar: appbarfun("Your Profile"),
       body: SingleChildScrollView(

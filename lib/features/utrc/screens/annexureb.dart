@@ -1,19 +1,22 @@
+// ignore_for_file: unused_field, unnecessary_import
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
-import 'package:justice_link/features/utrc/screens/annexurea1.dart';
-import 'package:justice_link/features/utrc/screens/annexureb.dart';
+import 'package:justice_link/features/utrc/screens/annexurea.dart';
+import 'package:justice_link/features/utrc/screens/annexureb1.dart';
 import 'package:justice_link/features/utrc/widgets/InputContainer.dart';
 
-class AnnexureA extends ConsumerStatefulWidget {
-  const AnnexureA({super.key});
+class AnnexureB extends ConsumerStatefulWidget {
+  const AnnexureB({super.key});
 
   @override
-  ConsumerState<AnnexureA> createState() => _AnnexureA();
+  ConsumerState<AnnexureB> createState() => _LoginState();
 }
 
-class _AnnexureA extends ConsumerState<AnnexureA> {
+class _LoginState extends ConsumerState<AnnexureB> {
   final TextEditingController _utpNameController = TextEditingController();
   final TextEditingController _fatherNameController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
@@ -49,30 +52,7 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
   final TextEditingController _additionalCaseDetailsController =
       TextEditingController();
 
-  int selectedOption = 1;
-  bool _areTextControllersNotEmpty() {
-    return _utpNameController.text.isNotEmpty &&
-        _fatherNameController.text.isNotEmpty &&
-        _genderController.text.isNotEmpty &&
-        _ageController.text.isNotEmpty &&
-        _firController.text.isNotEmpty &&
-        _policeStationController.text.isNotEmpty &&
-        _districtController.text.isNotEmpty &&
-        _arrestedUnderSectionController.text.isNotEmpty &&
-        _courtParticularsController.text.isNotEmpty &&
-        _dateOfArrestController.text.isNotEmpty &&
-        _dateOfFirstRemandController.text.isNotEmpty &&
-        _dateOfAdmissionController.text.isNotEmpty &&
-        _dateOfFillingSheetController.text.isNotEmpty &&
-        _chargesheetedUnderSectionController.text.isNotEmpty &&
-        _utpRepresentedByController.text.isNotEmpty &&
-        _lawyersDetailsController.text.isNotEmpty &&
-        _bailStatusController.text.isNotEmpty &&
-        _reasonForNoBailController.text.isNotEmpty &&
-        _diseaseDetailsController.text.isNotEmpty &&
-        _convictUndertrialController.text.isNotEmpty &&
-        _additionalCaseDetailsController.text.isNotEmpty;
-  }
+  int selectedOption = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +109,11 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
                                       ),
                                 onChanged: (value) {
                                   setState(() {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => const AnnexureA(),
+                                      ),
+                                    );
                                     selectedOption = value as int;
                                   });
                                 },
@@ -189,11 +174,6 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
                                 groupValue: selectedOption,
                                 onChanged: (value) {
                                   setState(() {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (context) => const AnnexureB(),
-                                      ),
-                                    );
                                     selectedOption = value as int;
                                   });
                                 },
@@ -224,7 +204,7 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
                 width: 340,
                 child: CustomTextField(
                   controller: _utpNameController,
-                  hintText: 'Name of the UTP',
+                  hintText: 'Recommendation of UTRC',
                   width: 340,
                 ),
               ),
@@ -233,7 +213,7 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
               ),
               CustomTextField(
                 controller: _fatherNameController,
-                hintText: 'Father’s Name',
+                hintText: 'Name of the Convict',
                 width: 340,
               ),
               const SizedBox(
@@ -257,7 +237,7 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
               const SizedBox(height: 20),
               CustomTextField(
                 controller: _firController,
-                hintText: 'Fir / Crime No.',
+                hintText: 'FIR/Crime No.',
                 width: 340,
               ),
               const SizedBox(height: 20),
@@ -272,14 +252,14 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
               Row(
                 children: [
                   CustomTextField(
-                    controller: _districtController,
+                    controller: _genderController,
                     hintText: 'District',
                     width: 140,
                   ),
                   const Spacer(),
                   CustomTextField(
-                    controller: _arrestedUnderSectionController,
-                    hintText: 'Arrested under section',
+                    controller: _ageController,
+                    hintText: 'Date of Conviction',
                     width: 140,
                   ),
                 ],
@@ -287,120 +267,60 @@ class _AnnexureA extends ConsumerState<AnnexureA> {
               const SizedBox(height: 20),
               CustomTextField(
                 controller: _courtParticularsController,
-                hintText: 'Particulars of the Court',
+                hintText: 'Name of Trial Court',
                 width: 340,
               ),
-              const SizedBox(
-                height: 20,
+              const SizedBox(height: 20),
+              CustomTextField(
+                controller: _courtParticularsController,
+                hintText: 'Duration and Nature of Sentence',
+                width: 340,
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  CustomTextField(
-                    controller: _dateOfArrestController,
-                    hintText: 'Date of Arrest',
-                    width: 140,
-                  ),
-                  const Spacer(),
-                  CustomTextField(
-                    controller: _dateOfFirstRemandController,
-                    hintText: 'Date of First remand',
-                    width: 140,
-                  ),
-                ],
-              ),
+              const SizedBox(height: 20),
               const SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
                   CustomTextField(
-                    controller: _dateOfAdmissionController,
-                    hintText: 'Date of Admission',
+                    controller: _genderController,
+                    hintText: 'Total Remission Earned',
                     width: 140,
                   ),
                   const Spacer(),
                   CustomTextField(
-                    controller: _dateOfFillingSheetController,
-                    hintText: 'Date of Filling sheet',
+                    controller: _ageController,
+                    hintText: 'Date when sentence completeed',
                     width: 140,
                   ),
                 ],
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: _chargesheetedUnderSectionController,
-                hintText: 'Chargesheeted under Section',
+                controller: _courtParticularsController,
+                hintText: 'Reason for Non-Release',
                 width: 340,
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: _utpRepresentedByController,
-                hintText: 'UTP represented by Legal aid/Private',
+                controller: _courtParticularsController,
+                hintText: 'Whether case considered by Sentence Review Board ?',
                 width: 340,
               ),
               const SizedBox(height: 20),
               CustomTextField(
-                controller: _lawyersDetailsController,
-                hintText:
-                    'Name of the lawyers with contact details (if applicable)',
+                controller: _courtParticularsController,
+                hintText: 'Reason for not granting pre-mature release',
                 width: 340,
               ),
               const SizedBox(height: 20),
-              CustomTextField(
-                controller: _bailStatusController,
-                hintText:
-                    'Whether bails has been granted to the accused, if when',
-                width: 340,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _reasonForNoBailController,
-                hintText:
-                    'If accused is not released on bail despite grant of bail, reason for the same (if applicable)',
-                width: 340,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _diseaseDetailsController,
-                hintText:
-                    'If the UTP suffering from any disease, mental or physical, details regarding the same.',
-                width: 340,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _convictUndertrialController,
-                hintText: 'Whether UTP is a convict/Undertrial in any other',
-                width: 340,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                controller: _additionalCaseDetailsController,
-                hintText:
-                    'If yes, separate entry in the datasheet be made qua the additional case',
-                width: 340,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               GestureDetector(
                 onTap: () {
-                  if (_areTextControllersNotEmpty()) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const AnnexureA1(),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please fill in all the fields'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  }
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const AnnexureB1(),
+                    ),
+                  );
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10),

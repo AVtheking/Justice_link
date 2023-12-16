@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -74,7 +76,7 @@ class _MeetingRequestState extends ConsumerState<MeetingRequest> {
                   if (meetings[index].meetingStatus == 'accepted') {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()),
+                      MaterialPageRoute(builder: (context) => const ChatScreen()),
                     );
                   } else {
                     navigateToMeetingDetails(meetings[index]);

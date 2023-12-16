@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +24,6 @@ class EServices extends ConsumerWidget {
       "Rehabilitation Program",
     ];
 
-    final lawyer = ref.read(lawyerProvider);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
@@ -66,11 +65,17 @@ class EServices extends ConsumerWidget {
                         ),
                       );
                     } else if (index == 4) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const DocumentVerification()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const DocumentVerification(),
+                        ),
+                      );
                     } else if (index == 5) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const RehabilationScreen()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const RehabilationScreen(),
+                        ),
+                      );
                     }
                   },
                   child: Image.asset(

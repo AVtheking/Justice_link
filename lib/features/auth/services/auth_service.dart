@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers, empty_catches
 
 import 'dart:convert';
 
@@ -259,7 +259,6 @@ class AuthService {
             (state) => User.fromJson(_user),
           );
     } catch (e) {
-      print(e.toString());
       // showSnackBar(context, e.toString());
     }
   }
@@ -287,7 +286,6 @@ class AuthService {
             (state) => Lawyer.fromJson(_lawyer),
           );
     } catch (e) {
-      print(e.toString());
     }
   }
 }

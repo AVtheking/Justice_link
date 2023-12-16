@@ -1,10 +1,11 @@
+// ignore_for_file: unused_import, library_prefixes, unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/chat/widgets/chat_widgets.dart';
 import 'package:justice_link/global.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:justice_link/models/meeting.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -38,7 +39,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     });
     socket.connect();
     socket.on('connect', (_) {
-      print('Connected to server');
     });
     socket.on(
       'message',
@@ -48,7 +48,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         }
         final user = ref.read(userProvider);
         final lawyer = ref.read(lawyerProvider);
-        final message;
+        final Message message;
         if (user == null) {
           if ((data)['userId'] == lawyer!.id) {
             message = Message(
