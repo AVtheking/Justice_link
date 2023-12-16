@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/chat/screens/chat_screen.dart';
 import 'package:justice_link/features/meetings/services/meeting_service.dart';
 import 'package:justice_link/models/meeting.dart';
@@ -27,9 +28,7 @@ class _MeetingDetailsScreenState extends ConsumerState<MeetingDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Meeting Details'),
-      ),
+      appBar:appbarfun('Meeting Details'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
