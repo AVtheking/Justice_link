@@ -4,6 +4,8 @@ import 'package:justice_link/features/case_status/screens/new_case_status_lawyer
 import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_request.dart';
+import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.dart';
+import 'package:justice_link/features/utrc/screens/annexurea.dart';
 
 class EServicesLawyer extends ConsumerWidget {
   const EServicesLawyer({super.key});
@@ -61,8 +63,18 @@ class EServicesLawyer extends ConsumerWidget {
                             builder: (context) => const MeetingRequest()),
                       );
                     } else if (index == 4) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const DocumentVerification()),
+                      );
+                    } else if (index == 3) {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const DocumentVerification()));
+                          builder: (context) => const AnnexureA()));
+                    } else if (index == 5) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const RehabilationScreen()),
+                      );
                     }
                   },
                   child: Image.asset(

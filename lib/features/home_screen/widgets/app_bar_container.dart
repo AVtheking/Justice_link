@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 
-class TopBar extends StatelessWidget {
+class TopBar extends ConsumerWidget {
   const TopBar({super.key});
 
+  void logOut(BuildContext context, WidgetRef ref) {
+    ref.read(authServiceProvider).logOut(context);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: double.infinity,
       height: 56,
@@ -60,7 +66,9 @@ class TopBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                logOut(context, ref);
+              },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
@@ -72,7 +80,7 @@ class TopBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "Log In",
+                      "Log Out",
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.w600),
                     ),

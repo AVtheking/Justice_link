@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/screens/view_case_status.dart';
+import 'package:justice_link/features/case_status/services/case_services.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
 
-class CaseStatus extends StatefulWidget {
+class CaseStatus extends ConsumerStatefulWidget {
   const CaseStatus({Key? key}) : super(key: key);
 
   @override
-  State<CaseStatus> createState() => _CaseStatusState();
+  ConsumerState<CaseStatus> createState() => _CaseStatusState();
 }
 
-class _CaseStatusState extends State<CaseStatus> {
+class _CaseStatusState extends ConsumerState<CaseStatus> {
+  final TextEditingController _caseNoController = TextEditingController();
   final _currencies = [
-    "Food",
-    "Transport",
-    "Personal",
+    "Criminal",
+    "Civil",
   ];
   String? _currentSelectedValue;
   String? _currentSelectedYear;
@@ -25,6 +27,18 @@ class _CaseStatusState extends State<CaseStatus> {
   void initState() {
     super.initState();
     _years = generateYearsList();
+  }
+
+  @override
+  void dispose() {
+    _caseNoController.dispose();
+    super.dispose();
+  }
+
+  void getCaseDetails() async {
+    await ref
+        .read(caseServiceProvider)
+        .getCaseStatus(context: context, caseNo: _caseNoController.text.trim());
   }
 
   List<String> generateYearsList() {
@@ -143,6 +157,7 @@ class _CaseStatusState extends State<CaseStatus> {
                               ),
                               Expanded(
                                 child: TextField(
+                                  controller: _caseNoController,
                                   cursorHeight: 20,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(

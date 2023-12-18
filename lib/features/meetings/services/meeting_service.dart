@@ -206,11 +206,11 @@ class MeetingService {
             // final data = body['data'];
             // final meetingData = data['meeting'];
             // _ref.read(provider)
-            print("Meeting accepted");
+            // print("Meeting accepted");
             showSnackBar(context, "Meeting Request Accepted Successfully");
           });
     } catch (e) {
-      // showSnackBar(context, e.toString());
+      showSnackBar(context, e.toString());
     }
   }
 

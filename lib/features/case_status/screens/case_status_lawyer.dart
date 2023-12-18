@@ -52,7 +52,7 @@ class _CaseStatusLawyerState extends ConsumerState<CaseStatusLawyer> {
     if (widget.caseNo != null) {
       await ref
           .read(caseServiceProvider)
-          .getCaseStatus(context: context, caseNo: widget.caseNo!);
+          .getCaseStatuslawyer(context: context, caseNo: widget.caseNo!);
 
       final caseDetails = ref.read(caseProvider);
       // if (caseDetails != null) print(caseDetails);

@@ -10,8 +10,9 @@ import 'package:justice_link/features/home_screen/widgets/drawer_item.dart';
 import 'package:justice_link/features/home_screen/widgets/eServices_lawyer.dart';
 import 'package:justice_link/features/home_screen/widgets/key_features_lawyer.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
-import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
+import 'package:justice_link/features/meetings/screens/meeting_request.dart';
 import 'package:justice_link/features/profile/screens/profile_screen.dart';
+import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
 
 class HomeScreenLawyer extends ConsumerStatefulWidget {
   const HomeScreenLawyer({Key? key}) : super(key: key);
@@ -141,7 +142,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                       } else if (index == 3) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const MeetingScreen(),
+                            builder: (context) => const MeetingRequest(),
                           ),
                         );
                       }
@@ -254,23 +255,29 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Column(
-                      children: [
-                        Image.asset("assets/images/reminders.png",
-                            height: 25,
-                            width: 25,
-                            color: const Color.fromARGB(255, 4, 50, 2)),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const Text(
-                          "Reminders",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ReminderScreen()));
+                      },
+                      child: Column(
+                        children: [
+                          Image.asset("assets/images/reminders.png",
+                              height: 25,
+                              width: 25,
+                              color: const Color.fromARGB(255, 4, 50, 2)),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          const Text(
+                            "Reminders",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400),
+                          )
+                        ],
+                      ),
                     ),
                     Column(
                       children: [

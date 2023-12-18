@@ -58,6 +58,44 @@ class CaseService {
       showSnackBar(context, e.toString());
     }
   }
+  Future<void> getCaseStatuslawyer({
+    required BuildContext context,
+    required String caseNo,
+  }) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    final token = pref.getString("token");
+
+    try {
+      http.Response res = await http.get(
+          Uri.parse("$uri/getCaseDetails/$caseNo"),
+          headers: <String, String>{
+            "Content-Type": "application/json; charset=UTF-8",
+            'authorization': "Bearer $token"
+          });
+      // print(res.body);
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () async {
+          final body = jsonDecode(res.body);
+          // print(body['data']);
+          final data = body['data'];
+          // print(data['user']);
+          final _case = jsonEncode(data['caseDetails']);
+          // print(_case);
+
+          _ref.read(caseProvider.notifier).update(
+                (state) => Case.fromJson(_case),
+              );
+
+          // print(_ref.read(caseProvider));
+        },
+      );
+    } catch (e) {
+      // print(e);
+      showSnackBar(context, e.toString());
+    }
+  }
 
   Future<void> uploadCaseDetails(
       {required BuildContext context,
