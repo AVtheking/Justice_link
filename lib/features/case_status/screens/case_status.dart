@@ -269,9 +269,9 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                       ),
                   ],
                 ),
-                // const SizedBox(
-                //   height: 200,
-                // ),
+                const SizedBox(
+                  height: 150,
+                ),
                 Column(
                   children: [
                     SizedBox(
