@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
-import 'package:justice_link/features/meetings/screens/appointment_payment.dart';
 import 'package:justice_link/features/meetings/services/meeting_service.dart';
 import 'package:justice_link/features/meetings/widgets/lawyer_card.dart';
 import 'package:justice_link/models/lawyer.dart';

@@ -72,7 +72,7 @@ class _FilePickContainerState extends State<FilePickContainer> {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [Color(0xFF004D14), Color(0xFF098904)],

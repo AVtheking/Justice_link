@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
