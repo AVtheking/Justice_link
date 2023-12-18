@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/screens/case_status_lawyer.dart';
-import 'package:justice_link/features/case_status/screens/view_case_status.dart';
 import 'package:justice_link/features/case_status/widgets/case_status_btn.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
 
@@ -13,6 +12,7 @@ class NewCaseStatus extends StatefulWidget {
 }
 
 class _CaseStatusState extends State<NewCaseStatus> {
+  final TextEditingController _caseNoController = TextEditingController();
   final _currencies = [
     "Criminal",
     "Civil",
@@ -21,6 +21,11 @@ class _CaseStatusState extends State<NewCaseStatus> {
   String? _currentSelectedYear;
   late List<String> _years;
   bool _isYearDropdownOpen = false;
+  @override
+  void dispose() {
+    _caseNoController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -144,6 +149,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                               ),
                               Expanded(
                                 child: TextField(
+                                  controller: _caseNoController,
                                   cursorHeight: 20,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
@@ -190,6 +196,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
+                                    // print(_isYearDropdownOpen);
                                     _isYearDropdownOpen = !_isYearDropdownOpen;
                                   });
                                 },
@@ -215,10 +222,51 @@ class _CaseStatusState extends State<NewCaseStatus> {
                         ),
                       ),
                     ),
+                    if (_isYearDropdownOpen)
+                      Positioned(
+                        top: 100, // Adjust the position based on your UI
+                        left: 20,
+                        right: 20,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          height: 150,
+                          // width: 300,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 0.5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: ListView.builder(
+                            itemCount: _years.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(_years[index]),
+                                onTap: () {
+                                  setState(() {
+                                    _currentSelectedYear = _years[index];
+                                    _isYearDropdownOpen = false;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                   ],
                 ),
+                // const SizedBox(
+                //   height: 150,
+                // ),
+
                 const SizedBox(
-                  height: 100,
+                  height: 120,
                 ),
                 Column(
                   children: [
@@ -233,7 +281,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const ViewCaseStatus(),
+                            builder: (context) => CaseStatusLawyer(
+                              caseNo: _caseNoController.text.trim(),
+                            ),
                           ),
                         );
                       },
@@ -246,7 +296,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const CaseStatusLawyer(),
+                            builder: (context) => CaseStatusLawyer(),
                           ),
                         );
                       },
@@ -257,43 +307,6 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     )
                   ],
                 ),
-                if (_isYearDropdownOpen)
-                  Positioned(
-                    top: 120, // Adjust the position based on your UI
-                    left: 20,
-                    right: 20,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      height: 150,
-                      // width: 300,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      child: ListView.builder(
-                        itemCount: _years.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(_years[index]),
-                            onTap: () {
-                              setState(() {
-                                _currentSelectedYear = _years[index];
-                                _isYearDropdownOpen = false;
-                              });
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
               ],
             ),
           )

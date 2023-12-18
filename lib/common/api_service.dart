@@ -13,6 +13,7 @@ void httpErrorHandle({
   if (body['success']) {
     onSuccess();
   } else {
+    print(body['message']);
     showSnackBar(context, body['message']);
   }
 }

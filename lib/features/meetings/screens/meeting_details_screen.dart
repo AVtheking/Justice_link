@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/chat/screens/chat_screen.dart';
 import 'package:justice_link/features/meetings/services/meeting_service.dart';
 import 'package:justice_link/models/meeting.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MeetingDetailsScreen extends ConsumerStatefulWidget {
   final Meeting meeting;
@@ -43,7 +43,7 @@ class _MeetingDetailsScreenState extends ConsumerState<MeetingDetailsScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                ref
+                await ref
                     .read(meetingServiceProvider)
                     .acceptMeetingRequest(context: context, meeting: _meeting);
                 updateMeetingStatus('accepeted');
@@ -74,7 +74,7 @@ class _MeetingDetailsScreenState extends ConsumerState<MeetingDetailsScreen> {
     );
   }
 
-  void updateMeetingStatus(String status)  {
+  void updateMeetingStatus(String status) {
     setState(() {
       _meeting.meetingStatus = status;
     });

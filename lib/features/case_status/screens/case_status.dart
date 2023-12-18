@@ -189,6 +189,7 @@ class _CaseStatusState extends State<CaseStatus> {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
+                                    print(_isYearDropdownOpen);
                                     _isYearDropdownOpen = !_isYearDropdownOpen;
                                   });
                                 },
@@ -214,11 +215,48 @@ class _CaseStatusState extends State<CaseStatus> {
                         ),
                       ),
                     ),
+                    if (_isYearDropdownOpen)
+                      Positioned(
+                        top: 150, // Adjust the position based on your UI
+                        left: 20,
+                        right: 20,
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          height: 150,
+                          // width: 300,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 0.5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          child: ListView.builder(
+                            itemCount: _years.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(_years[index]),
+                                onTap: () {
+                                  setState(() {
+                                    _currentSelectedYear = _years[index];
+                                    _isYearDropdownOpen = false;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                   ],
                 ),
-                const SizedBox(
-                  height: 150,
-                ),
+                // const SizedBox(
+                //   height: 200,
+                // ),
                 Column(
                   children: [
                     SizedBox(
@@ -272,43 +310,6 @@ class _CaseStatusState extends State<CaseStatus> {
                     )
                   ],
                 ),
-                if (_isYearDropdownOpen)
-                  Positioned(
-                    top: 120, // Adjust the position based on your UI
-                    left: 20,
-                    right: 20,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      height: 150,
-                      // width: 300,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 0.5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                      ),
-                      child: ListView.builder(
-                        itemCount: _years.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(_years[index]),
-                            onTap: () {
-                              setState(() {
-                                _currentSelectedYear = _years[index];
-                                _isYearDropdownOpen = false;
-                              });
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
               ],
             ),
           )

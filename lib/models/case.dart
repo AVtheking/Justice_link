@@ -79,7 +79,7 @@ class Case {
 
   factory Case.fromMap(Map<String, dynamic> map) {
     return Case(
-      id: map['_id'] != null ? map['id'] as String : null,
+      id: map['_id'] != null ? map['_id'] as String : null,
       lawyerId: map['lawyerId'] as String,
       victimName: map['victimName'] as String,
       oppositionName: map['oppositionName'] as String,
