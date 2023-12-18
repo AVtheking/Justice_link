@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
-import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
 import 'package:justice_link/features/utrc/screens/annexurea1.dart';
 import 'package:justice_link/features/utrc/screens/annexureb.dart';
@@ -14,7 +13,7 @@ class AnnexureA extends ConsumerStatefulWidget {
   ConsumerState<AnnexureA> createState() => _AnnexureA();
 }
 
-class _LoginState extends ConsumerState<AnnexureA> {
+class _AnnexureA extends ConsumerState<AnnexureA> {
   final TextEditingController _utpNameController = TextEditingController();
   final TextEditingController _fatherNameController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
