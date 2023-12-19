@@ -82,7 +82,8 @@ class _MeetingRequestState extends ConsumerState<MeetingRequest> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ChatScreen()),
+                                builder: (context) =>
+                                    ChatScreen(meeting: meeting)),
                           );
                         } else {
                           navigateToMeetingDetails(meetings![index]!);

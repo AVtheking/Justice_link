@@ -12,9 +12,7 @@ class VideoScreen extends StatefulWidget {
 class _VideoScreenState extends State<VideoScreen> {
   final AgoraClient client = AgoraClient(
     agoraConnectionData: AgoraConnectionData(
-      appId: appId,
-      channelName: "test",
-    ),
+        appId: appId, channelName: "test", tempToken: token),
   );
 
 // Initialize the Agora Engine
@@ -30,14 +28,33 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Stack(
-        children: [
-          AgoraVideoViewer(client: client),
-          AgoraVideoButtons(client: client)
-        ],
-      )),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+        ),
+        body: SafeArea(
+            child: Stack(
+          children: [
+            AgoraVideoViewer(
+              client: client,
+              layoutType: Layout.floating,
+              enableHostControls: true,
+              showNumberOfUsers: true,
+            ),
+            AgoraVideoButtons(
+              client: client,
+              enabledButtons: const [
+                BuiltInButtons.callEnd,
+                BuiltInButtons.toggleCamera,
+                BuiltInButtons.toggleMic,
+                BuiltInButtons.switchCamera
+              ],
+            )
+          ],
+        )),
+      ),
     );
   }
 }
