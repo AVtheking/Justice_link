@@ -69,7 +69,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                   children: [
                     Card(
                       elevation: 10,
-                      margin: EdgeInsets.only(left: 20, right: 20, top: 40),
+                      margin: const  EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
                         // height: 70,
                         width: double.infinity,

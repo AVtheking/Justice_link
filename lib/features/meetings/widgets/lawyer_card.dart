@@ -59,7 +59,7 @@ class _LawyerCardState extends ConsumerState<LawyerCard> {
                       ? meeting!.meetingStatus == "pending"
                           ? const Color.fromARGB(255, 243, 222, 35)
                           : meeting!.meetingStatus == "accepted"
-                              ?const  Color.fromARGB(255, 128, 241, 132)
+                              ? const Color.fromARGB(255, 128, 241, 132)
                               : meeting!.meetingStatus == "rejected"
                                   ? Colors.red
                                   : Colors.white
@@ -144,7 +144,7 @@ class _LawyerCardState extends ConsumerState<LawyerCard> {
                                 Text(
                                   widget.lawyer.lawyerExperience == null
                                       ? "5 years"
-                                      : "${widget.lawyer.lawyerExperience} years",
+                                      : "${widget.lawyer.lawyerExperience} ",
                                   style: const TextStyle(
                                     color: Color.fromARGB(255, 61, 63, 65),
                                     fontWeight: FontWeight.w400,
