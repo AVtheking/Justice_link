@@ -56,6 +56,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.read(lawyerProvider);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFF004D14), size: 30),
@@ -109,7 +110,9 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          translation == "Hindi" ? "स्वागत है" : "Welcome",
+                          translation == "Hindi"
+                              ? "स्वागत है ${user?.name}"
+                              : "Welcome ${user?.name} ",
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),

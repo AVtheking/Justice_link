@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/chat_bot/screens/chat_bot_screen.dart';
 import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
@@ -15,14 +17,14 @@ import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreen();
+  ConsumerState<HomeScreen> createState() => _HomeScreen();
 }
 
-class _HomeScreen extends State<HomeScreen> {
+class _HomeScreen extends ConsumerState<HomeScreen> {
   List<String> drawerItemsHindi = [
     "स्थिति जांचें",
     "मेडिकल अपडेट्स",
@@ -64,6 +66,7 @@ class _HomeScreen extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.read(userProvider);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFF004D14), size: 30),
@@ -109,7 +112,7 @@ class _HomeScreen extends State<HomeScreen> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          getTranslation("स्वागत है", "Welcome"),
+                          "${getTranslation("स्वागत है ", "Welcome ")}${user!.name}",
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),

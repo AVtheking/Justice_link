@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
+import 'package:justice_link/models/user.dart';
 
 class TopBar extends ConsumerWidget {
   const TopBar({super.key, required this.translation});
@@ -12,6 +13,10 @@ class TopBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(userProvider);
+    final lawyer = ref.read(lawyerProvider);
+    print(lawyer?.name);
+    print(user?.name);
     return Container(
       width: double.infinity,
       height: 56,
@@ -47,7 +52,13 @@ class TopBar extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  translation == "Hindi" ? "स्वागत है" : "Welcome",
+                  translation == "Hindi"
+                      ? user != null
+                          ? "स्वागत है ${user.name}"
+                          : "स्वागत है ${lawyer!.name}"
+                      : user != null
+                          ? "Welcome ${user.name}"
+                          : "Welcome ${lawyer!.name}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
