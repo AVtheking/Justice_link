@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/chat/screens/chat_screen.dart';
+import 'package:justice_link/features/chat_bot/screens/chat_bot_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatelessWidget {
@@ -102,7 +103,7 @@ class ContactUs extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const ChatScreen(),
+                    builder: (context) => const ChatBotScreen(),
                   ),
                 );
               },
