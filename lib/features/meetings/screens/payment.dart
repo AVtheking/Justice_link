@@ -92,7 +92,7 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                       ],
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,14 +103,16 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "$ruppeeSymbol 100",
+                          widget.isProbono == false
+                              ? "$ruppeeSymbol 100"
+                              : "$ruppeeSymbol 0",
                           style: TextStyle(fontSize: 16),
                         )
                       ],
                     ),
                   ),
                   const Divider(),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,7 +123,9 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "$ruppeeSymbol 1600",
+                          widget.isProbono == false
+                              ? "$ruppeeSymbol 1600"
+                              : "$ruppeeSymbol 0",
                           style: TextStyle(fontSize: 16),
                         )
                       ],

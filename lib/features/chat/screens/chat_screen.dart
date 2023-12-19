@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
+import 'package:justice_link/features/chat/screens/video_chat.dart';
 import 'package:justice_link/features/chat/widgets/chat_widgets.dart';
 import 'package:justice_link/global.dart';
 import 'package:justice_link/models/meeting.dart';
@@ -102,6 +103,19 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               onPressed: showMeetingDetails,
               icon: const Icon(
                 Icons.details,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const VideoScreen()));
+              },
+              icon: const Icon(
+                Icons.video_call,
                 color: Colors.white,
               ),
             ),
