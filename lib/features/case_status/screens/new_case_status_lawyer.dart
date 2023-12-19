@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/common/snackbar.dart';
 import 'package:justice_link/features/case_status/screens/case_status_lawyer.dart';
 import 'package:justice_link/features/case_status/widgets/case_status_btn.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
@@ -69,7 +70,8 @@ class _CaseStatusState extends State<NewCaseStatus> {
                   children: [
                     Card(
                       elevation: 10,
-                      margin: const  EdgeInsets.only(left: 20, right: 20, top: 40),
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
                         // height: 70,
                         width: double.infinity,
@@ -90,7 +92,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Case_status(text: _getTranslatedText("Case Type", "मुकदमा प्रकार")),
+                              Case_status(
+                                  text: _getTranslatedText(
+                                      "Case Type", "मुकदमा प्रकार")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -117,9 +121,10 @@ class _CaseStatusState extends State<NewCaseStatus> {
                                         ..._caseTypes.map((String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(_getTranslatedText(value, value)),
+                                            child: Text(_getTranslatedText(
+                                                value, value)),
                                           );
-                                        }).toList(),
+                                        }),
                                       ],
                                     ),
                                   ),
@@ -132,7 +137,8 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     ),
                     Card(
                       elevation: 5,
-                      margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 30),
                       child: Container(
                         height: 70,
                         width: double.infinity,
@@ -153,7 +159,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Case_status(text: _getTranslatedText("Case Number", "मुकदमा संख्या")),
+                              Case_status(
+                                  text: _getTranslatedText(
+                                      "Case Number", "मुकदमा संख्या")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -176,7 +184,8 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     ),
                     Card(
                       elevation: 10,
-                      margin: EdgeInsets.only(left: 20, right: 20, top: 40),
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
                         // height: 70,
                         width: double.infinity,
@@ -197,7 +206,8 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Case_status(text: _getTranslatedText("Year", "वर्ष")),
+                              Case_status(
+                                  text: _getTranslatedText("Year", "वर्ष")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -218,7 +228,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 16),
                                       child: Text(
-                                        _currentSelectedYear ?? _getTranslatedText("Select Year", "वर्ष चयन करें"),
+                                        _currentSelectedYear ??
+                                            _getTranslatedText(
+                                                "Select Year", "वर्ष चयन करें"),
                                       ),
                                     ),
                                   ),
@@ -235,7 +247,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                         left: 20,
                         right: 20,
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
                           height: 150,
                           decoration: BoxDecoration(
                             boxShadow: [
@@ -267,7 +279,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                       ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 120,
                 ),
                 Column(
@@ -281,6 +293,12 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     ),
                     GestureDetector(
                       onTap: () {
+                        if (_caseNoController.text.trim().isEmpty ||
+                            _currentSelectedCaseType == null ||
+                            _currentSelectedYear == null) {
+                          showSnackBar(context, "Please fill all the fields");
+                          return;
+                        }
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => CaseStatusLawyer(
@@ -289,22 +307,26 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           ),
                         );
                       },
-                      child: CaseStatusButton(text: _getTranslatedText("View Case Status", "मुकदमा स्थिति देखें")),
+                      child: CaseStatusButton(
+                          text: _getTranslatedText(
+                              "View Case Status", "मुकदमा स्थिति देखें")),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => CaseStatusLawyer(),
+                            builder: (context) => const CaseStatusLawyer(),
                           ),
                         );
                       },
-                      child: CaseStatusButton(text: _getTranslatedText("Upload Case Status", "मुकदमा स्थिति अपलोड करें")),
+                      child: CaseStatusButton(
+                          text: _getTranslatedText("Upload Case Status",
+                              "मुकदमा स्थिति अपलोड करें")),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     )
                   ],

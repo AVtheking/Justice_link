@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/cloud_services/screens/cloud_service.dart';
+import 'package:justice_link/features/guidelines/screens/guidelines.dart';
+import 'package:justice_link/features/legal_rights/screens/legal_rights.dart';
 
 class KeyFeaturesLawyer extends ConsumerWidget {
   const KeyFeaturesLawyer({super.key, required this.translation});
@@ -34,6 +36,18 @@ class KeyFeaturesLawyer extends ConsumerWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (ctx) => const CloudServices(),
+                  ),
+                );
+              } else if (index == 0) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const Guidelines(),
+                  ),
+                );
+              } else if (index == 2) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const LegalRights(),
                   ),
                 );
               }
