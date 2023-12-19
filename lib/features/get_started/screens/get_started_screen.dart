@@ -181,13 +181,15 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
 
                     // translation = "English";
                   }
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                        builder: (context) => lawyer == null
-                            ? user == null
-                                ? const Register()
-                                : const HomeScreen()
-                            : const HomeScreenLawyer()),
+                      builder: (context) => lawyer == null
+                          ? user == null
+                              ? const Register()
+                              : const HomeScreen()
+                          : const HomeScreenLawyer(),
+                    ),
+                    (route) => false,
                   );
                 },
                 child: const Text(
