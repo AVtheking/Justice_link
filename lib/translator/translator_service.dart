@@ -14,23 +14,28 @@ class Translator {
   Translator({required Ref ref}) : _ref = ref;
 
   Future<String> translate(
-      {required String text, required BuildContext context}) async {
+      {required String text,
+      required BuildContext context,
+      required String lang}) async {
     String translatedText = "";
+    print(lang);
     http.Response res = await http.post(
-      Uri.parse("https://bhashini.anaskhan.site/api/translate/"),
-      body: {
+      Uri.parse("https://bhashini.anaskhan.site/api/translate/${lang}/"),
+      body: jsonEncode({
         "text": text,
-      },
+      }),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },
     );
+    print(res.body);
     httpErrorHandle(
       response: res,
       context: context,
       onSuccess: () {
         final body = jsonDecode(res.body);
         translatedText = body['text'];
+        print(translatedText);
       },
     );
     return translatedText;

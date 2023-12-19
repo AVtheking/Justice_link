@@ -72,7 +72,7 @@ class ContactUs extends StatelessWidget {
                   width: 90,
                   child: GestureDetector(
                     onTap: () {
-                      launch("tel://21213123123");
+                      launch("tel://11111111");
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
