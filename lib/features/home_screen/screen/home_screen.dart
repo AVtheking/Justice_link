@@ -15,6 +15,7 @@ import 'package:justice_link/features/home_screen/widgets/key_feature.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
+import 'package:justice_link/translator/translator_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -25,6 +26,12 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreen extends ConsumerState<HomeScreen> {
+  Future<String> translatedText(String text, String translation) async {
+    return await ref
+        .read(translatorProvider)
+        .translate(text: text, context: context, lang: translation);
+  }
+
   List<String> drawerItemsHindi = [
     "स्थिति जांचें",
     "मेडिकल अपडेट्स",
@@ -109,12 +116,26 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "${getTranslation("स्वागत है ", "Welcome ")}${user!.name}",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
+                      FutureBuilder<String>(
+                        future: translatedText("Welcome", translation!),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator(); // Show a loading indicator while translation is in progress
+                          } else if (snapshot.hasError) {
+                            print(snapshot.error);
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "${snapshot.data} ${user!.name}",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            );
+                          }
+                        },
                       ),
                       Expanded(
                         child: Padding(

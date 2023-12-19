@@ -18,7 +18,7 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
   final List<String> items = <String>[
     "English",
     "Hindi",
-    "Marathi",
+    "Bengali",
     "Gujarati",
     "Tamil",
     "Punjabi",
