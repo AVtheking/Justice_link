@@ -301,7 +301,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const ViewCaseStatus(),
+                            builder: (context) =>  ViewCaseStatus(translation:_translation! ),
                           ),
                         );
                       },
