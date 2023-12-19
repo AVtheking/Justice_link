@@ -3,6 +3,7 @@ import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/screens/case_status_lawyer.dart';
 import 'package:justice_link/features/case_status/widgets/case_status_btn.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NewCaseStatus extends StatefulWidget {
   const NewCaseStatus({Key? key}) : super(key: key);
@@ -13,14 +14,13 @@ class NewCaseStatus extends StatefulWidget {
 
 class _CaseStatusState extends State<NewCaseStatus> {
   final TextEditingController _caseNoController = TextEditingController();
-  final _currencies = [
-    "Criminal",
-    "Civil",
-  ];
-  String? _currentSelectedValue;
+  final _caseTypes = ["Criminal", "Civil"];
+  String? _currentSelectedCaseType;
   String? _currentSelectedYear;
   late List<String> _years;
   bool _isYearDropdownOpen = false;
+  String? _translation = "English";
+
   @override
   void dispose() {
     _caseNoController.dispose();
@@ -31,6 +31,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
   void initState() {
     super.initState();
     _years = generateYearsList();
+    _setLanguage();
   }
 
   List<String> generateYearsList() {
@@ -42,10 +43,21 @@ class _CaseStatusState extends State<NewCaseStatus> {
     return years;
   }
 
+  Future<void> _setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _translation = prefs.getString("language") ?? "English";
+    });
+  }
+
+  String _getTranslatedText(String englishText, String hindiText) {
+    return _translation == "Hindi" ? hindiText : englishText;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarfun("Case Status"),
+      appBar: appbarfun(_getTranslatedText("Case Status", "मुकदमा स्थिति")),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -57,10 +69,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                   children: [
                     Card(
                       elevation: 10,
-                      margin:
-                          const EdgeInsets.only(left: 20, right: 20, top: 40),
+                      margin: EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
-                        height: 70,
+                        // height: 70,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -79,7 +90,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Case_status(text: "Case Type"),
+                              Case_status(text: _getTranslatedText("Case Type", "मुकदमा प्रकार")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -96,17 +107,17 @@ class _CaseStatusState extends State<NewCaseStatus> {
                                     child: DropdownButton<String>(
                                       isExpanded: true,
                                       iconEnabledColor: Colors.black,
-                                      value: _currentSelectedValue,
+                                      value: _currentSelectedCaseType,
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          _currentSelectedValue = newValue;
+                                          _currentSelectedCaseType = newValue;
                                         });
                                       },
                                       items: [
-                                        ..._currencies.map((String value) {
+                                        ..._caseTypes.map((String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(_getTranslatedText(value, value)),
                                           );
                                         }).toList(),
                                       ],
@@ -121,8 +132,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     ),
                     Card(
                       elevation: 5,
-                      margin:
-                          const EdgeInsets.only(left: 20, right: 20, top: 30),
+                      margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                       child: Container(
                         height: 70,
                         width: double.infinity,
@@ -143,7 +153,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Case_status(text: "Case Number"),
+                              Case_status(text: _getTranslatedText("Case Number", "मुकदमा संख्या")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -153,7 +163,6 @@ class _CaseStatusState extends State<NewCaseStatus> {
                                   cursorHeight: 20,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                    // hintText: "Enter Case Number",
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5),
                                     ),
@@ -167,10 +176,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     ),
                     Card(
                       elevation: 10,
-                      margin:
-                          const EdgeInsets.only(left: 20, right: 20, top: 40),
+                      margin: EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
-                        height: 70,
+                        // height: 70,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -189,14 +197,13 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Case_status(text: "year"),
+                              Case_status(text: _getTranslatedText("Year", "वर्ष")),
                               const SizedBox(
                                 height: 5,
                               ),
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    // print(_isYearDropdownOpen);
                                     _isYearDropdownOpen = !_isYearDropdownOpen;
                                   });
                                 },
@@ -211,7 +218,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 16),
                                       child: Text(
-                                        _currentSelectedYear ?? "Select Year",
+                                        _currentSelectedYear ?? _getTranslatedText("Select Year", "वर्ष चयन करें"),
                                       ),
                                     ),
                                   ),
@@ -224,13 +231,12 @@ class _CaseStatusState extends State<NewCaseStatus> {
                     ),
                     if (_isYearDropdownOpen)
                       Positioned(
-                        top: 100, // Adjust the position based on your UI
+                        top: 100,
                         left: 20,
                         right: 20,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          margin: EdgeInsets.symmetric(horizontal: 20),
                           height: 150,
-                          // width: 300,
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -261,11 +267,7 @@ class _CaseStatusState extends State<NewCaseStatus> {
                       ),
                   ],
                 ),
-                // const SizedBox(
-                //   height: 150,
-                // ),
-
-                const SizedBox(
+                SizedBox(
                   height: 120,
                 ),
                 Column(
@@ -287,9 +289,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           ),
                         );
                       },
-                      child: const CaseStatusButton(text: "View Case Status"),
+                      child: CaseStatusButton(text: _getTranslatedText("View Case Status", "मुकदमा स्थिति देखें")),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     GestureDetector(
@@ -300,9 +302,9 @@ class _CaseStatusState extends State<NewCaseStatus> {
                           ),
                         );
                       },
-                      child: const CaseStatusButton(text: "Upload Case Status"),
+                      child: CaseStatusButton(text: _getTranslatedText("Upload Case Status", "मुकदमा स्थिति अपलोड करें")),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 40,
                     )
                   ],
