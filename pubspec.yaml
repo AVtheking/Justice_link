@@ -49,6 +49,10 @@ dependencies:
   bubble: ^1.2.1
   percent_indicator: ^4.2.3
   socket_io_client: ^2.0.3+1
+  url_launcher: ^6.2.2
+  google_gemini: ^0.0.9
+  flutter_dotenv: ^5.1.0
+  flutter_gemini: ^1.0.1
 
 dev_dependencies:
   flutter_test:
