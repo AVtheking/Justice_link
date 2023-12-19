@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
+import 'package:justice_link/features/chat_bot/screens/chat_bot_screen.dart';
 import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
 import 'package:justice_link/features/feedback/screens/feedback_screen.dart';
 import 'package:justice_link/features/get_started/screens/get_started_screen.dart';
@@ -397,15 +398,35 @@ class _HomeScreen extends State<HomeScreen> {
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: Image.asset(
-                "assets/images/par.png",
+            child: Stack(children: [
+              SizedBox(
                 width: double.infinity,
-                fit: BoxFit.cover,
+                child: Image.asset(
+                  "assets/images/par.png",
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          )
+              Positioned(
+                right: 30,
+                top: 20,
+                child: FloatingActionButton(
+                  shape: CircleBorder(),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ChatBotScreen(),
+                      ),
+                    );
+                  },
+                  child: Image.asset(
+                    "assets/images/fab.png",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
+            ]),
+          ),
         ],
       ),
     );
