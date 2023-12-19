@@ -25,7 +25,7 @@ class _MeetingRequestState extends ConsumerState<MeetingRequest> {
     );
   }
 
-  List<Meeting> meetings = [];
+  List<Meeting?>? meetings;
   getMeetingsRequest() async {
     meetings = await ref
         .read(meetingServiceProvider)
@@ -43,72 +43,78 @@ class _MeetingRequestState extends ConsumerState<MeetingRequest> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle:
-              const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
-          backgroundColor: const Color(0xFF098904),
-          title: const Text(
-            "Meeting Requests",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
-              color: Colors.white,
-            )
-          ],
-          centerTitle: true,
-          iconTheme: const IconThemeData(color: Colors.white),
-        ),
-        body: ListView.builder(
-          itemCount: meetings.length,
-          itemBuilder: (ctx, index) {
-            // print(meetings[index].meetingStatus);
-            final meeting = meetings[index]!;
-            return Card(
-              child: InkWell(
-                onTap: () {
-                  if (meetings[index].meetingStatus == 'accepted') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ChatScreen()),
-                    );
-                  } else {
-                    navigateToMeetingDetails(meetings[index]);
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ListTile(
-                    leading: const CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage("assets/images/lawyer.png"),
-                    ),
-                    title: Text(meeting.senderName),
-                    subtitle: const Text("New Meeting Request"),
-                    trailing: Text(
-                      meeting.meetingStatus!,
-                      style: TextStyle(
-                          color: meeting.meetingStatus == "accepted"
-                              ? const Color.fromARGB(255, 11, 132, 15)
-                              : const Color.fromARGB(255, 239, 146, 46),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14),
-                    ),
-                  ),
+    return meetings == null
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              systemOverlayStyle:
+                  const SystemUiOverlayStyle(statusBarColor: Color(0xFF046200)),
+              backgroundColor: const Color(0xFF098904),
+              title: const Text(
+                "Meeting Requests",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
               ),
-            );
-          },
-        ));
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.search),
+                  color: Colors.white,
+                )
+              ],
+              centerTitle: true,
+              iconTheme: const IconThemeData(color: Colors.white),
+            ),
+            body: ListView.builder(
+              itemCount: meetings!.length,
+              itemBuilder: (ctx, index) {
+                // print(meetings[index].meetingStatus);
+                final meeting = meetings![index]!;
+                return Card(
+                  child: InkWell(
+                    onTap: () {
+                      if (meetings![index]!.meetingStatus == 'accepted') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ChatScreen()),
+                        );
+                      } else {
+                        navigateToMeetingDetails(meetings![index]!);
+                      }
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListTile(
+                        leading: const CircleAvatar(
+                          radius: 30,
+                          backgroundImage:
+                              AssetImage("assets/images/lawyer.png"),
+                        ),
+                        title: Text(meeting.senderName),
+                        subtitle: const Text("New Meeting Request"),
+                        trailing: Text(
+                          meeting.meetingStatus!,
+                          style: TextStyle(
+                              color: meeting.meetingStatus == "accepted"
+                                  ? const Color.fromARGB(255, 11, 132, 15)
+                                  : const Color.fromARGB(255, 239, 146, 46),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ));
   }
 }

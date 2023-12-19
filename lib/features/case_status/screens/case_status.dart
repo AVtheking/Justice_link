@@ -4,6 +4,7 @@ import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/screens/view_case_status.dart';
 import 'package:justice_link/features/case_status/services/case_services.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CaseStatus extends ConsumerStatefulWidget {
   const CaseStatus({Key? key}) : super(key: key);
@@ -14,19 +15,21 @@ class CaseStatus extends ConsumerStatefulWidget {
 
 class _CaseStatusState extends ConsumerState<CaseStatus> {
   final TextEditingController _caseNoController = TextEditingController();
-  final _currencies = [
+  final _caseTypes = [
     "Criminal",
     "Civil",
   ];
-  String? _currentSelectedValue;
+  String? _currentSelectedCaseType;
   String? _currentSelectedYear;
   late List<String> _years;
   bool _isYearDropdownOpen = false;
+  String? _translation = "English";
 
   @override
   void initState() {
     super.initState();
     _years = generateYearsList();
+    _setLanguage();
   }
 
   @override
@@ -41,6 +44,17 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
         .getCaseStatus(context: context, caseNo: _caseNoController.text.trim());
   }
 
+  Future<void> _setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _translation = prefs.getString("language") ?? "English";
+    });
+  }
+
+  String _getTranslatedText(String englishText, String hindiText) {
+    return _translation == "Hindi" ? hindiText : englishText;
+  }
+
   List<String> generateYearsList() {
     List<String> years = [];
     int currentYear = DateTime.now().year;
@@ -53,7 +67,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarfun("Case Status"),
+      appBar: appbarfun(_getTranslatedText("Case Status", "मुकदमा स्थिति")),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -68,7 +82,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                       margin:
                           const EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
-                        height: 70,
+                        // height: 70,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -87,7 +101,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Case_status(text: "Case Type"),
+                              Case_status(text: _getTranslatedText("Case Type", "मुकदमा प्रकार")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -104,17 +118,17 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                                     child: DropdownButton<String>(
                                       isExpanded: true,
                                       iconEnabledColor: Colors.black,
-                                      value: _currentSelectedValue,
+                                      value: _currentSelectedCaseType,
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          _currentSelectedValue = newValue;
+                                          _currentSelectedCaseType = newValue;
                                         });
                                       },
                                       items: [
-                                        ..._currencies.map((String value) {
+                                        ..._caseTypes.map((String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value),
+                                            child: Text(_getTranslatedText(value, value)),
                                           );
                                         }).toList(),
                                       ],
@@ -151,7 +165,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Case_status(text: "Case Number"),
+                              Case_status(text: _getTranslatedText("Case Number", "मुकदमा संख्या")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -161,7 +175,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                                   cursorHeight: 20,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                    // hintText: "Enter Case Number",
+                                    // hintText: _getTranslatedText("Enter Case Number", "मुकदमा संख्या दर्ज करें"),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(5),
                                     ),
@@ -178,7 +192,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                       margin:
                           const EdgeInsets.only(left: 20, right: 20, top: 40),
                       child: Container(
-                        height: 70,
+                        // height: 70,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -197,7 +211,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Case_status(text: "year"),
+                              Case_status(text: _getTranslatedText("Year", "वर्ष")),
                               const SizedBox(
                                 height: 5,
                               ),
@@ -219,7 +233,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 16),
                                       child: Text(
-                                        _currentSelectedYear ?? "Select Year",
+                                        _currentSelectedYear ?? _getTranslatedText("Select Year", "वर्ष चयन करें"),
                                       ),
                                     ),
                                   ),
@@ -302,19 +316,20 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                             end: Alignment.bottomCenter,
                           ),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.remove_red_eye, color: Colors.white),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              "View Case Status",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                              _getTranslatedText("View Case Status", "मुकदमा स्थिति देखें"),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         ),
@@ -327,7 +342,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

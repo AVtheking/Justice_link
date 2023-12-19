@@ -400,15 +400,26 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           Expanded(
-            child: SizedBox(
-              width: double.infinity,
-              child: Image.asset(
-                "assets/images/par.png",
+            child: Stack(children: [
+              SizedBox(
                 width: double.infinity,
-                fit: BoxFit.cover,
+                child: Image.asset(
+                  "assets/images/par.png",
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          )
+              Positioned(
+                right: 30,
+                top: 20,
+                child: FloatingActionButton(
+                  onPressed: () {},
+
+                  child: Image.asset("assets/images/fab.png"),
+                ),
+              )
+            ]),
+          ),
         ],
       ),
     );

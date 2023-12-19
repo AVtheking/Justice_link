@@ -24,7 +24,7 @@ class HomeScreenLawyer extends ConsumerStatefulWidget {
 }
 
 // Add this variable to track translation language
-String? translation;
+String? translation="English";
 
 class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
   List<String> drawerItems = [
