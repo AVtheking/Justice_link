@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
           child: Container(
             // color: Colors.grey,
             width: double.infinity, // Take the full width of the screen
-            padding:  EdgeInsets.all(16.0),
+            padding:  const EdgeInsets.all(16.0),
             child:  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
                     Image.asset('assets/images/bullet.png'),
-                     Text(
+                  const    Text(
                   ' User Privacy and Data Security:',
                   style: TextStyle(
                     fontSize: 20,
@@ -32,12 +32,12 @@ class MainApp extends StatelessWidget {
                   ]
                 ),
                   
-                  SizedBox(height: 10),
-                  Text(
+                const   SizedBox(height: 10),
+                 const  Text(
                     '[•] Prioritize the privacy and security of user data.\n[•] Implement encryption protocols for sensitive information.\n[•] Clearly communicate your data handling practices in the application.',
 
                   ),
-                   Divider(
+                 const   Divider(
               //set color to #CCCCCC
               color: Color(0xFFCCCCCC),
               height: 20,
@@ -47,7 +47,7 @@ class MainApp extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
                     Image.asset('assets/images/bullet.png'),
-                     Text(
+                    const  Text(
                   ' Legal Accuracy and Compliance',
                   style: TextStyle(
                     fontSize: 20,
@@ -57,12 +57,12 @@ class MainApp extends StatelessWidget {
                   ]
                 ),
                   
-                  SizedBox(height: 10),
-                  Text(
+                 const  SizedBox(height: 10),
+                 const  Text(
                     '[•] Ensure all legal information provided is accurate and up-to-date.\n[•] Comply with local, state, and national legal regulations.\n[•]Regularly review and update content to reflect any legal changes.',
 
                   ),
-                  Divider(
+               const    Divider(
               color: Color(0xFFCCCCCC),
               height: 20,
               thickness: 0.5,
