@@ -13,10 +13,10 @@ class ChatBotScreen extends StatefulWidget {
 class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   void initState() {
-      Gemini.init(apiKey: apiKEY);
+    Gemini.init(apiKey: apiKEY);
     super.initState();
-    _chatBubbles.add(
-        ChatBubble('Hello I am Nyay Mitra . How can i Help you Today', false));
+    _chatBubbles.add(const ChatBubble(
+        'Hello I am Nyay Mitra . How can i Help you Today', false));
   }
 
   final TextEditingController _textEditingController = TextEditingController();
@@ -26,7 +26,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffefe6dd),
+      backgroundColor: const Color(0xffefe6dd),
       appBar: appbarfun('Nyay Mitra'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -41,7 +41,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 },
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                   Expanded(
                     child: TextField(
                       controller: _textEditingController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Type a message...',
                       ),
                       onSubmitted: (_) {
@@ -61,7 +61,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: () {
                       _sendMessage();
                       _scrollToBottom();
@@ -83,13 +83,13 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       try {
         setState(() {
           _chatBubbles.add(ChatBubble(userMessage, true));
-          _chatBubbles.add(ChatBubble('Typing...', false));
+          _chatBubbles.add(const ChatBubble('Typing...', false));
         });
 
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
 
-        final response = await Gemini.instance.text(userMessage);
-
+        final response = await Gemini.instance.text(
+            "now lets have a role play in which you will be my lawyer and i will ask you a question related to law or any legal advice related to legal matters and you need to reply in detail in a step by step guid and you need to do that in a proper documentation but if the question is not releted to law or any legal matters then you will reply me please ask a relevant question so the next question will follow this guideline , remember that if a question is not releted to law or can not be related to law then do not answer it In any case if question is not irrevelant just return 'I can only help you with legdal advices only' $userMessage");
         setState(() {
           _chatBubbles.removeLast();
           _chatBubbles
@@ -106,7 +106,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   void _scrollToBottom() {
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
   }
@@ -123,15 +123,15 @@ class ChatBubble extends StatelessWidget {
     return Align(
       alignment: isUser ? Alignment.topRight : Alignment.topLeft,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5),
-        padding: EdgeInsets.all(10),
+        margin: const EdgeInsets.symmetric(vertical: 5),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: isUser ? Colors.green : Colors.grey,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
           message,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

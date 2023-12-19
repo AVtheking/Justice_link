@@ -400,7 +400,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
       case 4:
         return "Guidelines";
       case 5:
-        return "Fundamental Rights";
+        return "Legal Rights";
       case 6:
         return "Reminders";
       case 7:
