@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/document_verification/widgets/required_documents_container.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DocumentVerification extends StatefulWidget {
   const DocumentVerification({Key? key}) : super(key: key);
@@ -10,45 +11,64 @@ class DocumentVerification extends StatefulWidget {
 }
 
 class _DocumentVerificationState extends State<DocumentVerification> {
+   String? _translation="English";
+
+  @override
+  void initState() {
+    super.initState();
+    _setLanguage();
+  }
+
+  Future<void> _setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _translation = prefs.getString("language") ?? "English";
+    });
+  }
+
+  String _getTranslatedText(String englishText, String hindiText) {
+    return _translation == "Hindi" ? hindiText : englishText;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarfun("Document Verification"),
+      appBar: appbarfun(_getTranslatedText("Document Verification", "दस्तावेज सत्यापन")),
       body: Column(
         children: [
           const SizedBox(
             height: 40,
           ),
-          const Expanded(
+          Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   RequiredDocuments(
-                    title: "Government Issued-ID",
+                    title: _getTranslatedText("Government Issued-ID", "सरकार द्वारा जारी किया गया आईडी"),
                   ),
                   SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
-                    title: "Aadhar Card",
+                    title: _getTranslatedText("Aadhar Card", "आधार कार्ड"),
                   ),
                   SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
-                    title: "Address Proof",
+                    title: _getTranslatedText("Address Proof", "पता साबित करने का सबूत"),
                   ),
                   SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
-                    title: "Legal Documents",
+                    title: _getTranslatedText("Legal Documents", "कानूनी दस्तावेज़"),
                   ),
                   SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
-                    title: "Passport Size Photograph",
+                    title: _getTranslatedText("Passport Size Photograph", "पासपोर्ट साइज़ फ़ोटोग्राफ"),
                   ),
                 ],
               ),
