@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/chat/screens/chat_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatelessWidget {
   const ContactUs({super.key});
@@ -68,25 +69,30 @@ class ContactUs extends StatelessWidget {
                 onPressed: () {},
                 child: SizedBox(
                   width: 90,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/telephone.png'),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Text(
-                          'Call ',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: () {
+                      launch("tel://21213123123");
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/telephone.png'),
+                        const SizedBox(
+                          width: 12,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Text(
+                            'Call ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
