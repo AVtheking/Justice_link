@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/auth/widgets/text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -17,6 +18,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String? translation;
   @override
   void dispose() {
     _emailController.dispose();
@@ -24,8 +26,13 @@ class _LoginState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    setLanguage();
+    super.initState();
+  }
+
   void login(BuildContext context) {
-    // print(_nameController);
     selectedOption == 1
         ? ref.watch(authServiceProvider).login(
               context: context,
@@ -37,6 +44,14 @@ class _LoginState extends ConsumerState<LoginScreen> {
               email: _emailController.text.trim(),
               password: _passwordController.text.trim(),
             );
+  }
+
+  void setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      translation = prefs.getString("language") ?? "English";
+    });
+    // print(prefs.getString("language"));
   }
 
   @override
@@ -52,9 +67,9 @@ class _LoginState extends ConsumerState<LoginScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const Center(
+              Center(
                 child: Text(
-                  "Register",
+                  translation == "Hindi" ? "लॉगिन" : "Login",
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
@@ -113,7 +128,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
                               },
                             ),
                             title: Text(
-                              "User",
+                              translation == "Hindi" ? "उपयोगकर्ता" : "User",
                               style: TextStyle(
                                 color: selectedOption == 1
                                     ? Colors.white
@@ -171,7 +186,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
                             },
                           ),
                           title: Text(
-                            "Lawyer",
+                            translation == "Hindi" ? "लॉयर" : "Lawyer",
                             style: TextStyle(
                               color: selectedOption == 2
                                   ? Colors.white
@@ -188,14 +203,16 @@ class _LoginState extends ConsumerState<LoginScreen> {
               ),
               const SizedBox(height: 20),
               RegisterField(
-                  hintText: "User@gmail.com",
+                  hintText: translation == "Hindi"
+                      ? "उपयोगकर्ता@gmail.com"
+                      : "User@gmail.com",
                   controller: _emailController,
                   icon: Icons.mail),
               const SizedBox(
                 height: 30,
               ),
               RegisterField(
-                hintText: "Password",
+                hintText: translation == "Hindi" ? "पासवर्ड" : "Password",
                 controller: _passwordController,
                 icon: Icons.lock,
                 isVisible: true,
@@ -205,7 +222,6 @@ class _LoginState extends ConsumerState<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  // print("here");
                   login(context);
                 },
                 child: Container(
@@ -221,9 +237,9 @@ class _LoginState extends ConsumerState<LoginScreen> {
                       end: Alignment.bottomCenter,
                     ),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Login',
+                      translation == "Hindi" ? 'लॉगिन' : 'Login',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
@@ -232,8 +248,12 @@ class _LoginState extends ConsumerState<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Do not have account? ",
-                      style: TextStyle(fontSize: 16)),
+                  Text(
+                    translation == "Hindi"
+                        ? "खाता नहीं है? "
+                        : "Do not have account? ",
+                    style: TextStyle(fontSize: 16),
+                  ),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -242,8 +262,8 @@ class _LoginState extends ConsumerState<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text(
-                      "Register",
+                    child: Text(
+                      translation == "Hindi" ? "रजिस्टर" : "Register",
                       style: TextStyle(color: Color(0xFF046200), fontSize: 16),
                     ),
                   )

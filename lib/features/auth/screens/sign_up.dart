@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/screens/login_in.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/auth/widgets/text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Register extends ConsumerStatefulWidget {
   const Register({super.key});
@@ -19,6 +20,7 @@ class _RegisterState extends ConsumerState<Register> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  String? translation;
   @override
   void dispose() {
     _nameController.dispose();
@@ -28,8 +30,13 @@ class _RegisterState extends ConsumerState<Register> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    setLanguage();
+    super.initState();
+  }
+
   void register(BuildContext context) {
-    // print(_nameController);
     selectedOption == 1
         ? ref.watch(authServiceProvider).register(
               context: context,
@@ -45,6 +52,14 @@ class _RegisterState extends ConsumerState<Register> {
             );
   }
 
+  void setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      translation = prefs.getString("language") ?? "English";
+    });
+    // print(prefs.getString("language"));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,10 +73,10 @@ class _RegisterState extends ConsumerState<Register> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              const Center(
+              Center(
                 child: Text(
-                  "Register",
-                  style: TextStyle(
+                  translation == "Hindi" ? "रजिस्टर" : "Register",
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF46474B),
@@ -119,7 +134,7 @@ class _RegisterState extends ConsumerState<Register> {
                               },
                             ),
                             title: Text(
-                              "User",
+                              translation == "Hindi" ? "उपयोगकर्ता" : "User",
                               style: TextStyle(
                                 color: selectedOption == 1
                                     ? Colors.white
@@ -177,7 +192,7 @@ class _RegisterState extends ConsumerState<Register> {
                             },
                           ),
                           title: Text(
-                            "Lawyer",
+                            translation == "Hindi" ? "वकील" : "Lawyer",
                             style: TextStyle(
                               color: selectedOption == 2
                                   ? Colors.white
@@ -194,7 +209,7 @@ class _RegisterState extends ConsumerState<Register> {
               ),
               const SizedBox(height: 20),
               RegisterField(
-                hintText: "Full Name",
+                hintText: translation == "Hindi" ? "पूरा नाम" : "Full Name",
                 controller: _nameController,
                 icon: Icons.person,
               ),
@@ -202,14 +217,16 @@ class _RegisterState extends ConsumerState<Register> {
                 height: 30,
               ),
               RegisterField(
-                  hintText: "User@gmail.com",
+                  hintText: translation == "Hindi"
+                      ? "उपयोगकर्ता@gmail.com"
+                      : "User@gmail.com",
                   controller: _emailController,
                   icon: Icons.mail),
               const SizedBox(
                 height: 30,
               ),
               RegisterField(
-                hintText: "Password",
+                hintText: translation == "Hindi" ? "पासवर्ड" : "Password",
                 controller: _passwordController,
                 icon: Icons.lock,
                 isVisible: true,
@@ -218,7 +235,9 @@ class _RegisterState extends ConsumerState<Register> {
                 height: 30,
               ),
               RegisterField(
-                hintText: "Confirm Password",
+                hintText: translation == "Hindi"
+                    ? "पासवर्ड की पुष्टि करें"
+                    : "Confirm Password",
                 controller: _confirmPasswordController,
                 icon: Icons.lock,
                 isVisible: true,
@@ -243,9 +262,9 @@ class _RegisterState extends ConsumerState<Register> {
                       end: Alignment.bottomCenter,
                     ),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'Register',
+                      translation == "Hindi" ? 'रजिस्टर' : 'Register',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
@@ -254,8 +273,12 @@ class _RegisterState extends ConsumerState<Register> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already Registered? ",
-                      style: TextStyle(fontSize: 16)),
+                  Text(
+                    translation == "Hindi"
+                        ? "पहले से पंजीकृत हैं? "
+                        : "Already Registered? ",
+                    style: TextStyle(fontSize: 16),
+                  ),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -264,8 +287,8 @@ class _RegisterState extends ConsumerState<Register> {
                         ),
                       );
                     },
-                    child: const Text(
-                      "Login",
+                    child: Text(
+                      translation == "Hindi" ? "लॉग इन" : "Login",
                       style: TextStyle(color: Color(0xFF046200), fontSize: 16),
                     ),
                   )

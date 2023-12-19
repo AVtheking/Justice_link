@@ -10,25 +10,18 @@ import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.d
 import 'package:justice_link/features/utrc/screens/annexurea.dart';
 
 class EServicesLawyer extends ConsumerWidget {
-  const EServicesLawyer({super.key});
+  const EServicesLawyer({super.key,required this.translation});
+  final String translation; 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // List<String> eServices = [
-    //   "Case Status",
-    //   "Medical Updates",
-    //   "Meetings",
-    //   "UTRC connection",
-    //   "Document Verfication",
-    //   "Rehabilitation Program",
-    // ];
     List<String> eServicesLawyer = [
-      "Case Status",
-      "Medical Updates",
-      "Meeting Request",
-      "UTRC connection",
-      "Document Verfication",
-      "Rehabilitation Program",
+      translation == "Hindi" ? "केस स्थिति" : "Case Status",
+      translation == "Hindi" ? "मेडिकल अपडेट्स" : "Medical Updates",
+      translation == "Hindi" ? "मीटिंग अनुरोध" : "Meeting Request",
+      translation == "Hindi" ? "UTRC कनेक्शन" : "UTRC connection",
+      translation == "Hindi" ? "दस्तावेज़ सत्यापन" : "Document Verification",
+      translation == "Hindi" ? "पुनर्वास कार्यक्रम" : "Rehabilitation Program",
     ];
 
     return Padding(

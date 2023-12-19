@@ -65,7 +65,7 @@ class AuthService {
 
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const GetStartedScreen(),
+              builder: (context) => const HomeScreen(),
             ),
           );
         },
@@ -115,7 +115,7 @@ class AuthService {
 
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const GetStartedScreen(),
+              builder: (context) => const HomeScreenLawyer(),
             ),
           );
         },

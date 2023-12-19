@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class KeyFeatures extends ConsumerWidget {
-  const KeyFeatures({super.key});
+  const KeyFeatures({super.key,required this.translation});
+  final String translation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // print(lawyer);
     List<String> features = [
-      "Guidelines",
-      "Legal rights",
+      translation == "Hindi" ? "मार्गदर्शिका" : "Guidelines",
+      translation == "Hindi" ? "मौलिक अधिकार" : "Legal rights",
     ];
 
     return Container(

@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 
 class TopBar extends ConsumerWidget {
-  const TopBar({super.key});
+  const TopBar({super.key, required this.translation});
+  final String translation;
 
   void logOut(BuildContext context, WidgetRef ref) {
     ref.read(authServiceProvider).logOut(context);
@@ -40,20 +41,22 @@ class TopBar extends ConsumerWidget {
               width: 40,
             ),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome",
+                  translation == "Hindi" ? "स्वागत है" : "Welcome",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w600),
                 ),
                 Text(
-                  "Tue,December 4,2023",
+                  translation == "Hindi"
+                      ? "मंगलवार, 4 दिसंबर, 2023"
+                      : "Tuesday, December 4, 2023",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -75,26 +78,26 @@ class TopBar extends ConsumerWidget {
                 ),
                 minimumSize: const Size(77, 30),
               ),
-              child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "Log Out",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w600),
-                    ),
-                    // const Spacer(),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Icon(
-                      Icons.logout,
-                      color: Color(0xFF004D14),
-                    )
-                  ]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    translation == "Hindi" ? "लॉग आउट" : "Logout",
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Icon(
+                    Icons.logout,
+                    color: Color(0xFF004D14),
+                  ),
+                ],
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

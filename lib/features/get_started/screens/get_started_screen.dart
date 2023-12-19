@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen_lawyer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GetStartedScreen extends ConsumerStatefulWidget {
   const GetStartedScreen({Key? key}) : super(key: key);
@@ -27,6 +29,7 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
   @override
   Widget build(BuildContext context) {
     final lawyer = ref.read(lawyerProvider);
+    final user = ref.read(userProvider);
     return Scaffold(
       appBar: AppBar(
         actions: const [],
@@ -164,13 +167,27 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
                 ),
               ),
               child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
+                onPressed: () async {
+                  if (isCheckedList[1] == true) {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.setString("language", "Hindi");
+                    print("hindi");
+                  } else {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.setString("language", "English");
+                    print("English");
+
+                    // translation = "English";
+                  }
+                  Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => lawyer == null
-                          ? const HomeScreen()
-                          : const HomeScreenLawyer(),
-                    ),
+                        builder: (context) => lawyer == null
+                            ? user == null
+                                ? const Register()
+                                : const HomeScreen()
+                            : const HomeScreenLawyer()),
                   );
                 },
                 child: const Text(

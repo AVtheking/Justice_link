@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
-import 'package:justice_link/features/case_status/services/case_services.dart';
 import 'package:justice_link/features/case_status/widgets/case_details.dart';
 import 'package:justice_link/features/case_status/widgets/case_status.dart';
 import 'package:justice_link/features/case_status/widgets/versus_card.dart';
@@ -11,7 +10,7 @@ class ViewCaseStatus extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final caseDetails = ref.read(caseProvider)!;
+    // final caseDetails = ref.read(caseProvider)!;
     List<String> headings = [
       "Case No",
       "Last Presented On",
