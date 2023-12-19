@@ -38,7 +38,7 @@ class _HomeScreen extends State<HomeScreen> {
     "change language",
     "Meetings",
     "Guide",
-    "Fundamental Rights",
+    "Legal Rights",
     "Reminders",
     "Contact Us"
   ];
