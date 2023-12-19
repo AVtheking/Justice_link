@@ -89,7 +89,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text("Chat Bot"),
+        title: Text(widget.meeting!.receiverName),
         centerTitle: true,
         elevation: 5,
         foregroundColor: Colors.white,
