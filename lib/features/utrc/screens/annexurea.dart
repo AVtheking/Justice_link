@@ -1,47 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
-import 'package:justice_link/features/auth/screens/sign_up.dart';
-import 'package:justice_link/features/auth/services/auth_service.dart';
-import 'package:justice_link/features/auth/widgets/text_field.dart';
 import 'package:justice_link/features/case_status/widgets/rich_text.dart';
+import 'package:justice_link/features/utrc/screens/annexurea1.dart';
+import 'package:justice_link/features/utrc/screens/annexureb.dart';
 import 'package:justice_link/features/utrc/widgets/InputContainer.dart';
 
 class AnnexureA extends ConsumerStatefulWidget {
   const AnnexureA({super.key});
 
   @override
-  ConsumerState<AnnexureA> createState() => _LoginState();
+  ConsumerState<AnnexureA> createState() => _AnnexureA();
 }
 
-class _LoginState extends ConsumerState<AnnexureA> {
-  TextEditingController _utpNameController = TextEditingController();
-  TextEditingController _fatherNameController = TextEditingController();
-  TextEditingController _genderController = TextEditingController();
-  TextEditingController _ageController = TextEditingController();
-  TextEditingController _firController = TextEditingController();
-  TextEditingController _policeStationController = TextEditingController();
-  TextEditingController _districtController = TextEditingController();
-  TextEditingController _arrestedUnderSectionController =
+class _AnnexureA extends ConsumerState<AnnexureA> {
+  final TextEditingController _utpNameController = TextEditingController();
+  final TextEditingController _fatherNameController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _firController = TextEditingController();
+  final TextEditingController _policeStationController =
       TextEditingController();
-  TextEditingController _courtParticularsController = TextEditingController();
-  TextEditingController _dateOfArrestController = TextEditingController();
-  TextEditingController _dateOfFirstRemandController = TextEditingController();
-  TextEditingController _dateOfAdmissionController = TextEditingController();
-  TextEditingController _dateOfFillingSheetController = TextEditingController();
-  TextEditingController _chargesheetedUnderSectionController =
+  final TextEditingController _districtController = TextEditingController();
+  final TextEditingController _arrestedUnderSectionController =
       TextEditingController();
-  TextEditingController _utpRepresentedByController = TextEditingController();
-  TextEditingController _lawyersDetailsController = TextEditingController();
-  TextEditingController _bailStatusController = TextEditingController();
-  TextEditingController _reasonForNoBailController = TextEditingController();
-  TextEditingController _diseaseDetailsController = TextEditingController();
-  TextEditingController _convictUndertrialController = TextEditingController();
-  TextEditingController _additionalCaseDetailsController =
+  final TextEditingController _courtParticularsController =
+      TextEditingController();
+  final TextEditingController _dateOfArrestController = TextEditingController();
+  final TextEditingController _dateOfFirstRemandController =
+      TextEditingController();
+  final TextEditingController _dateOfAdmissionController =
+      TextEditingController();
+  final TextEditingController _dateOfFillingSheetController =
+      TextEditingController();
+  final TextEditingController _chargesheetedUnderSectionController =
+      TextEditingController();
+  final TextEditingController _utpRepresentedByController =
+      TextEditingController();
+  final TextEditingController _lawyersDetailsController =
+      TextEditingController();
+  final TextEditingController _bailStatusController = TextEditingController();
+  final TextEditingController _reasonForNoBailController =
+      TextEditingController();
+  final TextEditingController _diseaseDetailsController =
+      TextEditingController();
+  final TextEditingController _convictUndertrialController =
+      TextEditingController();
+  final TextEditingController _additionalCaseDetailsController =
       TextEditingController();
 
   int selectedOption = 1;
+  bool _areTextControllersNotEmpty() {
+    return _utpNameController.text.isNotEmpty &&
+        _fatherNameController.text.isNotEmpty &&
+        _genderController.text.isNotEmpty &&
+        _ageController.text.isNotEmpty &&
+        _firController.text.isNotEmpty &&
+        _policeStationController.text.isNotEmpty &&
+        _districtController.text.isNotEmpty &&
+        _arrestedUnderSectionController.text.isNotEmpty &&
+        _courtParticularsController.text.isNotEmpty &&
+        _dateOfArrestController.text.isNotEmpty &&
+        _dateOfFirstRemandController.text.isNotEmpty &&
+        _dateOfAdmissionController.text.isNotEmpty &&
+        _dateOfFillingSheetController.text.isNotEmpty &&
+        _chargesheetedUnderSectionController.text.isNotEmpty &&
+        _utpRepresentedByController.text.isNotEmpty &&
+        _lawyersDetailsController.text.isNotEmpty &&
+        _bailStatusController.text.isNotEmpty &&
+        _reasonForNoBailController.text.isNotEmpty &&
+        _diseaseDetailsController.text.isNotEmpty &&
+        _convictUndertrialController.text.isNotEmpty &&
+        _additionalCaseDetailsController.text.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +189,11 @@ class _LoginState extends ConsumerState<AnnexureA> {
                                 groupValue: selectedOption,
                                 onChanged: (value) {
                                   setState(() {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => const AnnexureB(),
+                                      ),
+                                    );
                                     selectedOption = value as int;
                                   });
                                 },
@@ -183,7 +219,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
               const SizedBox(height: 20),
               const Case_status(text: 'To be filled by Jail Superintendent'),
               const SizedBox(height: 20),
-              Container(
+              SizedBox(
                 height: 38,
                 width: 340,
                 child: CustomTextField(
@@ -210,7 +246,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'Gender',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _ageController,
                     hintText: 'Age',
@@ -240,7 +276,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'District',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _arrestedUnderSectionController,
                     hintText: 'Arrested under section',
@@ -267,7 +303,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'Date of Arrest',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _dateOfFirstRemandController,
                     hintText: 'Date of First remand',
@@ -285,7 +321,7 @@ class _LoginState extends ConsumerState<AnnexureA> {
                     hintText: 'Date of Admission',
                     width: 140,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   CustomTextField(
                     controller: _dateOfFillingSheetController,
                     hintText: 'Date of Filling sheet',
@@ -351,9 +387,20 @@ class _LoginState extends ConsumerState<AnnexureA> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Handle onTap logic here
-                  // print("here");
-                  // login(context);
+                  if (_areTextControllersNotEmpty()) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const AnnexureA1(),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please fill in all the fields'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10),
@@ -370,32 +417,12 @@ class _LoginState extends ConsumerState<AnnexureA> {
                   ),
                   child: const Center(
                     child: Text(
-                      'Login',
+                      'Submit',
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Do not have an account? ",
-                      style: TextStyle(fontSize: 16)),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const Register(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      "Register",
-                      style: TextStyle(color: Color(0xFF046200), fontSize: 16),
-                    ),
-                  )
-                ],
-              )
             ],
           ),
         ),

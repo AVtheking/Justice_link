@@ -24,7 +24,6 @@ class _RegisterFormState extends ConsumerState<MeetingDetailForm> {
 
   void sendMeetingReq(BuildContext context) {
     // final user = ref.read(userProvider);
-    print(widget.lawyer.name);
     ref.read(meetingServiceProvider).sendMeetingReq(
           context: context,
           lawyerId: widget.lawyer.id!,

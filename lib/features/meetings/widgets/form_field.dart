@@ -25,6 +25,7 @@ class MeetingFormField extends StatefulWidget {
 class _RegisterFieldState extends State<MeetingFormField> {
   @override
   Widget build(BuildContext context) {
+    // ignore: avoid_unnecessary_containers
     return Container(
       // height: 60, // Set a fixed height here
       child: TextFormField(

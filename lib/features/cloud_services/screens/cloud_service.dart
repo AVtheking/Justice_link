@@ -2,15 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/screens/view_case_status.dart';
 import 'package:justice_link/features/cloud_services/widgets/case_details_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CloudServices extends StatefulWidget {
   const CloudServices({super.key});
+  
 
   @override
   State<CloudServices> createState() => _CloudServicesState();
 }
 
 class _CloudServicesState extends State<CloudServices> {
+  String? translation="Engilsh";
+  @override
+  void initState() {
+    _setLanguage();
+    super.initState();
+  }
+  Future<void> _setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      translation = prefs.getString("language") ?? "English";
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,7 +206,7 @@ class _CloudServicesState extends State<CloudServices> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const ViewCaseStatus(),
+                      builder: (context) =>  ViewCaseStatus(translation: translation!),
                     ),
                   );
                 },

@@ -57,9 +57,9 @@ class _LawyerCardState extends ConsumerState<LawyerCard> {
                   ? Colors.white
                   : meeting!.lawyerId == widget.lawyer.id
                       ? meeting!.meetingStatus == "pending"
-                          ? Colors.yellow
+                          ? const Color.fromARGB(255, 243, 222, 35)
                           : meeting!.meetingStatus == "accepted"
-                              ? Colors.green
+                              ?const  Color.fromARGB(255, 128, 241, 132)
                               : meeting!.meetingStatus == "rejected"
                                   ? Colors.red
                                   : Colors.white

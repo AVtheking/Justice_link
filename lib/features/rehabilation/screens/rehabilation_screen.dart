@@ -23,7 +23,7 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
               height: 40,
             ),
             Container(
-              padding: EdgeInsets.only(left: 10, top: 8),
+              padding: const EdgeInsets.only(left: 10, top: 8),
               width: 329,
               height: 130,
               decoration: BoxDecoration(
@@ -88,6 +88,7 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
                   const SizedBox(
                     height: 16,
                   ),
+                  // ignore: avoid_unnecessary_containers
                   Container(
                     child: Row(
                       children: [
@@ -100,12 +101,12 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
                               color: Color(0xff046200)),
                         ),
                         LinearPercentIndicator(
-                          barRadius: Radius.circular(10),
+                          barRadius: const Radius.circular(10),
                           width: 189.0,
                           lineHeight: 8.0,
                           percent: percent,
-                          backgroundColor: Color(0xff000000),
-                          progressColor: Color(0xff004D14),
+                          backgroundColor: const Color(0xff000000),
+                          progressColor: const Color(0xff004D14),
                         ),
                         Text(
                           '${(percent * 100).toStringAsFixed(0)}%',
@@ -118,11 +119,11 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               width: 329,
               height: 149,
               decoration: BoxDecoration(
@@ -138,15 +139,16 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                padding: EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CircularPercentIndicator(
-                      backgroundColor: Color(0xff0000000),
+                      // ignore: use_full_hex_values_for_flutter_colors
+                      backgroundColor: const Color(0xff0000000),
                       lineWidth: 12,
                       percent: .65,
-                      progressColor: Color(0xff046200),
+                      progressColor: const Color(0xff046200),
                       radius: 60,
                       center: const Column(
                         children: [
@@ -193,8 +195,8 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
                           width: 70,
                           height: 70,
                         ),
-                        Spacer(),
-                        Text(
+                        const Spacer(),
+                        const Text(
                           'Targets achieved : 3',
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )
@@ -207,21 +209,21 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 32.0),
+            const Padding(
+              padding: EdgeInsets.only(left: 32.0),
               child: Align(
-                child: const Text(
+                alignment: Alignment.topLeft,
+                child: Text(
                   "Video Courses:",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                alignment: Alignment.topLeft,
               ),
             ),
             const SizedBox(
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.only(left: 10, top: 8),
+              padding: const EdgeInsets.only(left: 10, top: 8),
               width: 329,
               height: 130,
               decoration: BoxDecoration(

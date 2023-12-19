@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
+import 'package:justice_link/features/get_started/screens/get_started_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen_lawyer.dart';
 
@@ -52,7 +52,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             ),
             home: lawyer == null
                 ? user == null
-                    ? const Register()
+                    ? const GetStartedScreen()
                     : const HomeScreen()
                 : const HomeScreenLawyer(),
           );

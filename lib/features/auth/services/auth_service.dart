@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers, empty_catches
 
 import 'dart:convert';
 
@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:justice_link/common/api_service.dart';
 import 'package:justice_link/common/snackbar.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
-import 'package:justice_link/features/get_started/screens/get_started_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen_lawyer.dart';
 import 'package:justice_link/global.dart';
@@ -65,7 +64,7 @@ class AuthService {
 
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const GetStartedScreen(),
+              builder: (context) => const HomeScreen(),
             ),
           );
         },
@@ -115,7 +114,7 @@ class AuthService {
 
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const GetStartedScreen(),
+              builder: (context) => const HomeScreenLawyer(),
             ),
           );
         },
@@ -177,6 +176,8 @@ class AuthService {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       sharedPreferences.setString("token", '');
+      _ref.read(userProvider.notifier).update((state) => null);
+      _ref.read(lawyerProvider.notifier).update((state) => null);
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const Register()),
@@ -259,7 +260,6 @@ class AuthService {
             (state) => User.fromJson(_user),
           );
     } catch (e) {
-      print(e.toString());
       // showSnackBar(context, e.toString());
     }
   }
@@ -286,8 +286,6 @@ class AuthService {
       _ref.read(lawyerProvider.notifier).update(
             (state) => Lawyer.fromJson(_lawyer),
           );
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
   }
 }

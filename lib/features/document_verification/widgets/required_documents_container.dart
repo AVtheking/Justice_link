@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/features/medical_updates/widgets/file_pick_button.dart';
 import 'package:justice_link/features/medical_updates/widgets/open_file.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RequiredDocuments extends StatefulWidget {
   final String title;
@@ -8,12 +9,29 @@ class RequiredDocuments extends StatefulWidget {
   const RequiredDocuments({Key? key, required this.title}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _RequiredDocumentsState createState() => _RequiredDocumentsState();
 }
 
 class _RequiredDocumentsState extends State<RequiredDocuments> {
   late String pickedFilePath = '';
+  String? _translation="English";
+
+  @override
+  void initState() {
+    super.initState();
+    _setLanguage();
+  }
+
+  Future<void> _setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _translation = prefs.getString("language") ?? "English";
+    });
+  }
+
+  String _getTranslatedText(String englishText, String hindiText) {
+    return _translation == "Hindi" ? hindiText : englishText;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +56,7 @@ class _RequiredDocumentsState extends State<RequiredDocuments> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.title,
+              _getTranslatedText(widget.title, "आवश्यक दस्तावेज़"),
               style: const TextStyle(
                 fontFamily: 'Inter',
                 fontSize: 15.0,
@@ -57,9 +75,9 @@ class _RequiredDocumentsState extends State<RequiredDocuments> {
                     });
                   },
                   borderRadius: BorderRadius.circular(10),
-                  child: const Text(
-                    '+ Add File ',
-                    style: TextStyle(
+                  child: Text(
+                    _getTranslatedText('+ Add File', '+ फ़ाइल जोड़ें'),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'Inter',
                       fontSize: 14.0,
@@ -96,9 +114,9 @@ class _RequiredDocumentsState extends State<RequiredDocuments> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'View Files ',
-                        style: TextStyle(
+                      child: Text(
+                        _getTranslatedText('View Files', 'फ़ाइलें देखें'),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontFamily: 'Inter',
                           fontSize: 14.0,

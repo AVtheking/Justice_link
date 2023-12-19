@@ -6,7 +6,7 @@ class ReminderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _searchController = TextEditingController();
+    final TextEditingController searchController = TextEditingController();
     return Scaffold(
       appBar: appbarfun("Reminders"),
       body: Center(
@@ -17,12 +17,12 @@ class ReminderScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: TextField(
-                  controller: _searchController,
+                  controller: searchController,
                   decoration: InputDecoration(
                     hintText: 'Search...',
-                    hintStyle: TextStyle(fontSize: 16),
+                    hintStyle: const TextStyle(fontSize: 16),
                     prefixIcon: IconButton(
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       onPressed: () {},
                     ),
                     border: OutlineInputBorder(
@@ -32,7 +32,7 @@ class ReminderScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(),
+            const Divider(),
             Expanded(
               child: ListView.builder(
                 itemCount: 10,
@@ -40,7 +40,7 @@ class ReminderScreen extends StatelessWidget {
                   return Container(
                     height: 80,
                     width: 360,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

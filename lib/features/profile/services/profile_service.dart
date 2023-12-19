@@ -62,7 +62,7 @@ class ProfileService {
                 .read(lawyerProvider.notifier)
                 .update((state) => Lawyer.fromJson(_lawyer));
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (ctx) => ProfileScreen()));
+                MaterialPageRoute(builder: (ctx) => const ProfileScreen()));
           });
     } catch (err) {
       // print(err);

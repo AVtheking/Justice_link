@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:justice_link/features/medical_updates/widgets/file_pick_button.dart';
 import 'package:justice_link/features/medical_updates/widgets/open_file.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FilePickContainer extends StatefulWidget {
   final String title;
@@ -8,12 +10,29 @@ class FilePickContainer extends StatefulWidget {
   const FilePickContainer({Key? key, required this.title}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _FilePickContainerState createState() => _FilePickContainerState();
 }
 
 class _FilePickContainerState extends State<FilePickContainer> {
   late String pickedFilePath = '';
+   String? _translation="English";
+
+  @override
+  void initState() {
+    super.initState();
+    _setLanguage();
+  }
+
+  Future<void> _setLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _translation = prefs.getString("language") ?? "English";
+    });
+  }
+
+  String _getTranslatedText(String englishText, String hindiText) {
+    return _translation == "Hindi" ? hindiText : englishText;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +57,7 @@ class _FilePickContainerState extends State<FilePickContainer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.title,
+              _getTranslatedText(widget.title, "चिकित्सा रिपोर्टें"),
               style: const TextStyle(
                 fontFamily: 'Inter',
                 fontSize: 15.0,
@@ -57,9 +76,9 @@ class _FilePickContainerState extends State<FilePickContainer> {
                     });
                   },
                   borderRadius: BorderRadius.circular(10),
-                  child: const Text(
-                    '+ Add File ',
-                    style: TextStyle(
+                  child: Text(
+                    _getTranslatedText('+ Add File', '+ फ़ाइल जोड़ें'),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'Inter',
                       fontSize: 14.0,
@@ -72,7 +91,7 @@ class _FilePickContainerState extends State<FilePickContainer> {
                   padding: const EdgeInsets.only(right: 8.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [Color(0xFF004D14), Color(0xFF098904)],
@@ -96,9 +115,9 @@ class _FilePickContainerState extends State<FilePickContainer> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'View Files ',
-                        style: TextStyle(
+                      child: Text(
+                        _getTranslatedText('View Files', 'फ़ाइलें देखें'),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontFamily: 'Inter',
                           fontSize: 14.0,
