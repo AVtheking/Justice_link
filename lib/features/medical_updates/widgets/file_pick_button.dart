@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -34,11 +34,8 @@ class MyElevatedButton extends StatelessWidget {
     //     onFilePicked!(filePath);
     //   }
     // } else {}
-    var result;
     var image = await ImagePicker().pickImage(source: ImageSource.camera);
-    print(image);
     String filePath = image!.path;
-    print(filePath);
     if (onFilePicked != null) {
       onFilePicked!(filePath);
     } else {}
