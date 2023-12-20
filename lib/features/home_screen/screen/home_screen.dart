@@ -72,7 +72,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 60,
+                        // height: 60,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 12, 117, 9),
                           borderRadius: BorderRadius.circular(5),

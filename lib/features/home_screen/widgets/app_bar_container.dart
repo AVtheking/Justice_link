@@ -18,7 +18,7 @@ class TopBar extends ConsumerWidget {
     // print(user?.name);
     return Container(
       width: double.infinity,
-      height: 56,
+      // height: 56,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -55,13 +55,13 @@ class TopBar extends ConsumerWidget {
                         englishText: "Welcome ${user.name}",
                         style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 13,
                             fontWeight: FontWeight.w600))
                     : TranslateText(
                         englishText: "Welcome ${lawyer!.name}",
                         style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 13,
                             fontWeight: FontWeight.w600)),
                 // Text(
                 //   translation == "Hindi"
