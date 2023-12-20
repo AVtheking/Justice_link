@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/widgets/case_details.dart';
@@ -25,7 +26,6 @@ final String translation;
       _getTranslatedText("Pet.Advocates", "प्रतिवादी वकील(ए)"),
       _getTranslatedText("Res.Advocates", "उत्तरदाता के वकील(ए)"),
     ];
-
    List<String> details = [
   _getTranslatedText(
     "1000/2023 Registered On 06-12-2023 12:11 AM",

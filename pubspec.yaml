@@ -54,6 +54,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_gemini: ^1.0.1
   image_picker: ^1.0.5
+  youtube: ^0.0.1
 
 dev_dependencies:
   flutter_test:
