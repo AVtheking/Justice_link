@@ -15,6 +15,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginState extends ConsumerState<LoginScreen> {
   int selectedOption = 1;
+// final ConnectivityResult connectivityResult = await (Connectivity().checkConnectivity());
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -70,7 +71,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
               Center(
                 child: Text(
                   translation == "Hindi" ? "लॉगिन" : "Login",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF46474B),
@@ -240,7 +241,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
                   child: Center(
                     child: Text(
                       translation == "Hindi" ? 'लॉगिन' : 'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),
@@ -252,7 +253,7 @@ class _LoginState extends ConsumerState<LoginScreen> {
                     translation == "Hindi"
                         ? "खाता नहीं है? "
                         : "Do not have account? ",
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -264,7 +265,8 @@ class _LoginState extends ConsumerState<LoginScreen> {
                     },
                     child: Text(
                       translation == "Hindi" ? "रजिस्टर" : "Register",
-                      style: TextStyle(color: Color(0xFF046200), fontSize: 16),
+                      style: const TextStyle(
+                          color: Color(0xFF046200), fontSize: 16),
                     ),
                   )
                 ],

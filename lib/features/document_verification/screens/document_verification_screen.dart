@@ -46,25 +46,25 @@ class _DocumentVerificationState extends State<DocumentVerification> {
                   RequiredDocuments(
                     title: _getTranslatedText("Government Issued-ID", "सरकार द्वारा जारी किया गया आईडी"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
                     title: _getTranslatedText("Aadhar Card", "आधार कार्ड"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
                     title: _getTranslatedText("Address Proof", "पता साबित करने का सबूत"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(
                     title: _getTranslatedText("Legal Documents", "कानूनी दस्तावेज़"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 24,
                   ),
                   RequiredDocuments(

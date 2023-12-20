@@ -11,7 +11,7 @@ class MedicalUpdates extends StatefulWidget {
 }
 
 class _MedicalUpdatesState extends State<MedicalUpdates> {
-   String? _translation="English";
+  String? _translation = "English";
 
   @override
   void initState() {
@@ -80,7 +80,7 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
                       children: [
                         Text(
                           _getTranslatedText("Manoj Kumar", "मनोज कुमार"),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'Inter',
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
@@ -88,8 +88,11 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
                             color: Color(0xFF046200),
                           ),
                         ),
-                        Text(_getTranslatedText("Ward No . : 420", "वार्ड नंबर: 420")),
-                        Text(_getTranslatedText("Appointed Doctor : Dr. KK Menon", "नियुक्त डॉक्टर: डॉ. के.के. मेनन"))
+                        Text(_getTranslatedText(
+                            "Ward No . : 420", "वार्ड नंबर: 420")),
+                        Text(_getTranslatedText(
+                            "Appointed Doctor : Dr. KK Menon",
+                            "नियुक्त डॉक्टर: डॉ. के.के. मेनन"))
                       ],
                     ),
                   )
@@ -104,11 +107,12 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   FilePickContainer(
-                    title: _getTranslatedText("Medical Reports", "चिकित्सा रिपोर्टें"),
+                    title: _getTranslatedText(
+                        "Medical Reports", "चिकित्सा रिपोर्टें"),
                   ),
                 ],
               ),
@@ -121,11 +125,12 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   FilePickContainer(
-                    title: _getTranslatedText("Prescription Medication", "निर्धारित औषधि"),
+                    title: _getTranslatedText(
+                        "Prescription Medication", "निर्धारित औषधि"),
                   ),
                 ],
               ),
@@ -154,17 +159,22 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _getTranslatedText("Next Scheduled on:", "अगला निर्धारित है:"),
-                      style: TextStyle(
+                      _getTranslatedText(
+                          "Next Scheduled on:", "अगला निर्धारित है:"),
+                      style: const TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 15.0,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Text(_getTranslatedText("Date: 12/12/2021", "तारीख: 12/12/2021"),
-                        style: TextStyle(fontWeight: FontWeight.w500)),
-                    Text(_getTranslatedText("Doctor Appointed: Rajesh Yadav", "नियुक्त डॉक्टर: राजेश यादव"),
-                        style: TextStyle(fontWeight: FontWeight.w500))
+                    Text(
+                        _getTranslatedText(
+                            "Date: 12/12/2021", "तारीख: 12/12/2021"),
+                        style: const TextStyle(fontWeight: FontWeight.w500)),
+                    Text(
+                        _getTranslatedText("Doctor Appointed: Rajesh Yadav",
+                            "नियुक्त डॉक्टर: राजेश यादव"),
+                        style: const TextStyle(fontWeight: FontWeight.w500))
                   ],
                 ),
               ),

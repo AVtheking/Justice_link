@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:justice_link/features/medical_updates/widgets/file_pick_button.dart';
 import 'package:justice_link/features/medical_updates/widgets/open_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +9,7 @@ class FilePickContainer extends StatefulWidget {
   const FilePickContainer({Key? key, required this.title}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _FilePickContainerState createState() => _FilePickContainerState();
 }
 

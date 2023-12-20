@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/guidelines/screens/guidelines.dart';
 import 'package:justice_link/features/legal_rights/screens/legal_rights.dart';
 
 class KeyFeatures extends ConsumerWidget {
-  const KeyFeatures({super.key, required this.translation});
-  final String translation;
+  const KeyFeatures({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> features = [
-      translation == "Hindi" ? "मार्गदर्शिका" : "Guidelines",
-      translation == "Hindi" ? "मौलिक अधिकार" : "Legal rights",
+      "Guidelines",
+      "Legal rights",
     ];
 
     return Container(
@@ -69,13 +69,12 @@ class KeyFeatures extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    features[index],
-                    style: const TextStyle(
-                        fontSize: 12,
-                        color: Color.fromARGB(255, 26, 30, 26),
-                        fontWeight: FontWeight.w500),
-                  )
+                  TranslateText(
+                      englishText: features[index],
+                      style: const TextStyle(
+                          fontSize: 12,
+                          color: Color.fromARGB(255, 26, 30, 26),
+                          fontWeight: FontWeight.w500))
                 ],
               ),
             ),

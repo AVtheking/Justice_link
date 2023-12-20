@@ -1,6 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
+import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/chat_bot/screens/chat_bot_screen.dart';
 import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
@@ -15,24 +20,14 @@ import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreen();
+  ConsumerState<HomeScreen> createState() => _HomeScreen();
 }
 
-class _HomeScreen extends State<HomeScreen> {
-  List<String> drawerItemsHindi = [
-    "स्थिति जांचें",
-    "मेडिकल अपडेट्स",
-    "भाषा",
-    "मीटिंग्स",
-    "मार्गदर्शिका",
-    "मौलिक अधिकार",
-    "स्मृति",
-    "संपर्क करें"
-  ];
+class _HomeScreen extends ConsumerState<HomeScreen> {
   List<String> drawerItems = [
     "Check Status",
     "Medical Updates",
@@ -44,26 +39,9 @@ class _HomeScreen extends State<HomeScreen> {
     "Contact Us"
   ];
 
-  String getTranslation(String hindiText, String englishText) {
-    return translation == "Hindi" ? hindiText : englishText;
-  }
-
-  String? translation = "English";
-  @override
-  void initState() {
-    setLanguage();
-    super.initState();
-  }
-
-  void setLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      translation = prefs.getString("language") ?? "English";
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final user = ref.read(userProvider);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFF004D14), size: 30),
@@ -96,7 +74,7 @@ class _HomeScreen extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 60,
+                        // height: 60,
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 12, 117, 9),
                           borderRadius: BorderRadius.circular(5),
@@ -106,12 +84,10 @@ class _HomeScreen extends State<HomeScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          getTranslation("स्वागत है", "Welcome"),
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
+                      TranslateText(
+                        englishText: "Welcome ${user!.name}",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Expanded(
                         child: Padding(
@@ -143,7 +119,7 @@ class _HomeScreen extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  print(drawerItems[index]);
+                  // print(drawerItems[index]);
                   return GestureDetector(
                     onTap: () {
                       if (index == 0) {
@@ -176,13 +152,13 @@ class _HomeScreen extends State<HomeScreen> {
                       }
                     },
                     child: DrawerItem(
-                        icon: "assets/drawer_images/$index.png",
-                        text: getTranslation(
-                            drawerItemsHindi[index], drawerItems[index])),
+                      icon: "assets/drawer_images/$index.png",
+                      text: drawerItems[index],
+                    ),
                   );
                 },
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 50.0),
                 child: ElevatedButton(
@@ -190,7 +166,7 @@ class _HomeScreen extends State<HomeScreen> {
                     SharedPreferences pref =
                         await SharedPreferences.getInstance();
                     pref.setString("token", '');
-                    // ignore: use_build_context_synchronously
+                    
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => const Register()),
@@ -206,8 +182,8 @@ class _HomeScreen extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        getTranslation("लॉग आउट", "Logout"),
+                      const TranslateText(
+                        englishText: "Logout",
                         style: TextStyle(
                           color: Color(0xFF098904),
                           fontSize: 16,
@@ -225,14 +201,14 @@ class _HomeScreen extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          TopBar(translation: translation!),
+          const TopBar(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  getTranslation("ई सेवाएं", "E Services"),
+                const TranslateText(
+                  englishText: "E Services",
                   style: TextStyle(
                     color: Color(0xFF046200),
                     fontSize: 15,
@@ -249,14 +225,14 @@ class _HomeScreen extends State<HomeScreen> {
               ],
             ),
           ),
-          EServices(translation: translation!),
+          const EServices(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  getTranslation("मुख्य विशेषताएँ", "Key Features"),
+                const TranslateText(
+                  englishText: "Key Features",
                   style: TextStyle(
                     color: Color(0xFF046200),
                     fontSize: 15,
@@ -273,7 +249,7 @@ class _HomeScreen extends State<HomeScreen> {
               ],
             ),
           ),
-          KeyFeatures(translation: translation!),
+          const KeyFeatures(),
           Card(
             elevation: 10,
             shape: RoundedRectangleBorder(
@@ -282,7 +258,7 @@ class _HomeScreen extends State<HomeScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
             child: Container(
               width: double.infinity,
-              height: 66,
+              // height: 66,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -317,14 +293,13 @@ class _HomeScreen extends State<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          getTranslation("स्मृति", "Reminder"),
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        const TranslateText(
+                            englishText: "Reminder",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            )),
                       ],
                     ),
                     Column(
@@ -347,8 +322,8 @@ class _HomeScreen extends State<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          getTranslation("प्रतिसाद", "Feedback"),
+                        const TranslateText(
+                          englishText: "Feedback",
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.black,
@@ -377,8 +352,8 @@ class _HomeScreen extends State<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          getTranslation("हमसे संपर्क करें", "Contact Us"),
+                        const TranslateText(
+                          englishText: "Contact Us",
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.black,
@@ -392,9 +367,8 @@ class _HomeScreen extends State<HomeScreen> {
               ),
             ),
           ),
-          Text(
-            getTranslation(
-                "सभी अधिकार सुरक्षित @ 2023", "All Rights Reserved @ 2023"),
+          const TranslateText(
+            englishText: "All Rights Reserved @ 2023",
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           Expanded(
@@ -411,7 +385,7 @@ class _HomeScreen extends State<HomeScreen> {
                 right: 30,
                 top: 20,
                 child: FloatingActionButton(
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(

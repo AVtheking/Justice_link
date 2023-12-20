@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,7 +20,7 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
   final List<String> items = <String>[
     "English",
     "Hindi",
-    "Marathi",
+    "Bengali",
     "Gujarati",
     "Tamil",
     "Punjabi",
@@ -172,14 +174,30 @@ class _GetStartedScreenState extends ConsumerState<GetStartedScreen> {
                     SharedPreferences pref =
                         await SharedPreferences.getInstance();
                     await pref.setString("language", "Hindi");
-                    print("hindi");
-                  } else {
+                    // print("hindi");
+                  } else if (isCheckedList[0]) {
                     SharedPreferences pref =
                         await SharedPreferences.getInstance();
                     await pref.setString("language", "English");
-                    print("English");
+                    // print("English");
 
                     // translation = "English";
+                  } else if (isCheckedList[2]) {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.setString("language", "Bengali");
+                  } else if (isCheckedList[3]) {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.setString("language", "Gujarati");
+                  } else if (isCheckedList[4]) {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.setString("language", "Tamil");
+                  } else if (isCheckedList[5]) {
+                    SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                    await pref.setString("language", "Punjabi");
                   }
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(

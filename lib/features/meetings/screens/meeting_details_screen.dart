@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +13,7 @@ class MeetingDetailsScreen extends ConsumerStatefulWidget {
   const MeetingDetailsScreen({super.key, required this.meeting});
 
   @override
-  _MeetingDetailsScreenState createState() => _MeetingDetailsScreenState();
+  _MeetingDetailsScreenState createState() => _MeetingDetailsScreenState();       
 }
 
 class _MeetingDetailsScreenState extends ConsumerState<MeetingDetailsScreen> {
@@ -28,7 +28,7 @@ class _MeetingDetailsScreenState extends ConsumerState<MeetingDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:appbarfun('Meeting Details'),
+      appBar: appbarfun('Meeting Details'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,9 +48,13 @@ class _MeetingDetailsScreenState extends ConsumerState<MeetingDetailsScreen> {
                     .read(meetingServiceProvider)
                     .acceptMeetingRequest(context: context, meeting: _meeting);
                 updateMeetingStatus('accepeted');
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const ChatScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => ChatScreen(
+                            meeting: _meeting,
+                          )),
+                  (route) => false,
                 );
               },
               child: const Text('Accept Meeting'),

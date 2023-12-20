@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
+import 'package:justice_link/features/chat/screens/video_chat.dart';
 import 'package:justice_link/features/chat/widgets/chat_widgets.dart';
 import 'package:justice_link/global.dart';
 import 'package:justice_link/models/meeting.dart';
+// ignore: library_prefixes
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -33,7 +35,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   void connectToServer() {
-    socket = IO.io('$uri', <String, dynamic>{
+    socket = IO.io(uri, <String, dynamic>{
       'transports': ['websocket'],
       'autoconnect': false,
     });
@@ -89,7 +91,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     return Scaffold(
       backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text("Chat Bot"),
+        title: Text(widget.meeting!.receiverName),
         centerTitle: true,
         elevation: 5,
         foregroundColor: Colors.white,
@@ -102,6 +104,19 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               onPressed: showMeetingDetails,
               icon: const Icon(
                 Icons.details,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const VideoScreen()));
+              },
+              icon: const Icon(
+                Icons.video_call,
                 color: Colors.white,
               ),
             ),
@@ -195,11 +210,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void showMeetingDetails() {
     final meeting = widget.meeting;
     if (meeting != null) {
-      final snackBarHeight = 200.0;
+      const snackBarHeight = 200.0;
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Container(
+          content: SizedBox(
             height: snackBarHeight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

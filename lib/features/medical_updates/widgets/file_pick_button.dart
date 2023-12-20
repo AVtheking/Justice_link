@@ -1,5 +1,6 @@
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyElevatedButton extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
@@ -24,17 +25,20 @@ class MyElevatedButton extends StatelessWidget {
   }) : super(key: key);
 
   Future<void> _pickFile(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    // FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if (result != null) {
-      String filePath = result.files.single.path ?? '';
+    // if (result != null) {
+    //   String filePath = result.files.single.path ?? '';
 
-
-      if (onFilePicked != null) {
-        onFilePicked!(filePath);
-      }
-    } else {
-    }
+    //   if (onFilePicked != null) {
+    //     onFilePicked!(filePath);
+    //   }
+    // } else {}
+    var image = await ImagePicker().pickImage(source: ImageSource.camera);
+    String filePath = image!.path;
+    if (onFilePicked != null) {
+      onFilePicked!(filePath);
+    } else {}
   }
 
   @override

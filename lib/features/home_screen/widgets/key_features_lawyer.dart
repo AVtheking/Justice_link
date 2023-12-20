@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/cloud_services/screens/cloud_service.dart';
+import 'package:justice_link/features/guidelines/screens/guidelines.dart';
+import 'package:justice_link/features/legal_rights/screens/legal_rights.dart';
 
 class KeyFeaturesLawyer extends ConsumerWidget {
-  const KeyFeaturesLawyer({super.key, required this.translation});
-  final String translation;
+  const KeyFeaturesLawyer({super.key});
+  // final String translation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> featuresLawyer = [
-      translation == "Hindi" ? "मार्गदर्शिका" : "Guidelines",
-      translation == "Hindi" ? "क्लाउड सेवाएं" : "Cloud Services",
-      translation == "Hindi" ? "कानूनी अधिकार" : "Legal rights",
+      "Guidelines",
+      "Cloud Services",
+      "Legal rights",
     ];
 
     return Container(
@@ -34,6 +37,18 @@ class KeyFeaturesLawyer extends ConsumerWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (ctx) => const CloudServices(),
+                  ),
+                );
+              } else if (index == 0) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const Guidelines(),
+                  ),
+                );
+              } else if (index == 2) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const LegalRights(),
                   ),
                 );
               }
@@ -67,14 +82,21 @@ class KeyFeaturesLawyer extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Text(
-                    featuresLawyer[index],
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Color.fromARGB(255, 26, 30, 26),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  )
+                  TranslateText(
+                      englishText: featuresLawyer[index],
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 26, 30, 26),
+                        fontWeight: FontWeight.w500,
+                      ))
+                  // Text(
+                  //   featuresLawyer[index],
+                  //   style: const TextStyle(
+                  //     fontSize: 12,
+                  //     color: Color.fromARGB(255, 26, 30, 26),
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // )
                 ],
               ),
             ),

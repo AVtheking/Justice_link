@@ -92,37 +92,41 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "GST:",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "$ruppeeSymbol 100",
-                          style: TextStyle(fontSize: 16),
+                          widget.isProbono == false
+                              ? "$ruppeeSymbol 100"
+                              : "$ruppeeSymbol 0",
+                          style: const TextStyle(fontSize: 16),
                         )
                       ],
                     ),
                   ),
                   const Divider(),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Total:",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "$ruppeeSymbol 1600",
-                          style: TextStyle(fontSize: 16),
+                          widget.isProbono == false
+                              ? "$ruppeeSymbol 1600"
+                              : "$ruppeeSymbol 0",
+                          style: const TextStyle(fontSize: 16),
                         )
                       ],
                     ),

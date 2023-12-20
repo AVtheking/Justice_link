@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/contact_us/screens/contact_us_screen.dart';
@@ -14,7 +15,6 @@ import 'package:justice_link/features/medical_updates/screens/medical_updates.da
 import 'package:justice_link/features/meetings/screens/meeting_request.dart';
 import 'package:justice_link/features/profile/screens/profile_screen.dart';
 import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenLawyer extends ConsumerStatefulWidget {
   const HomeScreenLawyer({Key? key}) : super(key: key);
@@ -23,39 +23,25 @@ class HomeScreenLawyer extends ConsumerStatefulWidget {
   ConsumerState<HomeScreenLawyer> createState() => _HomeScreen();
 }
 
-// Add this variable to track translation language
-String? translation="English";
-
 class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
-  List<String> drawerItems = [
-    "केस स्थिति",
-    "मेडिकल अपडेट्स",
-    "भाषा",
-    "मीटिंग अनुरोध",
-    "निर्देशिका",
-    "मौलिक अधिकार",
-    "अनुस्मारक",
-    "संपर्क करें"
-  ];
   void logOut(BuildContext context) {
     ref.read(authServiceProvider).logOut(context);
   }
 
-  @override
-  void initState() {
-    setLanguage();
-    super.initState();
-  }
-
-  void setLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      translation = prefs.getString("language") ?? "English";
-    });
-  }
+  List<String> drawerItems = [
+    "Check Status",
+    "Medical Updates",
+    "change language",
+    "Meetings Request",
+    "Guide",
+    "Legal Rights",
+    "Reminders",
+    "Contact Us"
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.read(lawyerProvider);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Color(0xFF004D14), size: 30),
@@ -93,24 +79,22 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: GestureDetector(
-                            onTap: () => {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProfileScreen(),
-                                    ),
-                                  ),
-                                },
-                            child: Image.asset("assets/images/profile.png")),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileScreen(),
+                            ),
+                          ),
+                          child: Image.asset("assets/images/profile.png"),
+                        ),
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          translation == "Hindi" ? "स्वागत है" : "Welcome",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        padding: const EdgeInsets.all(8.0),
+                        child: TranslateText(
+                          englishText: "Welcome ${user?.name} ",
+                          style: const TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),
                       Expanded(
@@ -120,14 +104,15 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               GestureDetector(
-                                onTap: () => {Navigator.pop(context)},
+                                onTap: () => Navigator.pop(context),
                                 child: const RotatedBox(
-                                    quarterTurns: 2,
-                                    child: Icon(
-                                      Icons.arrow_back_ios,
-                                      color: Colors.white,
-                                      size: 35,
-                                    )),
+                                  quarterTurns: 2,
+                                  child: Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Colors.white,
+                                    size: 35,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -168,10 +153,9 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                       }
                     },
                     child: DrawerItem(
-                        icon: "assets/drawer_images/$index.png",
-                        text: translation == "Hindi"
-                            ? drawerItems[index]
-                            : getEnglishTranslation(index)),
+                      icon: "assets/drawer_images/$index.png",
+                      text: drawerItems[index],
+                    ),
                   );
                 },
               ),
@@ -191,12 +175,13 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        translation == "Hindi" ? "लॉग आउट" : "Log Out",
+                      const TranslateText(
+                        englishText: "Log Out",
                         style: TextStyle(
-                            color: Color(0xFF098904),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
+                          color: Color(0xFF098904),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       Image.asset("assets/images/logout.png")
                     ],
@@ -209,18 +194,19 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
       ),
       body: Column(
         children: [
-          TopBar(translation: translation!),
+          const TopBar(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  translation == "Hindi" ? "eServices" : "eServices",
+                const TranslateText(
+                  englishText: "eServices",
                   style: TextStyle(
-                      color: Color(0xFF046200),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800),
+                    color: Color(0xFF046200),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
                 Expanded(
                   child: Container(
@@ -232,18 +218,19 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
               ],
             ),
           ),
-          EServicesLawyer(translation: translation!),
+          const EServicesLawyer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  translation == "Hindi" ? "Key Features" : "Key Features",
+                const TranslateText(
+                  englishText: "Key Features",
                   style: TextStyle(
-                      color: Color(0xFF046200),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800),
+                    color: Color(0xFF046200),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
                 Expanded(
                   child: Container(
@@ -255,9 +242,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
               ],
             ),
           ),
-          KeyFeaturesLawyer(
-            translation: translation!,
-          ),
+          const KeyFeaturesLawyer(),
           Card(
             elevation: 10,
             shape: RoundedRectangleBorder(
@@ -266,7 +251,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
             child: Container(
               width: double.infinity,
-              height: 66,
+              // height: 66,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                     color: Colors.black.withOpacity(0.25),
@@ -292,8 +277,8 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                           const SizedBox(
                             height: 5,
                           ),
-                          Text(
-                            translation == "Hindi" ? "स्मृतियाँ" : "Reminders",
+                          const TranslateText(
+                            englishText: "Reminders",
                             style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.black,
@@ -322,8 +307,8 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                         const SizedBox(
                           height: 5,
                         ),
-                        const Text(
-                          "Feedback",
+                        const TranslateText(
+                          englishText: "Feedback",
                           style: TextStyle(
                               fontSize: 12,
                               color: Colors.black,
@@ -351,8 +336,8 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                         const SizedBox(
                           height: 5,
                         ),
-                        const Text(
-                          "Contact Us",
+                        const TranslateText(
+                          englishText: "Contact Us",
                           style: TextStyle(
                               fontSize: 12,
                               color: Colors.black,
@@ -365,10 +350,8 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
               ),
             ),
           ),
-          Text(
-            translation == "Hindi"
-                ? "सभी अधिकार सुरक्षित @ 2023"
-                : "All Rights Reserved @ 2023",
+          const TranslateText(
+            englishText: "All Rights Reserved @ 2023",
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           Expanded(
@@ -387,26 +370,4 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
   }
 
   // Helper function to get English translation for drawer items
-  String getEnglishTranslation(int index) {
-    switch (index) {
-      case 0:
-        return "Case Status";
-      case 1:
-        return "Medical Updates";
-      case 2:
-        return "Change Language";
-      case 3:
-        return "Meetings Request";
-      case 4:
-        return "Guidelines";
-      case 5:
-        return "Legal Rights";
-      case 6:
-        return "Reminders";
-      case 7:
-        return "Contact Us";
-      default:
-        return "";
-    }
-  }
 }
