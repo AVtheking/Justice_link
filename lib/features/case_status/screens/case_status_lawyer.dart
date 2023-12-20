@@ -129,10 +129,10 @@ class _CaseStatusLawyerState extends ConsumerState<CaseStatusLawyer> {
               oppositionController: _oppositionController,
             ),
              Padding(
-              padding: EdgeInsets.only(left: 16),
+              padding:const  EdgeInsets.only(left: 16),
               child: Text(
                 _getTranslatedText("Case Details", "मुकदमे का विवरण:"),
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
             CaseDetailsLawyer(

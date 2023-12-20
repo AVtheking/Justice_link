@@ -1,7 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:justice_link/common/app_bar.dart';
+import 'package:justice_link/common/snackbar.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({Key? key}) : super(key: key);
@@ -12,7 +16,7 @@ class ChatBotScreen extends StatefulWidget {
 
 class _ChatBotScreenState extends State<ChatBotScreen> {
   final TextEditingController _textEditingController = TextEditingController();
-  List<ChatBubble> _chatBubbles = [];
+  final List<ChatBubble> _chatBubbles = [];
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -96,8 +100,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         });
 
         _scrollToBottom();
+        // ignore: empty_catches
       } catch (e) {
-        print('Error: $e');
+        showSnackBar(context, e.toString());
       }
     }
   }
@@ -113,7 +118,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      print(response.body);
       throw Exception('Failed to post message');
     }
   }

@@ -84,7 +84,7 @@ class KeyFeaturesLawyer extends ConsumerWidget {
                   ),
                   TranslateText(
                       englishText: featuresLawyer[index],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Color.fromARGB(255, 26, 30, 26),
                         fontWeight: FontWeight.w500,

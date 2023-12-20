@@ -93,11 +93,11 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "GST:",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
@@ -106,18 +106,18 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                           widget.isProbono == false
                               ? "$ruppeeSymbol 100"
                               : "$ruppeeSymbol 0",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         )
                       ],
                     ),
                   ),
                   const Divider(),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           "Total:",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
@@ -126,7 +126,7 @@ class _AppointmentScreenState extends State<PaymentScreen> {
                           widget.isProbono == false
                               ? "$ruppeeSymbol 1600"
                               : "$ruppeeSymbol 0",
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         )
                       ],
                     ),

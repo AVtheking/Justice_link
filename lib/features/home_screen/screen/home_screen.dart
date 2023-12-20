@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -84,7 +86,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                       ),
                       TranslateText(
                         englishText: "Welcome ${user!.name}",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Expanded(
                         child: Padding(
@@ -155,7 +158,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                   );
                 },
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 50.0),
                 child: ElevatedButton(
@@ -163,7 +166,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                     SharedPreferences pref =
                         await SharedPreferences.getInstance();
                     pref.setString("token", '');
-                    // ignore: use_build_context_synchronously
+                    
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => const Register()),
@@ -198,7 +201,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
       ),
       body: Column(
         children: [
-          TopBar(),
+          const TopBar(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -246,7 +249,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ],
             ),
           ),
-          KeyFeatures(),
+          const KeyFeatures(),
           Card(
             elevation: 10,
             shape: RoundedRectangleBorder(
@@ -364,7 +367,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
-          TranslateText(
+          const TranslateText(
             englishText: "All Rights Reserved @ 2023",
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
@@ -382,7 +385,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                 right: 30,
                 top: 20,
                 child: FloatingActionButton(
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(

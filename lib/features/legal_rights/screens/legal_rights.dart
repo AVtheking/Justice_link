@@ -11,7 +11,7 @@ class LegalRights extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -88,7 +88,7 @@ class LegalRights extends StatelessWidget {
   }
 
   Widget _divider() {
-    return Divider(
+    return const Divider(
       color: Color(0xFFCCCCCC),
       height: 20,
       thickness: 0.5,

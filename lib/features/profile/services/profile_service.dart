@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:justice_link/common/api_service.dart';
+import 'package:justice_link/common/connectivity.dart';
 import 'package:justice_link/common/snackbar.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/profile/screens/profile_screen.dart';
@@ -29,7 +30,13 @@ class ProfileService {
       required String lawyerExperience,
       required String location,
       required String lawyerbio}) async {
+          final bool _isConnected =await ConnectivityService().isConnected();
+    if (!_isConnected) {
+      showSnackBar(context, "No Internet Connection");
+      return;
+    }
     try {
+
       // print(uri);
       SharedPreferences pref = await SharedPreferences.getInstance();
       final token = pref.getString("token");

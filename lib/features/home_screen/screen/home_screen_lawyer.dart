@@ -91,10 +91,10 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                         width: 10,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: TranslateText(
                           englishText: "Welcome ${user?.name} ",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: const TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),
                       Expanded(
@@ -175,7 +175,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TranslateText(
+                      const TranslateText(
                         englishText: "Log Out",
                         style: TextStyle(
                           color: Color(0xFF098904),
@@ -194,13 +194,13 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
       ),
       body: Column(
         children: [
-          TopBar(),
+          const TopBar(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TranslateText(
+                const TranslateText(
                   englishText: "eServices",
                   style: TextStyle(
                     color: Color(0xFF046200),
@@ -218,13 +218,13 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
               ],
             ),
           ),
-          EServicesLawyer(),
+          const EServicesLawyer(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TranslateText(
+                const TranslateText(
                   englishText: "Key Features",
                   style: TextStyle(
                     color: Color(0xFF046200),
@@ -242,7 +242,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
               ],
             ),
           ),
-          KeyFeaturesLawyer(),
+          const KeyFeaturesLawyer(),
           Card(
             elevation: 10,
             shape: RoundedRectangleBorder(
@@ -277,7 +277,7 @@ class _HomeScreen extends ConsumerState<HomeScreenLawyer> {
                           const SizedBox(
                             height: 5,
                           ),
-                          TranslateText(
+                          const TranslateText(
                             englishText: "Reminders",
                             style: TextStyle(
                                 fontSize: 12,

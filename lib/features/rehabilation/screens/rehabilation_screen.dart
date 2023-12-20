@@ -387,6 +387,11 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
                   ],
                   borderRadius: BorderRadius.circular(10.0),
                 ),
+                child: Image.asset(
+                  'assets/images/rehab.png',
+                  height: 50,
+                  width: 50,
+                ),
               ),
               const SizedBox(
                 height: 20,
