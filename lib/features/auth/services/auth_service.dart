@@ -86,11 +86,11 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-      final bool _isConnected =await ConnectivityService().isConnected();
-      if (!_isConnected) {
-        showSnackBar(context, "No Internet Connection");
-        return;
-      }
+    final bool _isConnected = await ConnectivityService().isConnected();
+    if (!_isConnected) {
+      showSnackBar(context, "No Internet Connection");
+      return;
+    }
     try {
       Lawyer lawyer = Lawyer(
         name: name,
@@ -140,11 +140,11 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-      final bool _isConnected =await ConnectivityService().isConnected();
-      if (!_isConnected) {
-        showSnackBar(context, "No Internet Connection");
-        return;
-      }
+    final bool _isConnected = await ConnectivityService().isConnected();
+    if (!_isConnected) {
+      showSnackBar(context, "No Internet Connection");
+      return;
+    }
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/login'),
@@ -175,10 +175,11 @@ class AuthService {
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setString("token", data['token']);
 
-          Navigator.of(context).pushReplacement(
+          Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => const HomeScreen(),
             ),
+            (route) => false,
           );
         },
       );
@@ -188,7 +189,6 @@ class AuthService {
   }
 
   void logOut(BuildContext context) async {
-    
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
@@ -210,11 +210,11 @@ class AuthService {
     required String email,
     required String password,
   }) async {
-      final bool _isConnected =await ConnectivityService().isConnected();
-      if (!_isConnected) {
-        showSnackBar(context, "No Internet Connection");
-        return;
-      }
+    final bool _isConnected = await ConnectivityService().isConnected();
+    if (!_isConnected) {
+      showSnackBar(context, "No Internet Connection");
+      return;
+    }
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/lawyer/login'),
@@ -262,11 +262,11 @@ class AuthService {
   }
 
   Future<void> getUserData(BuildContext context) async {
-      // final bool _isConnected =await ConnectivityService().isConnected();
-      // if (!_isConnected) {
-      //   showSnackBar(context, "No Internet Connection");
-      //   return;
-      // }
+    // final bool _isConnected =await ConnectivityService().isConnected();
+    // if (!_isConnected) {
+    //   showSnackBar(context, "No Internet Connection");
+    //   return;
+    // }
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String? token = pref.getString("token");
@@ -292,8 +292,6 @@ class AuthService {
   }
 
   Future<void> getLawyerData() async {
-    
-
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String? token = pref.getString("token");
