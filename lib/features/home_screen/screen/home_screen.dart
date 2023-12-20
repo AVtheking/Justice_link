@@ -255,7 +255,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
             child: Container(
               width: double.infinity,
-              height: 66,
+              // height: 66,
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(

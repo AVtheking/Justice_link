@@ -60,9 +60,11 @@ class _FutureScreenState extends ConsumerState<TranslateText> {
                   child: Text(
                     "Loading...", // You can customize this text
                     style: TextStyle(
-                      color: Colors.grey, // Adjust color as needed
-                      fontSize: 16, // Adjust font size as needed
-                    ),
+                        color: Colors.grey, // Adjust color as needed
+                        fontSize: 12,
+                        overflow:
+                            TextOverflow.ellipsis // Adjust font size as needed
+                        ),
                   ),
                 );
               } else if (snapshot.hasError) {
