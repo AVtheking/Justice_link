@@ -32,10 +32,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   void navigateToPayment() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => PaymentScreen(
-          lawyer: widget.lawyer,
-          isProbono:widget.isProbono
-        ),
+        builder: (context) =>
+            PaymentScreen(lawyer: widget.lawyer, isProbono: widget.isProbono),
       ),
     );
   }
@@ -55,12 +53,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         color: Color(0xFF004D14),
                         width: 2.0,
                         style: BorderStyle.solid))),
-            primaryColor: const Color(0xFF046200),
+            primaryColor: const Color(0xFF046200), // Header background color
+
             colorScheme: ColorScheme.light(
               primary: const Color(0xFF046200), // Active text color
               onPrimary: Colors.white, // Active text color
-              surface:
-                  const Color(0xFF046200).withOpacity(0.1), // Background color
+              surface: Colors.white.withOpacity(1), // Background color
               onSurface: Colors.black, // Text color
             ),
             buttonTheme: const ButtonThemeData(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RehabilationScreen extends StatefulWidget {
   const RehabilationScreen({super.key});
@@ -371,26 +372,33 @@ class _RehabilationScreenState extends State<RehabilationScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                padding: const EdgeInsets.only(left: 10, top: 8),
-                width: 329,
-                height: 130,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 10.0,
-                      spreadRadius: 0.0,
-                      offset: Offset(0.0, 0.0),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Image.asset(
-                  'assets/images/rehab.png',
-                  height: 50,
-                  width: 50,
+              GestureDetector(
+                onTap: () {
+                  launchUrl(Uri.parse(
+                      'https://youtu.be/Ls1ayLoDedI?si=-0r7a3ReA24fnS_y'));
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(left: 10, top: 8),
+                  width: 329,
+                  height: 130,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 10.0,
+                        spreadRadius: 0.0,
+                        offset: Offset(0.0, 0.0),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Image.asset(
+                    'assets/images/Rectangle 57.png',
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(
