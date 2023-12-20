@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:justice_link/common/api_service.dart';
+import 'package:justice_link/common/connectivity.dart';
 import 'package:justice_link/common/snackbar.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
@@ -31,8 +32,13 @@ class AuthService {
     required String password,
   }) async {
     try {
+      final bool _isConnected = await ConnectivityService().isConnected();
       User user = User(name: name, email: email, password: password);
       // print(user.toJson());
+      if (!_isConnected) {
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
       http.Response res = await http.post(
         Uri.parse("$uri/register"),
         body: user.toJson(),
@@ -80,6 +86,11 @@ class AuthService {
     required String email,
     required String password,
   }) async {
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if (!_isConnected) {
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
     try {
       Lawyer lawyer = Lawyer(
         name: name,
@@ -129,6 +140,11 @@ class AuthService {
     required String email,
     required String password,
   }) async {
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if (!_isConnected) {
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/login'),
@@ -172,6 +188,7 @@ class AuthService {
   }
 
   void logOut(BuildContext context) async {
+    
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
@@ -193,6 +210,11 @@ class AuthService {
     required String email,
     required String password,
   }) async {
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if (!_isConnected) {
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
     try {
       http.Response res = await http.post(
         Uri.parse('$uri/lawyer/login'),
@@ -240,6 +262,11 @@ class AuthService {
   }
 
   Future<void> getUserData(BuildContext context) async {
+      // final bool _isConnected =await ConnectivityService().isConnected();
+      // if (!_isConnected) {
+      //   showSnackBar(context, "No Internet Connection");
+      //   return;
+      // }
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String? token = pref.getString("token");
@@ -265,6 +292,8 @@ class AuthService {
   }
 
   Future<void> getLawyerData() async {
+    
+
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       String? token = pref.getString("token");

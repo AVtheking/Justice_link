@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:http/http.dart" as http;
 import 'package:justice_link/common/api_service.dart';
+import 'package:justice_link/common/connectivity.dart';
 import 'package:justice_link/common/snackbar.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/home_screen/screen/home_screen.dart';
@@ -67,6 +68,11 @@ class MeetingService {
     required String courtName,
     required String caseDetails,
   }) async {
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if(!_isConnected){
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       final token = pref.getString("token");
@@ -108,6 +114,11 @@ class MeetingService {
 
   Future<Meeting?> getMeetingRequests(
       BuildContext context, String lawyerId) async {
+          final bool _isConnected =await ConnectivityService().isConnected();
+      if(!_isConnected){
+        showSnackBar(context, "No Internet Connection");
+        return null;
+      }
     Meeting? meeting;
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -153,7 +164,13 @@ class MeetingService {
 
   Future<List<Meeting>> getMeetingRequestsForLawyer(
       BuildContext context) async {
+
     List<Meeting> meetings = [];
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if(!_isConnected){
+        showSnackBar(context, "No Internet Connection");
+        return meetings;
+      }
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       final token = pref.getString("token");
@@ -186,6 +203,11 @@ class MeetingService {
     required BuildContext context,
     required Meeting meeting,
   }) async {
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if(!_isConnected){
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
     try {
       // final meeting = _ref.read(meetingProvider)!;
       SharedPreferences pref = await SharedPreferences.getInstance();
@@ -218,6 +240,11 @@ class MeetingService {
     required BuildContext context,
     required Meeting meeting,
   }) async {
+      final bool _isConnected =await ConnectivityService().isConnected();
+      if(!_isConnected){
+        showSnackBar(context, "No Internet Connection");
+        return;
+      }
     try {
       final meeting = _ref.read(meetingProvider)!;
       SharedPreferences pref = await SharedPreferences.getInstance();

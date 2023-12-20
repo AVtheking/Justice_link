@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:justice_link/common/app_bar.dart';
-import 'package:justice_link/features/chat/screens/chat_screen.dart';
 import 'package:justice_link/features/chat_bot/screens/chat_bot_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -72,7 +71,7 @@ class ContactUs extends StatelessWidget {
                   width: 90,
                   child: GestureDetector(
                     onTap: () {
-                      launch("tel://11111111");
+                      launchUrl(Uri.parse("tel://11111111"));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

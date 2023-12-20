@@ -6,6 +6,7 @@ import 'package:justice_link/features/chat/screens/video_chat.dart';
 import 'package:justice_link/features/chat/widgets/chat_widgets.dart';
 import 'package:justice_link/global.dart';
 import 'package:justice_link/models/meeting.dart';
+// ignore: library_prefixes
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class ChatScreen extends ConsumerStatefulWidget {
@@ -34,7 +35,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   void connectToServer() {
-    socket = IO.io('$uri', <String, dynamic>{
+    socket = IO.io(uri, <String, dynamic>{
       'transports': ['websocket'],
       'autoconnect': false,
     });
@@ -209,11 +210,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void showMeetingDetails() {
     final meeting = widget.meeting;
     if (meeting != null) {
-      final snackBarHeight = 200.0;
+      const snackBarHeight = 200.0;
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Container(
+          content: SizedBox(
             height: snackBarHeight,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

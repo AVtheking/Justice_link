@@ -218,7 +218,6 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    print(_isYearDropdownOpen);
                                     _isYearDropdownOpen = !_isYearDropdownOpen;
                                   });
                                 },
@@ -319,7 +318,7 @@ class _CaseStatusState extends ConsumerState<CaseStatus> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.remove_red_eye, color: Colors.white),
+                            const Icon(Icons.remove_red_eye, color: Colors.white),
                             const SizedBox(
                               width: 10,
                             ),

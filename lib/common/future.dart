@@ -57,7 +57,7 @@ class _FutureScreenState extends ConsumerState<TranslateText> {
                   width: 100, // Adjust width as needed
                   height: 20, // Adjust height as needed
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     "Loading...", // You can customize this text
                     style: TextStyle(
                         color: Colors.grey, // Adjust color as needed

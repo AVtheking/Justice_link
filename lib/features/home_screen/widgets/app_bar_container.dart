@@ -46,7 +46,7 @@ class TopBar extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+            padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

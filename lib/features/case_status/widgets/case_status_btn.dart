@@ -20,7 +20,7 @@ class CaseStatusButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.remove_red_eye, color: Colors.white),
+          const Icon(Icons.remove_red_eye, color: Colors.white),
           const SizedBox(
             width: 10,
           ),

@@ -265,7 +265,7 @@ class _RegisterState extends ConsumerState<Register> {
                   child: Center(
                     child: Text(
                       translation == "Hindi" ? 'रजिस्टर' : 'Register',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),
@@ -277,7 +277,7 @@ class _RegisterState extends ConsumerState<Register> {
                     translation == "Hindi"
                         ? "पहले से पंजीकृत हैं? "
                         : "Already Registered? ",
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -289,7 +289,7 @@ class _RegisterState extends ConsumerState<Register> {
                     },
                     child: Text(
                       translation == "Hindi" ? "लॉग इन" : "Login",
-                      style: TextStyle(color: Color(0xFF046200), fontSize: 16),
+                      style: const TextStyle(color: Color(0xFF046200), fontSize: 16),
                     ),
                   )
                 ],

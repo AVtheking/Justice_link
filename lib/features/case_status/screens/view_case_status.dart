@@ -5,12 +5,10 @@ import 'package:justice_link/common/app_bar.dart';
 import 'package:justice_link/features/case_status/widgets/case_details.dart';
 import 'package:justice_link/features/case_status/widgets/case_status.dart';
 import 'package:justice_link/features/case_status/widgets/versus_card.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ViewCaseStatus extends ConsumerWidget {
-   const  ViewCaseStatus({Key? key,required this.translation}) : super(key: key);
-final String translation;
-   
+  const ViewCaseStatus({Key? key, required this.translation}) : super(key: key);
+  final String translation;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,25 +24,20 @@ final String translation;
       _getTranslatedText("Pet.Advocates", "प्रतिवादी वकील(ए)"),
       _getTranslatedText("Res.Advocates", "उत्तरदाता के वकील(ए)"),
     ];
-   List<String> details = [
-  _getTranslatedText(
-    "1000/2023 Registered On 06-12-2023 12:11 AM",
-    "1000/2023 पंजीकृत हुआ 06-12-2023 12:11 बजे रात"
-  ),
-  _getTranslatedText("15-12-2023", "15-12-2023"),
-  _getTranslatedText(
-    "WON \nJUDGES: HONBLE MR. JUSTICE MEHUL SHARMA HONBLE MR.JUSTICE PRAKHAR GARG",
-    "जीता \nन्यायाधीश: आदरणीय श्री मेहुल शर्मा और आदरणीय श्री प्रखर गर्ग"
-  ),
-  _getTranslatedText(
-    "CRIMINAL UNDER SECTION 305",
-    "धारा 305 के तहत जुर्माना"
-  ),
-  _getTranslatedText(
-    "MR. RAKESH AGGARWAL\nADDRESS: CHIRANJEEV VIHAR",
-    "श्री राकेश अग्रवाल\nपता: चिरंजीव विहार"
-  ),
-];
+
+
+    List<String> details = [
+      _getTranslatedText("1000/2023 Registered On 06-12-2023 12:11 AM",
+          "1000/2023 पंजीकृत हुआ 06-12-2023 12:11 बजे रात"),
+      _getTranslatedText("15-12-2023", "15-12-2023"),
+      _getTranslatedText(
+          "WON \nJUDGES: HONBLE MR. JUSTICE MEHUL SHARMA HONBLE MR.JUSTICE PRAKHAR GARG",
+          "जीता \nन्यायाधीश: आदरणीय श्री मेहुल शर्मा और आदरणीय श्री प्रखर गर्ग"),
+      _getTranslatedText(
+          "CRIMINAL UNDER SECTION 305", "धारा 305 के तहत जुर्माना"),
+      _getTranslatedText("MR. RAKESH AGGARWAL\nADDRESS: CHIRANJEEV VIHAR",
+          "श्री राकेश अग्रवाल\nपता: चिरंजीव विहार"),
+    ];
 
 
     return Scaffold(
@@ -58,7 +51,8 @@ final String translation;
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 _getTranslatedText("Case Details", "मुकदमा विवरण:"),
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
             const CaseResult(),

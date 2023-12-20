@@ -80,7 +80,7 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
                       children: [
                         Text(
                           _getTranslatedText("Manoj Kumar", "मनोज कुमार"),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'Inter',
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
@@ -107,7 +107,7 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   FilePickContainer(
@@ -125,7 +125,7 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   FilePickContainer(
@@ -161,7 +161,7 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
                     Text(
                       _getTranslatedText(
                           "Next Scheduled on:", "अगला निर्धारित है:"),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 15.0,
                         fontWeight: FontWeight.w600,
@@ -170,11 +170,11 @@ class _MedicalUpdatesState extends State<MedicalUpdates> {
                     Text(
                         _getTranslatedText(
                             "Date: 12/12/2021", "तारीख: 12/12/2021"),
-                        style: TextStyle(fontWeight: FontWeight.w500)),
+                        style: const TextStyle(fontWeight: FontWeight.w500)),
                     Text(
                         _getTranslatedText("Doctor Appointed: Rajesh Yadav",
                             "नियुक्त डॉक्टर: राजेश यादव"),
-                        style: TextStyle(fontWeight: FontWeight.w500))
+                        style: const TextStyle(fontWeight: FontWeight.w500))
                   ],
                 ),
               ),
