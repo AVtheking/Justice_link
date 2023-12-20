@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:justice_link/common/api_service.dart';
 
 final translatorProvider = Provider((ref) => Translator(ref: ref));
 
@@ -13,31 +12,41 @@ class Translator {
   final Ref _ref;
   Translator({required Ref ref}) : _ref = ref;
 
-  Future<String> translate(
-      {required String text,
-      required BuildContext context,
-      required String lang}) async {
+  Future<String> translate({
+    required String textString,
+    required BuildContext context,
+    required String lang,
+  }) async {
     String translatedText = "";
     print(lang);
+
     http.Response res = await http.post(
-      Uri.parse("https://bhashini.anaskhan.site/api/translate/${lang}/"),
+      Uri.parse('https://bhashini.anaskhan.site/api/translate/$lang/'),
       body: jsonEncode({
-        "text": text,
+        'text': textString,
       }),
       headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    print(res.body);
-    httpErrorHandle(
-      response: res,
-      context: context,
-      onSuccess: () {
-        final body = jsonDecode(res.body);
-        translatedText = body['text'];
-        print(translatedText);
-      },
-    );
+
+    // Decode the response body
+    String decodedBody = utf8.decode(res.bodyBytes);
+    print(decodedBody);
+
+    final body = jsonDecode(decodedBody);
+    print(body);
+
+    if (res.statusCode == 200) {
+      translatedText = body["text"];
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Error translating"),
+        ),
+      );
+    }
+
     return translatedText;
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
-import 'package:justice_link/models/user.dart';
 
 class TopBar extends ConsumerWidget {
-  const TopBar({super.key, required this.translation});
-  final String translation;
+  const TopBar({super.key});
 
   void logOut(BuildContext context, WidgetRef ref) {
     ref.read(authServiceProvider).logOut(context);
@@ -15,8 +14,8 @@ class TopBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(userProvider);
     final lawyer = ref.read(lawyerProvider);
-    print(lawyer?.name);
-    print(user?.name);
+    // print(lawyer?.name);
+    // print(user?.name);
     return Container(
       width: double.infinity,
       height: 56,
@@ -51,34 +50,44 @@ class TopBar extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  translation == "Hindi"
-                      ? user != null
-                          ? "स्वागत है ${user.name}"
-                          : "स्वागत है ${lawyer!.name}"
-                      : user != null
-                          ? "Welcome ${user.name}"
-                          : "Welcome ${lawyer!.name}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  translation == "Hindi"
-                      ? "मंगलवार, 4 दिसंबर, 2023"
-                      : "Tuesday, December 4, 2023",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400),
-                ),
+                user != null
+                    ? TranslateText(
+                        englishText: "Welcome ${user.name}",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600))
+                    : TranslateText(
+                        englishText: "Welcome ${lawyer!.name}",
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600)),
+                // Text(
+                //   translation == "Hindi"
+                //       ? user != null
+                //           ? "स्वागत है ${user.name}"
+                //           : "स्वागत है ${lawyer!.name}"
+                //       : user != null
+                //           ? "Welcome ${user.name}"
+                //           : "Welcome ${lawyer!.name}",
+                //   style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.w600),
+                // ),
+                const TranslateText(
+                    englishText: "Tuesday, December 4, 2023",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400))
               ],
             ),
           ),
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 5),
             child: ElevatedButton(
               onPressed: () {
                 logOut(context, ref);
@@ -89,16 +98,17 @@ class TopBar extends ConsumerWidget {
                 ),
                 minimumSize: const Size(77, 30),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    translation == "Hindi" ? "लॉग आउट" : "Logout",
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
+                  TranslateText(
+                      englishText: "Logout",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13)),
+                  SizedBox(
                     width: 20,
                   ),
                   Icon(

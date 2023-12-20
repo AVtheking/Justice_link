@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/auth/screens/sign_up.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
@@ -15,7 +16,6 @@ import 'package:justice_link/features/home_screen/widgets/key_feature.dart';
 import 'package:justice_link/features/medical_updates/screens/medical_updates.dart';
 import 'package:justice_link/features/meetings/screens/meeting_screen.dart';
 import 'package:justice_link/features/reminders/screens/reminders_screen.dart';
-import 'package:justice_link/translator/translator_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -26,22 +26,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreen extends ConsumerState<HomeScreen> {
-  Future<String> translatedText(String text, String translation) async {
-    return await ref
-        .read(translatorProvider)
-        .translate(text: text, context: context, lang: translation);
-  }
-
-  List<String> drawerItemsHindi = [
-    "स्थिति जांचें",
-    "मेडिकल अपडेट्स",
-    "भाषा",
-    "मीटिंग्स",
-    "मार्गदर्शिका",
-    "मौलिक अधिकार",
-    "स्मृति",
-    "संपर्क करें"
-  ];
   List<String> drawerItems = [
     "Check Status",
     "Medical Updates",
@@ -52,24 +36,6 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
     "Reminders",
     "Contact Us"
   ];
-
-  String getTranslation(String hindiText, String englishText) {
-    return translation == "Hindi" ? hindiText : englishText;
-  }
-
-  String? translation = "English";
-  @override
-  void initState() {
-    setLanguage();
-    super.initState();
-  }
-
-  void setLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      translation = prefs.getString("language") ?? "English";
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,26 +82,9 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         width: 10,
                       ),
-                      FutureBuilder<String>(
-                        future: translatedText("Welcome", translation!),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return CircularProgressIndicator(); // Show a loading indicator while translation is in progress
-                          } else if (snapshot.hasError) {
-                            print(snapshot.error);
-                            return Text('Error: ${snapshot.error}');
-                          } else {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "${snapshot.data} ${user!.name}",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
-                            );
-                          }
-                        },
+                      TranslateText(
+                        englishText: "Welcome ${user!.name}",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       Expanded(
                         child: Padding(
@@ -167,7 +116,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  print(drawerItems[index]);
+                  // print(drawerItems[index]);
                   return GestureDetector(
                     onTap: () {
                       if (index == 0) {
@@ -200,9 +149,9 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                       }
                     },
                     child: DrawerItem(
-                        icon: "assets/drawer_images/$index.png",
-                        text: getTranslation(
-                            drawerItemsHindi[index], drawerItems[index])),
+                      icon: "assets/drawer_images/$index.png",
+                      text: drawerItems[index],
+                    ),
                   );
                 },
               ),
@@ -230,8 +179,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        getTranslation("लॉग आउट", "Logout"),
+                      const TranslateText(
+                        englishText: "Logout",
                         style: TextStyle(
                           color: Color(0xFF098904),
                           fontSize: 16,
@@ -249,14 +198,14 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
       ),
       body: Column(
         children: [
-          TopBar(translation: translation!),
+          TopBar(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  getTranslation("ई सेवाएं", "E Services"),
+                const TranslateText(
+                  englishText: "E Services",
                   style: TextStyle(
                     color: Color(0xFF046200),
                     fontSize: 15,
@@ -273,14 +222,14 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ],
             ),
           ),
-          EServices(translation: translation!),
+          const EServices(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  getTranslation("मुख्य विशेषताएँ", "Key Features"),
+                const TranslateText(
+                  englishText: "Key Features",
                   style: TextStyle(
                     color: Color(0xFF046200),
                     fontSize: 15,
@@ -297,7 +246,7 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ],
             ),
           ),
-          KeyFeatures(translation: translation!),
+          KeyFeatures(),
           Card(
             elevation: 10,
             shape: RoundedRectangleBorder(
@@ -341,14 +290,13 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          getTranslation("स्मृति", "Reminder"),
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                        const TranslateText(
+                            englishText: "Reminder",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                            )),
                       ],
                     ),
                     Column(
@@ -371,8 +319,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          getTranslation("प्रतिसाद", "Feedback"),
+                        const TranslateText(
+                          englishText: "Feedback",
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.black,
@@ -401,8 +349,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          getTranslation("हमसे संपर्क करें", "Contact Us"),
+                        const TranslateText(
+                          englishText: "Contact Us",
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.black,
@@ -416,9 +364,8 @@ class _HomeScreen extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
-          Text(
-            getTranslation(
-                "सभी अधिकार सुरक्षित @ 2023", "All Rights Reserved @ 2023"),
+          TranslateText(
+            englishText: "All Rights Reserved @ 2023",
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
           ),
           Expanded(

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:justice_link/common/future.dart';
 import 'package:justice_link/features/auth/services/auth_service.dart';
 import 'package:justice_link/features/case_status/screens/case_status.dart';
 import 'package:justice_link/features/document_verification/screens/document_verification_screen.dart';
@@ -11,18 +12,17 @@ import 'package:justice_link/features/rehabilation/screens/rehabilation_screen.d
 import 'package:justice_link/features/utrc/screens/annexurea.dart';
 
 class EServices extends ConsumerWidget {
-  const EServices({super.key, required this.translation});
-  final String translation;
+  const EServices({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> eServices = [
-      translation == "Hindi" ? "केस स्थिति" : "Case Status",
-      translation == "Hindi" ? "मेडिकल अपडेट्स" : "Medical Updates",
-      translation == "Hindi" ? "मीटिंग्स" : "Meetings",
-      translation == "Hindi" ? "यूटीआरसी कनेक्शन" : "UTRC Connection",
-      translation == "Hindi" ? "दस्तावेज़ सत्यापन" : "Document Verification",
-      translation == "Hindi" ? "पुनर्वास कार्यक्रम" : "Rehabilitation Program",
+      "Case Status",
+      "Medical Updates",
+      "Meetings",
+      "UTRC Connection",
+      "Document Verification",
+      "Rehabilitation Program",
     ];
 
     return Padding(
@@ -88,17 +88,14 @@ class EServices extends ConsumerWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                eServices[index],
+              TranslateText(
+                englishText: eServices[index],
                 style: const TextStyle(
                   color: Color.fromARGB(255, 34, 35, 34),
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                softWrap: true,
+                textAlign: true,
               )
             ],
           );
